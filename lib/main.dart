@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'homepage.dart';
+import 'loginpage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,11 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      home: LoginPage(),
       theme: ThemeData(
           // Define the default brightness and colors.
           brightness: Brightness.dark,
-          primaryColor: Colors.lightBlue[800],
+          primaryColor: Color(0xffc00d0e),
 
           // Define the default font family.
           fontFamily: 'Montserrat',
