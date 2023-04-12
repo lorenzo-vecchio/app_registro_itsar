@@ -17,8 +17,8 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     Home(),
-    Calendario(),
     Voti(),
+    Calendario(),
     Account(),
   ];
 
