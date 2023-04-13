@@ -1,8 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:prova_registro/homepage.dart';
 import 'package:prova_registro/data.dart';
 
@@ -17,27 +14,15 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final _storage = FlutterSecureStorage();
   bool _isLoading = false;
 
   Future<void> _login() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
-      final response = await http.post(
-        Uri.parse('https://web-production-ca2c.up.railway.app'),
-        body: jsonEncode({
-          'username': _usernameController.text,
-          'password': _passwordController.text,
-        }),
-        headers: {'Content-Type': 'application/json'},
-      );
+      Data data = Data.fromCredentials(_usernameController.text, _passwordController.text);
+      await data.initialize();
       setState(() => _isLoading = false);
-      Data data = Data.fromJson(response.body);
-      data.saveData();
-      if (response.statusCode == 200) {
-        // Store username and password securely
-        await _storage.write(key: 'username', value: _usernameController.text);
-        await _storage.write(key: 'password', value: _passwordController.text);
+      if (data.valid) {
         // Redirect to HomePage
         Navigator.pushAndRemoveUntil<dynamic>(
           context,
@@ -62,23 +47,6 @@ class _LoginPageState extends State<LoginPage> {
           ),
         );
       }
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _loadCredentials();
-  }
-
-  Future<void> _loadCredentials() async {
-    final username = await _storage.read(key: 'username');
-    final password = await _storage.read(key: 'password');
-    if (username != null && password != null) {
-      setState(() {
-        _usernameController.text = username;
-        _passwordController.text = password;
-      });
     }
   }
 

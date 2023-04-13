@@ -1,66 +1,94 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
+import 'globals.dart';
 
 class Data {
   List<Voto> votiList = [];
   List<Materia> materieList = [];
+  String jsonString = "";
+  bool valid = false;
+  int requestStatus = 0;
+  String requestBody = "";
+  String username;
+  String password;
+  bool fromCred;
 
-  Data() {}
+  Data (): fromCred = false, password = "", username = "";
+  Data.fromCredentials(this.username, this.password) : fromCred = true;
+  Data.fromDisc() : fromCred = false, password = "", username = "";
 
-  Data.fromJson(String jsonData) {
-    final Map<String, dynamic> jsonMap = json.decode(jsonData);
-
-    // Check if the JSON data is in the old format
-    if (jsonMap.containsKey('voti') && jsonMap.containsKey('calendario')) {
-      // Data is in the old format
-      jsonMap['voti'].forEach((key, value) {
-        votiList.add(Voto(key, value));
-      });
-      jsonMap['calendario'].forEach((element) {
-        String nomeMateria = element['title'];
-        DateTime inizio = DateTime.parse(element['start']);
-        DateTime fine = DateTime.parse(element['end']);
-        int sede = int.parse(element['AltraSede']);
-        Materia materia = Materia(sede, fine, inizio, nomeMateria);
-        materieList.add(materia);
-      });
+  Future<void> initialize () async {
+    if(fromCred) {
+      await _APIconnection(username, password);
+      jsonString = requestBody;
+      if (requestStatus == 200) {
+        _convertJSON();
+        await _saveCredentials(username, password);
+        await _saveDataToDisc();
+      } else {
+        valid = false;
+      }
     } else {
-      // Data is in the new format
-      if (jsonMap.containsKey('votiList')) {
-        votiList = List<Voto>.from(
-          jsonMap['votiList'].map((x) => Voto.fromJson(x)),
-        );
-      }
-      if (jsonMap.containsKey('materieList')) {
-        materieList = List<Materia>.from(
-          jsonMap['materieList'].map((x) => Materia.fromJson(x)),
-        );
-      }
+      await _readDataFromDisc();
+      _convertJSON();
     }
+    globalData = this;
   }
 
-  void saveData() async {
+
+  void _convertJSON () {
+    valid = true;
+    final Map<String, dynamic> jsonMap = json.decode(jsonString);
+    jsonMap['voti'].forEach((key, value) {
+      votiList.add(Voto(key, value));
+    });
+    jsonMap['calendario'].forEach((element) {
+      String nomeMateria = element['title'];
+      DateTime inizio = DateTime.parse(element['start']);
+      DateTime fine = DateTime.parse(element['end']);
+      int sede = int.parse(element['AltraSede']);
+      Materia materia = Materia(sede, fine, inizio, nomeMateria);
+      materieList.add(materia);
+    });
+  }
+
+  Future<void> _APIconnection(String username, String password) async {
+    final response = await http.post(
+      Uri.parse('https://web-production-ca2c.up.railway.app'),
+      body: jsonEncode({
+        'username': username,
+        'password': password,
+      }),
+      headers: {'Content-Type': 'application/json'},
+    );
+    requestStatus = response.statusCode;
+    requestBody = response.body;
+  }
+
+  Future<void> _saveDataToDisc() async {
     final path = await getApplicationDocumentsDirectory();
     final file = File('${path.path}/data.json');
-
-    // Convert the lists to JSON
-    final jsonData = {
-      'votiList': votiList.map((voto) => voto.toJson()).toList(),
-      'materieList': materieList.map((materia) => materia.toJson()).toList(),
-    };
-    final jsonString = jsonEncode(jsonData);
-
-    // Write the JSON string to disk
     await file.writeAsString(jsonString);
   }
 
-  Future<String> readData_returnJson() async {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/data.json');
-    final jsonString = await file.readAsString();
-    return jsonString;
+  Future<void> _readDataFromDisc() async {
+    final path = await getApplicationDocumentsDirectory();
+    final file = File('${path.path}/data.json');
+    final String content = await file.readAsString();
+    jsonString = content;
+  }
+
+  AndroidOptions _getAndroidOptions() => const AndroidOptions(
+    encryptedSharedPreferences: true,
+  );
+
+  Future<void> _saveCredentials(String username, String password) async {
+    final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
+    await storage.write(key: 'username', value: username);
+    await storage.write(key: 'password', value: password);
   }
 }
 
@@ -69,12 +97,6 @@ class Voto {
   int voto;
 
   Voto(this.nomeMateria, this.voto);
-
-  Voto.fromJson(Map<String, dynamic> json)
-      : nomeMateria = json['nomeMateria'],
-        voto = json['voto'];
-
-  Map<String, dynamic> toJson() => {'nomeMateria': nomeMateria, 'voto': voto};
 }
 
 class Materia {
@@ -84,17 +106,4 @@ class Materia {
   String nomeMateria;
 
   Materia(this.sede, this.fine, this.inizio, this.nomeMateria);
-
-  Materia.fromJson(Map<String, dynamic> json)
-      : sede = json['sede'],
-        fine = DateTime.parse(json['fine']),
-        inizio = DateTime.parse(json['inizio']),
-        nomeMateria = json['nomeMateria'];
-
-  Map<String, dynamic> toJson() => {
-    'sede': sede,
-    'fine': fine.toIso8601String(),
-    'inizio': inizio.toIso8601String(),
-    'nomeMateria': nomeMateria,
-  };
 }

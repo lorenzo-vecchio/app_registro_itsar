@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prova_registro/data.dart';
+import '../globals.dart';
 
 class Voti extends StatefulWidget {
   const Voti({Key? key}) : super(key: key);
@@ -9,36 +9,15 @@ class Voti extends StatefulWidget {
 }
 
 class _VotiState extends State<Voti> {
-  List<Voto> voti = [];
-  double? media;
-  @override
-  void initState() {
-
-    super.initState();
-    loadData();
-  }
-
-  Future<void> loadData() async {
-    final data = Data();
-    final jsonData = await data.readData_returnJson();
-    setState(() {
-      voti = Data.fromJson(jsonData).votiList;
-      double somma = 0;
-      for (Voto voto in voti) {
-        somma += voto.voto;
-      }
-      media = somma / voti.length;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: ListView.builder(
-        itemCount: voti.length,
+        itemCount: globalData.votiList.length,
         itemBuilder: (context, index) {
-          final voto = voti[index];
+          final voto = globalData.votiList[index];
           return Padding(
             padding: const EdgeInsets.all(10.0),
             child: ListTile(
