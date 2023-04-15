@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../globals.dart';
+import '../data.dart';
+import 'package:circular_seek_bar/circular_seek_bar.dart';
 
 class Voti extends StatefulWidget {
   const Voti({Key? key}) : super(key: key);
@@ -9,22 +11,96 @@ class Voti extends StatefulWidget {
 }
 
 class _VotiState extends State<Voti> {
+  final ValueNotifier<double> _valueNotifier = ValueNotifier(0);
+
+
+  double _calcolaMedia () {
+    int somma = 0;
+    for (Voto voto in globalData.votiList) {
+      somma += voto.voto;
+    }
+    return somma / globalData.votiList.length;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: ListView.builder(
-        itemCount: globalData.votiList.length,
+        itemCount: globalData.votiList.length + 1,
         itemBuilder: (context, index) {
-          final voto = globalData.votiList[index];
-          return Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: ListTile(
-              title: Text(voto.nomeMateria),
-              subtitle: Text(voto.voto.toString()),
-            ),
-          );
+          Color getCircleColor (Voto voto) {
+            if (voto.voto >= 27.0) {
+              return Colors.green;
+            } else if (voto.voto > 18.0 && voto.voto < 27) {
+              return Colors.orange;
+            } else {
+              return Colors.red;
+            }
+          }
+          if (index == 0) {
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(15, 5, 15, 30),
+              child: ListTile(
+                title: CircularSeekBar(
+                  width: double.infinity,
+                  height: 250,
+                  minProgress: 0,
+                  maxProgress: 30,
+                  progress: _calcolaMedia(),
+                  barWidth: 8,
+                  startAngle: 45,
+                  sweepAngle: 270,
+                  strokeCap: StrokeCap.round,
+                  progressGradientColors: const [Colors.red, Colors.orange, Colors.green],
+                  innerThumbRadius: 5,
+                  innerThumbStrokeWidth: 3,
+                  innerThumbColor: Colors.white,
+                  outerThumbRadius: 5,
+                  outerThumbStrokeWidth: 10,
+                  outerThumbColor: Colors.blueAccent,
+                  animation: true,
+                  valueNotifier: _valueNotifier,
+                  child: Center(
+                    child: ValueListenableBuilder(
+                        valueListenable: _valueNotifier,
+                        builder: (_, double value, __) => Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text('${value.round()}'),
+                            Text('media', style: TextStyle(
+                              color: Colors.grey.shade500
+                            )),
+                          ],
+                        )),
+                  ),
+                ),
+              ),
+            );
+          } else {
+            final voto = globalData.votiList[index-1];
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 15.0, vertical: 5),
+              child: ListTile(
+                title: Text(voto.nomeMateria),
+                trailing: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: getCircleColor(voto),
+                  ),
+                  child: Text(voto.voto.toString(),
+                    style: const TextStyle(
+                      fontSize: 25,
+                    ),
+                  ),
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 8.0),
+              ),
+            );
+          }
         },
       ),
     );

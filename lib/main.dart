@@ -57,7 +57,9 @@ class _MyAppState extends State<MyApp> {
     if(await isNetworkAvailable() && username != null && password != null) {
       data = Data.fromCredentials(username, password);
       await data.initialize();
-      globalData = data;
+      if(data.jsonString.isNotEmpty) {
+        globalData = data;
+      }
     }
 
     setState(() {
@@ -86,9 +88,9 @@ class _MyAppState extends State<MyApp> {
             tileColor: Colors.grey.shade900,
             contentPadding: const EdgeInsets.all(10),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(20),
               side: BorderSide(
-                color: Colors.grey.shade800,
+                color: Colors.grey.shade900,
               ),
             ),
           ),
