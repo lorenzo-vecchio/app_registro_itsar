@@ -69,7 +69,7 @@ class _VotiState extends State<Voti> {
                           children: [
                             Text('${double.parse((value).toStringAsFixed(2))}'),
                             Text('media', style: TextStyle(
-                              color: Colors.grey.shade500
+                                color: Colors.grey.shade500
                             )),
                           ],
                         )),
