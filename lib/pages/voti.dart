@@ -27,7 +27,7 @@ class _VotiState extends State<Voti> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: ListView.builder(
-        itemCount: globalData.votiList.length + 1,
+        itemCount: globalData.votiList.length + 2,
         itemBuilder: (context, index) {
           Color getCircleColor (Voto voto) {
             if (voto.voto >= 27.0) {
@@ -40,7 +40,7 @@ class _VotiState extends State<Voti> {
           }
           if (index == 0) {
             return Padding(
-              padding: const EdgeInsets.fromLTRB(15, 5, 15, 30),
+              padding: const EdgeInsets.fromLTRB(15, 20, 15, 30),
               child: ListTile(
                 title: CircularSeekBar(
                   width: double.infinity,
@@ -67,7 +67,7 @@ class _VotiState extends State<Voti> {
                         builder: (_, double value, __) => Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('${value.round()}'),
+                            Text('${double.parse((value).toStringAsFixed(2))}'),
                             Text('media', style: TextStyle(
                               color: Colors.grey.shade500
                             )),
@@ -77,8 +77,25 @@ class _VotiState extends State<Voti> {
                 ),
               ),
             );
-          } else {
-            final voto = globalData.votiList[index-1];
+          }
+          if (index == 1) {
+            return const Padding(
+              padding: EdgeInsets.fromLTRB(25, 8, 8, 0),
+              child: ListTile(
+                tileColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: Colors.black,
+                  ),
+                ),
+                title: Text("Grades", style: TextStyle(fontSize: 30,),),
+                contentPadding: EdgeInsets.symmetric(
+                    horizontal: 0, vertical: 0),
+              ),
+            );
+          }
+          else {
+            final voto = globalData.votiList[index-2];
             return Padding(
               padding: const EdgeInsets.symmetric(
                   horizontal: 15.0, vertical: 5),

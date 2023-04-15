@@ -82,6 +82,7 @@ class _MyAppState extends State<MyApp> {
           );
     } else {
       return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: alreadyHaveData ? HomePage() : LoginPage(),
         theme: ThemeData(
           listTileTheme: ListTileThemeData(
