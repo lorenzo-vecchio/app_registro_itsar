@@ -42,6 +42,7 @@ class _VotiState extends State<Voti> {
             return Padding(
               padding: const EdgeInsets.fromLTRB(15, 20, 15, 30),
               child: ListTile(
+                contentPadding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                 title: CircularSeekBar(
                   width: double.infinity,
                   height: 250,
