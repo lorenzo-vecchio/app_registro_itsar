@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:prova_registro/globals.dart';
 import 'homepage.dart';
 import 'loginpage.dart';
@@ -46,6 +47,18 @@ class _MyAppState extends State<MyApp> {
       // Handle errors here
       print('Error during initialization: $e');
     }
+    Future<bool> isNetworkAvailable() async {
+      var connectivityResult = await Connectivity().checkConnectivity();
+      if (connectivityResult == ConnectivityResult.none) {
+        return false;
+      }
+      return true;
+    }
+    if(await isNetworkAvailable() && username != null && password != null) {
+      data = Data.fromCredentials(username, password);
+      await data.initialize();
+      globalData = data;
+    }
 
     setState(() {
       _isLoading = false;
@@ -56,10 +69,15 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     if (_isLoading) {
       return Column(
-        children: [
-          Center(child: const CircularProgressIndicator()),
-        ],
-      );
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Image(image: AssetImage('lib/assets/ITS-Logo-Negativo.png')),
+              ),
+            ],
+          );
     } else {
       return MaterialApp(
         home: alreadyHaveData ? HomePage() : LoginPage(),

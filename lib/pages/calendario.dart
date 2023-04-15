@@ -23,7 +23,7 @@ class _CalendarioState extends State<Calendario> {
   void _createNeatCleanEventList () {
     List<Materia> eventiMaterie = globalData.materieList;
     for(Materia materia in eventiMaterie) {
-      NeatCleanCalendarEvent evento = NeatCleanCalendarEvent('${materia.nomeMateria}',
+      NeatCleanCalendarEvent evento = NeatCleanCalendarEvent('${materia.nomeMateria}\n\n${materia.aula}',
         startTime: materia.inizio,
         endTime: materia.fine,
         color: Colors.indigo,
@@ -36,9 +36,10 @@ class _CalendarioState extends State<Calendario> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Calendar(
-          eventTileHeight: 100,
+          eventTileHeight: 130,
           startOnMonday: true,
           weekDays: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
           eventsList: _eventList,
@@ -46,7 +47,7 @@ class _CalendarioState extends State<Calendario> {
           eventDoneColor: Colors.green,
           selectedColor: Colors.pink,
           selectedTodayColor: Colors.red,
-          todayColor: Colors.blue,
+          todayColor: Colors.red,
           eventColor: null,
           locale: 'en_US',
           todayButtonText: 'Today',
@@ -60,6 +61,8 @@ class _CalendarioState extends State<Calendario> {
           displayMonthTextStyle: const TextStyle(
             color: Colors.white,
           ),
+          defaultDayColor: Colors.white,
+          defaultOutOfMonthDayColor: Colors.grey.shade500,
         ),
       ),
     );

@@ -50,9 +50,11 @@ class Data {
       DateTime inizio = DateTime.parse(element['start']);
       DateTime fine = DateTime.parse(element['end']);
       int sede = int.parse(element['AltraSede']);
-      Materia materia = Materia(sede, fine, inizio, nomeMateria);
+      String aula = element['aula'];
+      Materia materia = Materia(sede, fine, inizio, nomeMateria, aula);
       materieList.add(materia);
     });
+    materieList.sort((a, b) => a.inizio.compareTo(b.inizio));
   }
 
   Future<void> _APIconnection(String username, String password) async {
@@ -104,6 +106,7 @@ class Materia {
   DateTime fine;
   DateTime inizio;
   String nomeMateria;
+  String aula;
 
-  Materia(this.sede, this.fine, this.inizio, this.nomeMateria);
+  Materia(this.sede, this.fine, this.inizio, this.nomeMateria, this.aula);
 }
