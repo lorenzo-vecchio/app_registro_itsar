@@ -19,19 +19,21 @@ class _CalendarioState extends State<Calendario> {
     _createNeatCleanEventList();
   }
 
-
-  void _createNeatCleanEventList () {
+  void _createNeatCleanEventList() {
     List<Materia> eventiMaterie = globalData.materieList;
-    for(Materia materia in eventiMaterie) {
-      NeatCleanCalendarEvent evento = NeatCleanCalendarEvent('${materia.nomeMateria}\n\n${materia.aula}',
+    for (Materia materia in eventiMaterie) {
+      debugPrint(materia.inizio.toString().substring(11));
+      NeatCleanCalendarEvent evento = NeatCleanCalendarEvent(
+        '${materia.nomeMateria}\n\n${materia.aula}',
         startTime: materia.inizio,
         endTime: materia.fine,
-        color: Colors.indigo,
+        color: materia.inizio.toString().substring(11) == '09:00:00.000'
+            ? Colors.red
+            : Colors.indigo,
       );
       _eventList.add(evento);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
