@@ -16,12 +16,18 @@ class Data {
   String password;
   bool fromCred;
 
-  Data (): fromCred = false, password = "", username = "";
+  Data()
+      : fromCred = false,
+        password = "",
+        username = "";
   Data.fromCredentials(this.username, this.password) : fromCred = true;
-  Data.fromDisc() : fromCred = false, password = "", username = "";
+  Data.fromDisc()
+      : fromCred = false,
+        password = "",
+        username = "";
 
-  Future<void> initialize () async {
-    if(fromCred) {
+  Future<void> initialize() async {
+    if (fromCred) {
       await _APIconnection(username, password);
       jsonString = requestBody;
       if (requestStatus == 200) {
@@ -38,8 +44,7 @@ class Data {
     globalData = this;
   }
 
-
-  void _convertJSON () {
+  void _convertJSON() {
     valid = true;
     final Map<String, dynamic> jsonMap = json.decode(jsonString);
     jsonMap['voti'].forEach((key, value) {
@@ -59,7 +64,7 @@ class Data {
 
   Future<void> _APIconnection(String username, String password) async {
     final response = await http.post(
-      Uri.parse('https://web-production-ca2c.up.railway.app'),
+      Uri.parse('https://flask-api-scraper.vercel.app'),
       body: jsonEncode({
         'username': username,
         'password': password,
@@ -84,8 +89,8 @@ class Data {
   }
 
   AndroidOptions _getAndroidOptions() => const AndroidOptions(
-    encryptedSharedPreferences: true,
-  );
+        encryptedSharedPreferences: true,
+      );
 
   Future<void> _saveCredentials(String username, String password) async {
     final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
