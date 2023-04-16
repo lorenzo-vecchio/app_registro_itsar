@@ -86,12 +86,12 @@ class _MyAppState extends State<MyApp> {
         home: alreadyHaveData ? HomePage() : LoginPage(),
         theme: ThemeData(
           listTileTheme: ListTileThemeData(
-            tileColor: Colors.grey.shade900,
+            tileColor: Colors.grey.shade900.withOpacity(0.50),
             contentPadding: const EdgeInsets.all(10),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(15),
               side: BorderSide(
-                color: Colors.grey.shade900,
+                color: Colors.grey.shade900.withOpacity(0.50),
               ),
             ),
           ),
@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> {
           ),
           inputDecorationTheme: InputDecorationTheme(
             filled: true,
-            fillColor: Colors.grey.shade900,
+            fillColor: Colors.grey.shade900.withOpacity(0.50),
           ),
           // Define the default font family.
           fontFamily: 'Montserrat',

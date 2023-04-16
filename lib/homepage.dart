@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.black,
             color: Colors.white,
             activeColor: Colors.white,
-            tabBackgroundColor: Colors.grey.shade800,
+            tabBackgroundColor: Colors.grey.shade900.withOpacity(0.50),
             padding: const EdgeInsets.all(16),
             gap: 8,
             tabs: const [
