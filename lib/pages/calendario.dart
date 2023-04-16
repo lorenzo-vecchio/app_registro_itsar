@@ -19,14 +19,38 @@ class _CalendarioState extends State<Calendario> {
     _createNeatCleanEventList();
   }
 
+  String _getInterval(String room) {
+    switch (room) {
+      case "CRESPI-1":
+        return '10:15 - 15:15';
+      case "CRESPI-3":
+        return '11:15 - 16:15';
+      case "CRESPI-4":
+        return '11:30 - 16:30';
+      case "CRESPI-5":
+        return '10:45 - 15:45';
+      case "CRESPI-6":
+        return '10:30 - 15:30';
+      case "CRESPI-7":
+        return '11:00 - 16:00';
+      case "CRESPI-P1":
+        return '11:00 - 16:00';
+      case "CRESPI-P2":
+        return '11:15 - 16:15';
+      default:
+    }
+    return "";
+  }
+
   void _createNeatCleanEventList() {
     List<Materia> eventiMaterie = globalData.materieList;
     for (Materia materia in eventiMaterie) {
-      debugPrint(materia.inizio.toString().substring(11));
+      debugPrint(_getInterval(materia.aula));
       NeatCleanCalendarEvent evento = NeatCleanCalendarEvent(
         '${materia.nomeMateria}\n\n${materia.aula}',
         startTime: materia.inizio,
         endTime: materia.fine,
+        description: _getInterval(materia.aula),
         color: materia.inizio.toString().substring(11) == '09:00:00.000'
             ? Colors.red
             : Colors.indigo,
