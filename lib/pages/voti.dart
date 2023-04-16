@@ -40,24 +40,27 @@ class _VotiState extends State<Voti> {
           }
           if (index == 0) {
             return Padding(
-              padding: const EdgeInsets.fromLTRB(15, 20, 15, 30),
+              padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
               child: ListTile(
-                contentPadding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                contentPadding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
                 title: CircularSeekBar(
                   width: double.infinity,
                   height: 250,
                   minProgress: 0,
                   maxProgress: 30,
                   progress: _calcolaMedia(),
-                  barWidth: 8,
+                  barWidth: 15,
                   startAngle: 45,
                   sweepAngle: 270,
                   strokeCap: StrokeCap.round,
                   progressGradientColors: const [Colors.red, Colors.orange, Colors.green],
-                  innerThumbRadius: 5,
+                  innerThumbRadius: 13,
                   innerThumbStrokeWidth: 3,
                   innerThumbColor: Colors.white,
-                  outerThumbRadius: 5,
+                  outerThumbRadius: 13,
                   outerThumbStrokeWidth: 10,
                   outerThumbColor: Colors.blueAccent,
                   animation: true,
@@ -68,9 +71,14 @@ class _VotiState extends State<Voti> {
                         builder: (_, double value, __) => Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('${double.parse((value).toStringAsFixed(2))}'),
+                            Text('${double.parse((value).toStringAsFixed(2))}', style: const TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.bold,
+                            ),),
                             Text('media', style: TextStyle(
-                                color: Colors.grey.shade500
+                                color: Colors.grey.shade500,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
                             )),
                           ],
                         )),
@@ -89,7 +97,11 @@ class _VotiState extends State<Voti> {
                     color: Colors.black,
                   ),
                 ),
-                title: Text("Grades", style: TextStyle(fontSize: 30,),),
+                title: Text("Grades", style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+                ),
                 contentPadding: EdgeInsets.symmetric(
                     horizontal: 0, vertical: 0),
               ),
@@ -111,6 +123,7 @@ class _VotiState extends State<Voti> {
                   child: Text(voto.voto.toString(),
                     style: const TextStyle(
                       fontSize: 25,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
