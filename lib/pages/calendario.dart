@@ -45,12 +45,13 @@ class _CalendarioState extends State<Calendario> {
   void _createNeatCleanEventList() {
     List<Materia> eventiMaterie = globalData.materieList;
     for (Materia materia in eventiMaterie) {
+      String intervallo = 'Intervallo: ${_getInterval(materia.aula)}';
       debugPrint(_getInterval(materia.aula));
       NeatCleanCalendarEvent evento = NeatCleanCalendarEvent(
         '${materia.nomeMateria}\n\n${materia.aula}',
         startTime: materia.inizio,
         endTime: materia.fine,
-        description: _getInterval(materia.aula),
+        description: intervallo,
         color: materia.inizio.toString().substring(11) == '09:00:00.000'
             ? Colors.red
             : Colors.indigo,

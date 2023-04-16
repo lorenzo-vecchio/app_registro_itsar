@@ -113,7 +113,7 @@ class _VotiState extends State<Voti> {
               padding: const EdgeInsets.symmetric(
                   horizontal: 15.0, vertical: 5),
               child: ListTile(
-                title: Text(voto.nomeMateria),
+                title: Text(voto.nomeMateria, style: TextStyle(fontWeight: FontWeight.bold),),
                 trailing: Container(
                   padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(

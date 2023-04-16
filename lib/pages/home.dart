@@ -105,7 +105,18 @@ class _HomeState extends State<Home> {
                                 widthFactor: 0.80,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text('${materieOggi[0].nomeMateria}\n\nAula: ${materieOggi[0].aula}'),
+                                  child: RichText(
+                                    text: TextSpan(
+                                      style: DefaultTextStyle.of(context).style,
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: '${materieOggi[0].nomeMateria}',
+                                          style: TextStyle(fontWeight: FontWeight.bold),
+                                        ),
+                                        TextSpan(text: '\n\nAula: ${materieOggi[0].aula}'),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -127,7 +138,18 @@ class _HomeState extends State<Home> {
                                 widthFactor: 0.80,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text('${materieOggi[0].nomeMateria}\n\nAula: ${materieOggi[0].aula}'),
+                                  child: RichText(
+                                    text: TextSpan(
+                                      style: DefaultTextStyle.of(context).style,
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: '${materieOggi[0].nomeMateria}',
+                                          style: TextStyle(fontWeight: FontWeight.bold),
+                                        ),
+                                        TextSpan(text: '\n\nAula: ${materieOggi[0].aula}'),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -144,7 +166,18 @@ class _HomeState extends State<Home> {
                                 widthFactor: 0.80,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text('${materieOggi[1].nomeMateria}\n\nAula: ${materieOggi[1].aula}'),
+                                  child: RichText(
+                                    text: TextSpan(
+                                      style: DefaultTextStyle.of(context).style,
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: '${materieOggi[1].nomeMateria}',
+                                          style: TextStyle(fontWeight: FontWeight.bold),
+                                        ),
+                                        TextSpan(text: '\n\nAula: ${materieOggi[1].aula}'),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
