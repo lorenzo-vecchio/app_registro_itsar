@@ -20,8 +20,7 @@ class _HomeState extends State<Home> {
     materieOggi = _findTodayMaterie();
   }
 
-
-  double _calcolaMedia () {
+  double _calcolaMedia() {
     int somma = 0;
     for (Voto voto in globalData.votiList) {
       somma += voto.voto;
@@ -31,11 +30,12 @@ class _HomeState extends State<Home> {
 
   List<Materia> _findTodayMaterie() {
     final now = DateTime.now();
-    return globalData.materieList.where((materia) =>
-    materia.inizio.year == now.year &&
-        materia.inizio.month == now.month &&
-        materia.inizio.day == now.day
-    ).toList();
+    return globalData.materieList
+        .where((materia) =>
+            materia.inizio.year == now.year &&
+            materia.inizio.month == now.month &&
+            materia.inizio.day == now.day)
+        .toList();
   }
 
   @override
@@ -53,140 +53,160 @@ class _HomeState extends State<Home> {
               ),
               title: Padding(
                 padding: const EdgeInsets.fromLTRB(25, 0, 0, 20),
-                child: Text('Today', style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold
-                ),),
+                child: Text(
+                  'Today',
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                ),
               ),
               subtitle: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
                 child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: Colors.grey.shade900.withOpacity(0.50),
-                  ),
-                  child: () {
-                    if (materieOggi.isEmpty) {
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.green,
-                              ),
-                              padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                              child: const FractionallySizedBox(
-                                widthFactor: 0.80,
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text('Oggi niente!!!', style: TextStyle(
-                                    fontWeight: FontWeight.bold
-                                  ),),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.grey.shade900.withOpacity(0.50),
+                    ),
+                    child: () {
+                      if (materieOggi.isEmpty) {
+                        return Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.green,
                                 ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    } else if (materieOggi.length == 1) {
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.red,
-                              ),
-                              padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                              child: FractionallySizedBox(
-                                widthFactor: 0.80,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      style: DefaultTextStyle.of(context).style,
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: '${materieOggi[0].nomeMateria}',
-                                          style: TextStyle(fontWeight: FontWeight.bold),
-                                        ),
-                                        TextSpan(text: '\n\nAula: ${materieOggi[0].aula}'),
-                                      ],
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                                child: const FractionallySizedBox(
+                                  widthFactor: 0.80,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Oggi niente!!!',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      );
-                    } else {
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.red,
-                              ),
-                              padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                              child: FractionallySizedBox(
-                                widthFactor: 0.80,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      style: DefaultTextStyle.of(context).style,
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: '${materieOggi[0].nomeMateria}',
-                                          style: TextStyle(fontWeight: FontWeight.bold),
-                                        ),
-                                        TextSpan(text: '\n\nAula: ${materieOggi[0].aula}'),
-                                      ],
+                          ],
+                        );
+                      } else if (materieOggi.length == 1) {
+                        return Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.red,
+                                ),
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                                child: FractionallySizedBox(
+                                  widthFactor: 0.80,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: RichText(
+                                      text: TextSpan(
+                                        style:
+                                            DefaultTextStyle.of(context).style,
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text:
+                                                '${materieOggi[0].nomeMateria}',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          TextSpan(
+                                              text:
+                                                  '\n\nAula: ${materieOggi[0].aula}'),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.indigo,
-                              ),
-                              padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                              child: FractionallySizedBox(
-                                widthFactor: 0.80,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      style: DefaultTextStyle.of(context).style,
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: '${materieOggi[1].nomeMateria}',
-                                          style: TextStyle(fontWeight: FontWeight.bold),
-                                        ),
-                                        TextSpan(text: '\n\nAula: ${materieOggi[1].aula}'),
-                                      ],
+                          ],
+                        );
+                      } else {
+                        return Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.red,
+                                ),
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                                child: FractionallySizedBox(
+                                  widthFactor: 0.80,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: RichText(
+                                      text: TextSpan(
+                                        style:
+                                            DefaultTextStyle.of(context).style,
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text:
+                                                '${materieOggi[0].nomeMateria}',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          TextSpan(
+                                              text:
+                                                  '\n\nAula: ${materieOggi[0].aula}'),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      );
-                    }
-                  }()
-                ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.indigo,
+                                ),
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                                child: FractionallySizedBox(
+                                  widthFactor: 0.80,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: RichText(
+                                      text: TextSpan(
+                                        style:
+                                            DefaultTextStyle.of(context).style,
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text:
+                                                '${materieOggi[1].nomeMateria}',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          TextSpan(
+                                              text:
+                                                  '\n\nAula: ${materieOggi[1].aula}'),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                    }()),
               ),
             ),
           ),
@@ -197,42 +217,52 @@ class _HomeState extends State<Home> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25),
               ),
-              title: CircularSeekBar(
-                width: double.infinity,
-                height: 250,
-                minProgress: 0,
-                maxProgress: 30,
-                progress: _calcolaMedia(),
-                barWidth: 15,
-                startAngle: 45,
-                sweepAngle: 270,
-                strokeCap: StrokeCap.round,
-                progressGradientColors: const [Colors.red, Colors.orange, Colors.green],
-                innerThumbRadius: 13,
-                innerThumbStrokeWidth: 3,
-                innerThumbColor: Colors.white,
-                outerThumbRadius: 13,
-                outerThumbStrokeWidth: 10,
-                outerThumbColor: Colors.blueAccent,
-                animation: true,
-                valueNotifier: _valueNotifier,
-                child: Center(
-                  child: ValueListenableBuilder(
-                      valueListenable: _valueNotifier,
-                      builder: (_, double value, __) => Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('${double.parse((value).toStringAsFixed(2))}', style: const TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
-                          ),),
-                          Text('media', style: TextStyle(
-                            color: Colors.grey.shade500,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          )),
-                        ],
-                      )),
+              title: IgnorePointer(
+                child: CircularSeekBar(
+                  width: double.infinity,
+                  height: 250,
+                  minProgress: 0,
+                  maxProgress: 30,
+                  progress: _calcolaMedia(),
+                  barWidth: 15,
+                  startAngle: 45,
+                  sweepAngle: 270,
+                  strokeCap: StrokeCap.round,
+                  progressGradientColors: const [
+                    Colors.red,
+                    Colors.orange,
+                    Colors.green
+                  ],
+                  innerThumbRadius: 13,
+                  innerThumbStrokeWidth: 3,
+                  innerThumbColor: Colors.white,
+                  outerThumbRadius: 13,
+                  outerThumbStrokeWidth: 10,
+                  outerThumbColor: Colors.blueAccent,
+                  animation: true,
+                  valueNotifier: _valueNotifier,
+                  child: Center(
+                    child: ValueListenableBuilder(
+                        valueListenable: _valueNotifier,
+                        builder: (_, double value, __) => Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  '${double.parse((value).toStringAsFixed(2))}',
+                                  style: const TextStyle(
+                                    fontSize: 40,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text('media',
+                                    style: TextStyle(
+                                      color: Colors.grey.shade500,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                              ],
+                            )),
+                  ),
                 ),
               ),
             ),
