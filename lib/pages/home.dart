@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import '../globals.dart';
 import '../data.dart';
@@ -12,11 +13,16 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<Materia> materieOggi = [];
+  List<Materia> materieDomani = [];
+  List<List<Materia>> materie = [];
 
   @override
   void initState() {
     super.initState();
     materieOggi = _findTodayMaterie();
+    materieDomani = _findTomorrowMaterie();
+    materie.add(materieOggi);
+    materie.add(materieDomani);
   }
 
   List<Materia> _findTodayMaterie() {
@@ -29,6 +35,16 @@ class _HomeState extends State<Home> {
         .toList();
   }
 
+  List<Materia> _findTomorrowMaterie() {
+    final now = DateTime.now();
+    return globalData.materieList
+        .where((materia) =>
+            materia.inizio.year == now.year &&
+            materia.inizio.month == now.month &&
+            materia.inizio.day == now.day + 1)
+        .toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,219 +53,118 @@ class _HomeState extends State<Home> {
         onTap: () => {debugPrint("pollo")},
         child: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
-              child: ListTile(
-                contentPadding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                title: const Padding(
-                  padding: EdgeInsets.fromLTRB(25, 0, 0, 20),
-                  child: Text(
-                    'Today',
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                subtitle: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
-                  child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Colors.grey.shade900.withOpacity(0.50),
+            CarouselSlider(
+              options: CarouselOptions(
+                height: 500,
+                viewportFraction: 1,
+                initialPage: 0,
+                enableInfiniteScroll: false,
+              ),
+              items: materie.map((i) {
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 40),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.fromLTRB(0, 25, 0, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    title: Padding(
+                      padding: EdgeInsets.fromLTRB(25, 0, 0, 20),
+                      child: Text(
+                        '${materie.indexOf(i) == 0 ? 'Today' : 'Tomorrow'}',
+                        style: TextStyle(
+                            fontSize: 40, fontWeight: FontWeight.bold),
                       ),
-                      child: () {
-                        if (materieOggi.isEmpty) {
-                          return Column(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(0, 30, 0, 30),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: Colors.green,
-                                  ),
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                                  child: const FractionallySizedBox(
-                                    widthFactor: 0.80,
-                                    child: Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'Oggi niente!!!',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 40),
+                      child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: Colors.grey.shade900.withOpacity(0.50),
+                          ),
+                          child: () {
+                            if (i.isEmpty) {
+                              return Column(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        color: Colors.green,
                                       ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        } else {
-                          List<Widget> listaMaterie = [];
-                          for (var i = 0; i < materieOggi.length; i++) {
-                            listaMaterie.add(
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(0, 30, 0, 30),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: i == 0 ? Colors.red : Colors.indigo,
-                                  ),
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                                  child: FractionallySizedBox(
-                                    widthFactor: 0.80,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: RichText(
-                                        text: TextSpan(
-                                          style: DefaultTextStyle.of(context)
-                                              .style,
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text:
-                                                  '${materieOggi[i].nomeMateria}',
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            TextSpan(
-                                                text:
-                                                    '\n\nAula: ${materieOggi[i].aula}'),
-                                          ],
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 15, 0, 15),
+                                      child: const FractionallySizedBox(
+                                        widthFactor: 0.80,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            'Oggi niente!!!',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ),
-                            );
-                          }
-                          return Column(
-                            children: listaMaterie,
-                          );
-                        }
-                        // } else if (materieOggi.length == 1) {
-                        //   return Column(
-                        //     children: [
-                        // Padding(
-                        //   padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
-                        //   child: Container(
-                        //     decoration: BoxDecoration(
-                        //       borderRadius: BorderRadius.circular(15),
-                        //       color: Colors.red,
-                        //     ),
-                        //     padding:
-                        //         const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                        //     child: FractionallySizedBox(
-                        //       widthFactor: 0.80,
-                        //       child: Padding(
-                        //         padding: const EdgeInsets.all(8.0),
-                        //         child: RichText(
-                        //           text: TextSpan(
-                        //             style:
-                        //                 DefaultTextStyle.of(context).style,
-                        //             children: <TextSpan>[
-                        //               TextSpan(
-                        //                 text:
-                        //                     '${materieOggi[0].nomeMateria}',
-                        //                 style: TextStyle(
-                        //                     fontWeight: FontWeight.bold),
-                        //               ),
-                        //               TextSpan(
-                        //                   text:
-                        //                       '\n\nAula: ${materieOggi[0].aula}'),
-                        //             ],
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                        //     ],
-                        //   );
-                        // } else {
-                        //   return Column(
-                        //     children: [
-                        //       Padding(
-                        //         padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
-                        //         child: Container(
-                        //           decoration: BoxDecoration(
-                        //             borderRadius: BorderRadius.circular(15),
-                        //             color: Colors.red,
-                        //           ),
-                        //           padding:
-                        //               const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                        //           child: FractionallySizedBox(
-                        //             widthFactor: 0.80,
-                        //             child: Padding(
-                        //               padding: const EdgeInsets.all(8.0),
-                        //               child: RichText(
-                        //                 text: TextSpan(
-                        //                   style:
-                        //                       DefaultTextStyle.of(context).style,
-                        //                   children: <TextSpan>[
-                        //                     TextSpan(
-                        //                       text:
-                        //                           '${materieOggi[0].nomeMateria}',
-                        //                       style: TextStyle(
-                        //                           fontWeight: FontWeight.bold),
-                        //                     ),
-                        //                     TextSpan(
-                        //                         text:
-                        //                             '\n\nAula: ${materieOggi[0].aula}'),
-                        //                   ],
-                        //                 ),
-                        //               ),
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //       Padding(
-                        //         padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
-                        //         child: Container(
-                        //           decoration: BoxDecoration(
-                        //             borderRadius: BorderRadius.circular(15),
-                        //             color: Colors.indigo,
-                        //           ),
-                        //           padding:
-                        //               const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                        //           child: FractionallySizedBox(
-                        //             widthFactor: 0.80,
-                        //             child: Padding(
-                        //               padding: const EdgeInsets.all(8.0),
-                        //               child: RichText(
-                        //                 text: TextSpan(
-                        //                   style:
-                        //                       DefaultTextStyle.of(context).style,
-                        //                   children: <TextSpan>[
-                        //                     TextSpan(
-                        //                       text:
-                        //                           '${materieOggi[1].nomeMateria}',
-                        //                       style: TextStyle(
-                        //                           fontWeight: FontWeight.bold),
-                        //                     ),
-                        //                     TextSpan(
-                        //                         text:
-                        //                             '\n\nAula: ${materieOggi[1].aula}'),
-                        //                   ],
-                        //                 ),
-                        //               ),
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   );
-                        // }
-                      }()),
-                ),
-              ),
-            ),
-            Average()
+                                ],
+                              );
+                            } else {
+                              List<Widget> listaMaterie = [];
+                              for (var j = 0; j < i.length; j++) {
+                                listaMaterie.add(
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        color:
+                                            j == 0 ? Colors.red : Colors.indigo,
+                                      ),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 15, 0, 15),
+                                      child: FractionallySizedBox(
+                                        widthFactor: 0.80,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: RichText(
+                                            text: TextSpan(
+                                              style:
+                                                  DefaultTextStyle.of(context)
+                                                      .style,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                  text: '${i[j].nomeMateria}',
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                TextSpan(
+                                                    text:
+                                                        '\n\nAula: ${i[j].aula}'),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                              return Column(
+                                children: listaMaterie,
+                              );
+                            }
+                          }()),
+                    ),
+                  ),
+                );
+              }).toList(),
+            )
           ],
         ),
       ),
