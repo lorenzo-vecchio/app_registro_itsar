@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:circular_seek_bar/circular_seek_bar.dart';
 import '../globals.dart';
 import '../data.dart';
+import '../widgets/average.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -11,21 +12,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final ValueNotifier<double> _valueNotifier = ValueNotifier(0);
   List<Materia> materieOggi = [];
 
   @override
   void initState() {
     super.initState();
     materieOggi = _findTodayMaterie();
-  }
-
-  double _calcolaMedia() {
-    int somma = 0;
-    for (Voto voto in globalData.votiList) {
-      somma += voto.voto;
-    }
-    return somma / globalData.votiList.length;
   }
 
   List<Materia> _findTodayMaterie() {
@@ -210,63 +202,7 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-            child: ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25),
-              ),
-              title: IgnorePointer(
-                child: CircularSeekBar(
-                  width: double.infinity,
-                  height: 250,
-                  minProgress: 0,
-                  maxProgress: 30,
-                  progress: _calcolaMedia(),
-                  barWidth: 15,
-                  startAngle: 45,
-                  sweepAngle: 270,
-                  strokeCap: StrokeCap.round,
-                  progressGradientColors: const [
-                    Colors.red,
-                    Colors.orange,
-                    Colors.green
-                  ],
-                  innerThumbRadius: 13,
-                  innerThumbStrokeWidth: 3,
-                  innerThumbColor: Colors.white,
-                  outerThumbRadius: 13,
-                  outerThumbStrokeWidth: 10,
-                  outerThumbColor: Colors.blueAccent,
-                  animation: true,
-                  valueNotifier: _valueNotifier,
-                  child: Center(
-                    child: ValueListenableBuilder(
-                        valueListenable: _valueNotifier,
-                        builder: (_, double value, __) => Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  '${double.parse((value).toStringAsFixed(2))}',
-                                  style: const TextStyle(
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text('media',
-                                    style: TextStyle(
-                                      color: Colors.grey.shade500,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                              ],
-                            )),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          Average()
         ],
       ),
     );
