@@ -19,7 +19,8 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _login() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
-      Data data = Data.fromCredentials(_usernameController.text, _passwordController.text);
+      Data data = Data.fromCredentials(
+          _usernameController.text, _passwordController.text);
       await data.initialize();
       setState(() => _isLoading = false);
       if (data.valid) {
@@ -66,7 +67,8 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 const Padding(
                   padding: EdgeInsets.all(25.0),
-                  child: Image(image: AssetImage('lib/assets/ITS-Logo-Negativo.png')),
+                  child: Image(
+                      image: AssetImage('lib/assets/ITS-Logo-Negativo.png')),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -109,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                 _isLoading
                     ? CircularProgressIndicator()
                     : Container(
-                  width: 100,
+                        width: 100,
                         height: 50,
                         child: ElevatedButton(
                           onPressed: _login,

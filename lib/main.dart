@@ -13,8 +13,6 @@ void main() {
   runApp(MyApp());
 }
 
-
-
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -34,8 +32,8 @@ class _MyAppState extends State<MyApp> {
   Future<void> _initialize() async {
     // Perform some initialization operations
     AndroidOptions getAndroidOptions() => const AndroidOptions(
-      encryptedSharedPreferences: true,
-    );
+          encryptedSharedPreferences: true,
+        );
     final storage = FlutterSecureStorage(aOptions: getAndroidOptions());
     final username = await storage.read(key: 'username');
     final password = await storage.read(key: 'password');
@@ -56,10 +54,11 @@ class _MyAppState extends State<MyApp> {
       }
       return true;
     }
-    if(await isNetworkAvailable() && username != null && password != null) {
+
+    if (await isNetworkAvailable() && username != null && password != null) {
       data = Data.fromCredentials(username, password);
       await data.initialize();
-      if(data.jsonString.isNotEmpty) {
+      if (data.jsonString.isNotEmpty) {
         globalData = data;
       }
     }
@@ -72,10 +71,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      } else {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    } else {
       FlutterNativeSplash.remove();
       return MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -96,8 +95,7 @@ class _MyAppState extends State<MyApp> {
           primaryColor: Colors.black,
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFc00d0e)
-            ),
+                backgroundColor: const Color(0xFFc00d0e)),
           ),
           inputDecorationTheme: InputDecorationTheme(
             filled: true,
@@ -110,12 +108,11 @@ class _MyAppState extends State<MyApp> {
           // text styling for headlines, titles, bodies of text, and more.
           textTheme: const TextTheme(
             displayLarge:
-            TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+                TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
             titleLarge: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
             bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Montserrat'),
           ),
         ),
-
       );
     }
   }
