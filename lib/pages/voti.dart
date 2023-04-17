@@ -13,8 +13,7 @@ class Voti extends StatefulWidget {
 class _VotiState extends State<Voti> {
   final ValueNotifier<double> _valueNotifier = ValueNotifier(0);
 
-
-  double _calcolaMedia () {
+  double _calcolaMedia() {
     int somma = 0;
     for (Voto voto in globalData.votiList) {
       somma += voto.voto;
@@ -29,7 +28,7 @@ class _VotiState extends State<Voti> {
       body: ListView.builder(
         itemCount: globalData.votiList.length + 2,
         itemBuilder: (context, index) {
-          Color getCircleColor (Voto voto) {
+          Color getCircleColor(Voto voto) {
             if (voto.voto >= 27.0) {
               return Colors.green;
             } else if (voto.voto > 18.0 && voto.voto < 27) {
@@ -38,6 +37,7 @@ class _VotiState extends State<Voti> {
               return Colors.red;
             }
           }
+
           if (index == 0) {
             return Padding(
               padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
@@ -46,42 +46,52 @@ class _VotiState extends State<Voti> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
                 ),
-                title: CircularSeekBar(
-                  width: double.infinity,
-                  height: 250,
-                  minProgress: 0,
-                  maxProgress: 30,
-                  progress: _calcolaMedia(),
-                  barWidth: 15,
-                  startAngle: 45,
-                  sweepAngle: 270,
-                  strokeCap: StrokeCap.round,
-                  progressGradientColors: const [Colors.red, Colors.orange, Colors.green],
-                  innerThumbRadius: 13,
-                  innerThumbStrokeWidth: 3,
-                  innerThumbColor: Colors.white,
-                  outerThumbRadius: 13,
-                  outerThumbStrokeWidth: 10,
-                  outerThumbColor: Colors.blueAccent,
-                  animation: true,
-                  valueNotifier: _valueNotifier,
-                  child: Center(
-                    child: ValueListenableBuilder(
-                        valueListenable: _valueNotifier,
-                        builder: (_, double value, __) => Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text('${double.parse((value).toStringAsFixed(2))}', style: const TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.bold,
-                            ),),
-                            Text('media', style: TextStyle(
-                                color: Colors.grey.shade500,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            )),
-                          ],
-                        )),
+                title: IgnorePointer(
+                  child: CircularSeekBar(
+                    width: double.infinity,
+                    height: 250,
+                    minProgress: 0,
+                    maxProgress: 30,
+                    progress: _calcolaMedia(),
+                    barWidth: 15,
+                    startAngle: 45,
+                    sweepAngle: 270,
+                    strokeCap: StrokeCap.round,
+                    progressGradientColors: const [
+                      Colors.red,
+                      Colors.orange,
+                      Colors.green
+                    ],
+                    innerThumbRadius: 13,
+                    innerThumbStrokeWidth: 3,
+                    innerThumbColor: Colors.white,
+                    outerThumbRadius: 13,
+                    outerThumbStrokeWidth: 10,
+                    outerThumbColor: Colors.blueAccent,
+                    animation: true,
+                    valueNotifier: _valueNotifier,
+                    child: Center(
+                      child: ValueListenableBuilder(
+                          valueListenable: _valueNotifier,
+                          builder: (_, double value, __) => Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    '${double.parse((value).toStringAsFixed(2))}',
+                                    style: const TextStyle(
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text('media',
+                                      style: TextStyle(
+                                        color: Colors.grey.shade500,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                ],
+                              )),
+                    ),
                   ),
                 ),
               ),
@@ -97,38 +107,43 @@ class _VotiState extends State<Voti> {
                     color: Colors.black,
                   ),
                 ),
-                title: Text("Grades", style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+                title: Text(
+                  "Grades",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                ),
-                contentPadding: EdgeInsets.symmetric(
-                    horizontal: 0, vertical: 0),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 0, vertical: 0),
               ),
             );
-          }
-          else {
-            final voto = globalData.votiList[index-2];
+          } else {
+            final voto = globalData.votiList[index - 2];
             return Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 15.0, vertical: 5),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
               child: ListTile(
-                title: Text(voto.nomeMateria, style: TextStyle(fontWeight: FontWeight.bold),),
+                title: Text(
+                  voto.nomeMateria,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 trailing: Container(
                   padding: const EdgeInsets.all(15.0),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: getCircleColor(voto),
                   ),
-                  child: Text(voto.voto.toString(),
+                  child: Text(
+                    voto.voto.toString(),
                     style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 16.0, vertical: 8.0),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               ),
             );
           }
