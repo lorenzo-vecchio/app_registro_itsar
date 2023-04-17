@@ -39,7 +39,7 @@ class _CalendarioState extends State<Calendario> {
         return '11:15 - 16:15';
       default:
     }
-    return "";
+    return "N/A";
   }
 
   void _createNeatCleanEventList() {
