@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:prova_registro/globals.dart';
@@ -7,6 +8,8 @@ import 'loginpage.dart';
 import 'data.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(MyApp());
 }
 
@@ -70,17 +73,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Image(image: AssetImage('lib/assets/ITS-Logo-Negativo.png')),
-              ),
-            ],
-          );
-    } else {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      } else {
+      FlutterNativeSplash.remove();
       return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: alreadyHaveData ? HomePage() : LoginPage(),
