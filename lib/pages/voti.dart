@@ -115,7 +115,7 @@ class _VotiState extends State<Voti> {
               child: ListTile(
                 title: Text(voto.nomeMateria, style: TextStyle(fontWeight: FontWeight.bold),),
                 trailing: Container(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(15.0),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: getCircleColor(voto),

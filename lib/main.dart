@@ -48,7 +48,6 @@ class _MyAppState extends State<MyApp> {
       }
     } catch (e) {
       // Handle errors here
-      print('Error during initialization: $e');
     }
     Future<bool> isNetworkAvailable() async {
       var connectivityResult = await Connectivity().checkConnectivity();
