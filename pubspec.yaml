@@ -44,6 +44,7 @@ dependencies:
   circular_seek_bar: ^1.1.0+2
   flutter_native_splash: ^2.2.19
   flutter_launcher_icons: ^0.13.0
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
