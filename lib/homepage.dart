@@ -38,9 +38,18 @@ class _HomePageState extends State<HomePage> {
             gap: 8,
             tabs: const [
               GButton(icon: Icons.home, text: 'Home'),
-              GButton(icon: Icons.calculate_outlined, text: 'Voti',),
-              GButton(icon: Icons.calendar_month_outlined, text: 'Calendario',),
-              GButton(icon: Icons.account_box_outlined, text: 'Account',)
+              GButton(
+                icon: Icons.calculate_outlined,
+                text: 'Voti',
+              ),
+              GButton(
+                icon: Icons.calendar_month_outlined,
+                text: 'Calendario',
+              ),
+              GButton(
+                icon: Icons.account_box_outlined,
+                text: 'Account',
+              )
             ],
             selectedIndex: _selectedIndex,
             onTabChange: (index) {
