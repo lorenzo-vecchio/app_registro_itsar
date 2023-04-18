@@ -16,6 +16,8 @@ class _HomeState extends State<Home> {
   List<Materia> materieDomani = [];
   List<List<Materia>> materie = [];
 
+  int currentPageIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -59,6 +61,12 @@ class _HomeState extends State<Home> {
                 viewportFraction: 1,
                 initialPage: 0,
                 enableInfiniteScroll: false,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    currentPageIndex = index;
+                    print(currentPageIndex);
+                  });
+                },
               ),
               items: materie.map((i) {
                 return Padding(
@@ -72,7 +80,7 @@ class _HomeState extends State<Home> {
                       padding: EdgeInsets.fromLTRB(25, 0, 0, 20),
                       child: Text(
                         '${materie.indexOf(i) == 0 ? 'Today' : 'Tomorrow'}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 40, fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -164,6 +172,29 @@ class _HomeState extends State<Home> {
                   ),
                 );
               }).toList(),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                for (int j = 0; j < materie.length; j++)
+                  Container(
+                    height: 13,
+                    width: 13,
+                    margin: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: currentPageIndex == j ? Colors.red : Colors.white,
+                      shape: BoxShape.circle,
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.grey,
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: Offset(2, 2),
+                        ),
+                      ],
+                    ),
+                  )
+              ],
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
