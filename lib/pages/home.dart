@@ -146,14 +146,14 @@ class _HomeState extends State<Home> {
                                                       .style,
                                               children: <TextSpan>[
                                                 TextSpan(
-                                                  text: '${i[j].nomeMateria}',
+                                                  text: i[j].nomeMateria,
                                                   style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
                                                 TextSpan(
                                                     text:
-                                                        '\n\nAula: ${i[j].aula}'),
+                                                        '\n\nAula: ${i[j].aula} Orario: ${i[j].inizio.toString().substring(11).substring(0, 5)}/${i[j].fine.toString().substring(11).substring(0, 5)}'),
                                               ],
                                             ),
                                           ),
@@ -176,22 +176,25 @@ class _HomeState extends State<Home> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int j = 0; j < materie.length; j++)
+                for (var j = 0; j < materie.length; j++)
                   Container(
                     height: 13,
                     width: 13,
                     margin: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                      color: currentPageIndex == j ? Colors.red : Colors.white,
+                      border: Border.all(color: Colors.grey.shade500, width: 1),
+                      color: currentPageIndex == j
+                          ? Colors.blue.shade400
+                          : Colors.white, 
                       shape: BoxShape.circle,
-                      boxShadow: const [
+                      /*boxShadow: const [
                         BoxShadow(
                           color: Colors.grey,
                           spreadRadius: 1,
-                          blurRadius: 3,
-                          offset: Offset(2, 2),
+                          blurRadius: 1,
+                          offset: Offset(1, 1),
                         ),
-                      ],
+                      ],*/
                     ),
                   )
               ],
