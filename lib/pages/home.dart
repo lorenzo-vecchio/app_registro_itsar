@@ -130,8 +130,13 @@ class _HomeState extends State<Home> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
-                                        color:
-                                            j == 0 ? Colors.red : Colors.indigo,
+                                        color: i[j]
+                                                    .inizio
+                                                    .toString()
+                                                    .substring(11) ==
+                                                '09:00:00.000'
+                                            ? Colors.red
+                                            : Colors.indigo,
                                       ),
                                       padding: const EdgeInsets.fromLTRB(
                                           0, 15, 0, 15),
@@ -184,8 +189,8 @@ class _HomeState extends State<Home> {
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey.shade500, width: 1),
                       color: currentPageIndex == j
-                          ? Colors.blue.shade400
-                          : Colors.white, 
+                          ? Colors.lightBlue[300]
+                          : Colors.white,
                       shape: BoxShape.circle,
                       /*boxShadow: const [
                         BoxShadow(
