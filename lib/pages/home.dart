@@ -164,7 +164,65 @@ class _HomeState extends State<Home> {
                   ),
                 );
               }).toList(),
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+              child: ListTile(
+                contentPadding: const EdgeInsets.fromLTRB(0, 25, 0, 10),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                title: const Padding(
+                  padding: EdgeInsets.fromLTRB(25, 0, 0, 20),
+                  child: Text(
+                    'Presenze',
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                subtitle: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                  child: Container(
+                    height: 100,
+                    padding: EdgeInsets.symmetric(horizontal: 28),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.grey.shade900.withOpacity(0.50),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.green,
+                          ),
+                          height: 60,
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            'Presenze totali: 4',
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        Container(
+                          height: 60,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.red,
+                          ),
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            'Assenze totali: 3',
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
