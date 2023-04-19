@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../globals.dart';
 import '../data.dart';
 import '../widgets/average.dart';
+import 'package:carousel_indicator/carousel_indicator.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,6 +16,10 @@ class _HomeState extends State<Home> {
   List<Materia> materieOggi = [];
   List<Materia> materieDomani = [];
   List<List<Materia>> materie = [];
+  int sommaPresenze = globalData.presenzeList
+      .fold(0, (total, presenza) => total + presenza.ore_presenza);
+  int sommaAssenze = globalData.presenzeList
+      .fold(0, (total, presenza) => total + presenza.ore_assenza);
 
   int currentPageIndex = 0;
 
@@ -70,9 +75,9 @@ class _HomeState extends State<Home> {
               ),
               items: materie.map((i) {
                 return Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 40),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
                   child: ListTile(
-                    contentPadding: const EdgeInsets.fromLTRB(0, 25, 0, 50),
+                    contentPadding: const EdgeInsets.fromLTRB(0, 25, 0, 80),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
                     ),
@@ -125,8 +130,9 @@ class _HomeState extends State<Home> {
                               for (var j = 0; j < i.length; j++) {
                                 listaMaterie.add(
                                   Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                                    padding: j == 0
+                                        ? EdgeInsets.fromLTRB(0, 30, 0, 0)
+                                        : EdgeInsets.fromLTRB(0, 30, 0, 0),
                                     child: Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
@@ -173,31 +179,14 @@ class _HomeState extends State<Home> {
                 );
               }).toList(),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                for (int j = 0; j < materie.length; j++)
-                  Container(
-                    height: 13,
-                    width: 13,
-                    margin: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: currentPageIndex == j ? Colors.red : Colors.white,
-                      shape: BoxShape.circle,
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.grey,
-                          spreadRadius: 1,
-                          blurRadius: 3,
-                          offset: Offset(2, 2),
-                        ),
-                      ],
-                    ),
-                  )
-              ],
-            ),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              CarouselIndicator(
+                count: materie.length,
+                index: currentPageIndex,
+              ),
+            ]),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+              padding: const EdgeInsets.fromLTRB(20, 50, 20, 10),
               child: ListTile(
                 contentPadding: const EdgeInsets.fromLTRB(0, 25, 0, 10),
                 shape: RoundedRectangleBorder(
@@ -231,8 +220,10 @@ class _HomeState extends State<Home> {
                           alignment: Alignment.center,
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            'Presenze totali: 4',
-                            style: const TextStyle(color: Colors.white),
+                            'Presenza: ${sommaPresenze}h',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                         Container(
@@ -244,8 +235,10 @@ class _HomeState extends State<Home> {
                           ),
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            'Assenze totali: 3',
-                            style: const TextStyle(color: Colors.white),
+                            'Assenza: ${sommaAssenze}h',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],

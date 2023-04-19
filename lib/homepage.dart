@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:prova_registro/pages/home.dart';
 import 'package:prova_registro/pages/calendario.dart';
+import 'package:prova_registro/pages/presenze.dart';
 import 'package:prova_registro/pages/voti.dart';
 import 'package:prova_registro/pages/account.dart';
 
@@ -18,6 +19,7 @@ class _HomePageState extends State<HomePage> {
     Home(),
     Voti(),
     Calendario(),
+    Presenze(),
     Account(),
   ];
 
@@ -45,6 +47,10 @@ class _HomePageState extends State<HomePage> {
               GButton(
                 icon: Icons.calendar_month_outlined,
                 text: 'Calendario',
+              ),
+              GButton(
+                icon: Icons.schedule,
+                text: 'Presenze',
               ),
               GButton(
                 icon: Icons.account_box_outlined,
