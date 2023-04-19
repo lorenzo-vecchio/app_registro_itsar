@@ -1,9 +1,9 @@
+import 'package:carousel_indicator/carousel_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import '../globals.dart';
 import '../data.dart';
 import '../widgets/average.dart';
-import 'package:carousel_indicator/carousel_indicator.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -136,8 +136,13 @@ class _HomeState extends State<Home> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
-                                        color:
-                                            j == 0 ? Colors.red : Colors.indigo,
+                                        color: i[j]
+                                                    .inizio
+                                                    .toString()
+                                                    .substring(11) ==
+                                                '09:00:00.000'
+                                            ? Colors.red
+                                            : Colors.indigo,
                                       ),
                                       padding: const EdgeInsets.fromLTRB(
                                           0, 15, 0, 15),
@@ -179,7 +184,9 @@ class _HomeState extends State<Home> {
                 );
               }).toList(),
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center, 
+              children: [
               CarouselIndicator(
                 count: materie.length,
                 index: currentPageIndex,
