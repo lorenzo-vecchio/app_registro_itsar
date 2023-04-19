@@ -8,6 +8,7 @@ import 'globals.dart';
 class Data {
   List<Voto> votiList = [];
   List<Materia> materieList = [];
+  List<PresenzaAssenza> presenzeList = [];
   String jsonString = "";
   bool valid = false;
   int requestStatus = 0;
@@ -60,6 +61,13 @@ class Data {
       materieList.add(materia);
     });
     materieList.sort((a, b) => a.inizio.compareTo(b.inizio));
+    jsonMap['presenze_assenze'].forEach((element) {
+      String materia = element['materia'];
+      int presenza = element['ore_presenza'];
+      int assenza = element['ore_assenza'];
+      PresenzaAssenza pres_ass = PresenzaAssenza(materia, presenza, assenza);
+      presenzeList.add(pres_ass);
+    });
   }
 
   Future<void> _APIconnection(String username, String password) async {
@@ -114,4 +122,12 @@ class Materia {
   String aula;
 
   Materia(this.sede, this.fine, this.inizio, this.nomeMateria, this.aula);
+}
+
+class PresenzaAssenza {
+  String materia;
+  int ore_presenza;
+  int ore_assenza;
+
+  PresenzaAssenza(this.materia, this.ore_presenza, this.ore_assenza);
 }
