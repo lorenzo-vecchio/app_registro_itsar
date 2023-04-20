@@ -94,7 +94,7 @@ class _PresenzeState extends State<Presenze> {
                       ),
                       height: 90,
                       alignment: Alignment.center,
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
@@ -124,7 +124,7 @@ class _PresenzeState extends State<Presenze> {
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.red,
                       ),
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(

@@ -3,7 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import '../globals.dart';
 import '../data.dart';
-import '../widgets/average.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
