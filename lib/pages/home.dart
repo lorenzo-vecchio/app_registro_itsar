@@ -54,6 +54,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData _mediaQueryData = MediaQuery.of(context);
     return Scaffold(
       backgroundColor: Colors.black,
       body: GestureDetector(
@@ -75,14 +76,27 @@ class _HomeState extends State<Home> {
               ),
               items: materie.map((i) {
                 return Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                  padding: EdgeInsets.fromLTRB(
+                      _mediaQueryData.size.width * 0.03,
+                      _mediaQueryData.size.width * 0.03,
+                      _mediaQueryData.size.width * 0.03,
+                      _mediaQueryData.size.width * 0.12),
                   child: ListTile(
-                    contentPadding: const EdgeInsets.fromLTRB(0, 25, 0, 80),
+                    contentPadding: EdgeInsets.fromLTRB(
+                      0,
+                      _mediaQueryData.size.width * 0.03,
+                      0,
+                      _mediaQueryData.size.width * 0.15,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
                     ),
                     title: Padding(
-                      padding: EdgeInsets.fromLTRB(25, 0, 0, 20),
+                      padding: EdgeInsets.fromLTRB(
+                          _mediaQueryData.size.width * 0.055,
+                          0,
+                          0,
+                          _mediaQueryData.size.width * 0.04),
                       child: Text(
                         '${materie.indexOf(i) == 0 ? 'Today' : 'Tomorrow'}',
                         style: const TextStyle(
@@ -90,7 +104,11 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     subtitle: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 40),
+                      padding: EdgeInsets.fromLTRB(
+                          _mediaQueryData.size.width * 0.05,
+                          0,
+                          _mediaQueryData.size.width * 0.05,
+                          _mediaQueryData.size.width * 0.1), //20,0,20,40
                       child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),
@@ -101,20 +119,30 @@ class _HomeState extends State<Home> {
                               return Column(
                                 children: [
                                   Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                                    padding: EdgeInsets.fromLTRB(
+                                        0,
+                                        _mediaQueryData.size.width * 0.06,
+                                        0,
+                                        _mediaQueryData.size.width *
+                                            0.06), //0,30,0,30
                                     child: Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
                                         color: Colors.green,
                                       ),
-                                      padding: const EdgeInsets.fromLTRB(
-                                          0, 15, 0, 15),
-                                      child: const FractionallySizedBox(
+                                      padding: EdgeInsets.fromLTRB(
+                                          0,
+                                          _mediaQueryData.size.width * 0.04,
+                                          0,
+                                          _mediaQueryData.size.width *
+                                              0.04), //0,15,0,15
+                                      child: FractionallySizedBox(
                                         widthFactor: 0.80,
                                         child: Padding(
-                                          padding: EdgeInsets.all(8.0),
-                                          child: Text(
+                                          padding: EdgeInsets.all(
+                                              _mediaQueryData.size.width *
+                                                  0.02),
+                                          child: const Text(
                                             'Oggi niente!!!',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold),
@@ -131,8 +159,16 @@ class _HomeState extends State<Home> {
                                 listaMaterie.add(
                                   Padding(
                                     padding: j == 0
-                                        ? EdgeInsets.fromLTRB(0, 30, 0, 0)
-                                        : EdgeInsets.fromLTRB(0, 30, 0, 0),
+                                        ? EdgeInsets.fromLTRB(
+                                            0,
+                                            _mediaQueryData.size.width * 0.07,
+                                            0,
+                                            0) //0,30,0,0
+                                        : EdgeInsets.fromLTRB(
+                                            0,
+                                            _mediaQueryData.size.width * 0.07,
+                                            0,
+                                            0), //0,30,0,0
                                     child: Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
@@ -144,12 +180,18 @@ class _HomeState extends State<Home> {
                                             ? Colors.red
                                             : Colors.indigo,
                                       ),
-                                      padding: const EdgeInsets.fromLTRB(
-                                          0, 15, 0, 15),
+                                      padding: EdgeInsets.fromLTRB(
+                                          0,
+                                          _mediaQueryData.size.width * 0.04,
+                                          0,
+                                          _mediaQueryData.size.width *
+                                              0.04), //0,15,0,15
                                       child: FractionallySizedBox(
                                         widthFactor: 0.80,
                                         child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: EdgeInsets.all(
+                                              _mediaQueryData.size.width *
+                                                  0.02), //8
                                           child: RichText(
                                             text: TextSpan(
                                               style:
@@ -191,24 +233,42 @@ class _HomeState extends State<Home> {
               ),
             ]),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 50, 20, 10),
+              padding: EdgeInsets.fromLTRB(
+                  _mediaQueryData.size.width * 0.05,
+                  _mediaQueryData.size.width *
+                      0.12, //modificare distanza dal Carosel indicator
+                  _mediaQueryData.size.width * 0.05,
+                  _mediaQueryData.size.width * 0.025), //20,50,20,10
               child: ListTile(
-                contentPadding: const EdgeInsets.fromLTRB(0, 25, 0, 10),
+                contentPadding: EdgeInsets.fromLTRB(
+                    0,
+                    _mediaQueryData.size.width * 0.055,
+                    0,
+                    _mediaQueryData.size.width * 0.025), //0,25,0,10
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
                 ),
-                title: const Padding(
-                  padding: EdgeInsets.fromLTRB(25, 0, 0, 20),
-                  child: Text(
+                title: Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      _mediaQueryData.size.width * 0.055,
+                      0,
+                      0,
+                      _mediaQueryData.size.width * 0.055), //25,0,0,25
+                  child: const Text(
                     'Presenze',
                     style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                   ),
                 ),
                 subtitle: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                  padding: EdgeInsets.fromLTRB(
+                      _mediaQueryData.size.width * 0.05,
+                      0,
+                      _mediaQueryData.size.width * 0.05,
+                      _mediaQueryData.size.width * 0.05), //20,0,20,20
                   child: Container(
                     height: 100,
-                    padding: EdgeInsets.symmetric(horizontal: 28),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: _mediaQueryData.size.width * 0.058), //28
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: Colors.grey.shade900.withOpacity(0.50),
@@ -223,7 +283,8 @@ class _HomeState extends State<Home> {
                           ),
                           height: 60,
                           alignment: Alignment.center,
-                          padding: const EdgeInsets.all(10),
+                          padding: EdgeInsets.all(
+                              _mediaQueryData.size.width * 0.025),
                           child: Text(
                             'Presenza: ${sommaPresenze}h',
                             style: const TextStyle(
@@ -238,7 +299,8 @@ class _HomeState extends State<Home> {
                             borderRadius: BorderRadius.circular(15),
                             color: Colors.red,
                           ),
-                          padding: const EdgeInsets.all(10),
+                          padding: EdgeInsets.all(
+                              _mediaQueryData.size.width * 0.025),
                           child: Text(
                             'Assenza: ${sommaAssenze}h',
                             style: const TextStyle(
