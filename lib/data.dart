@@ -4,6 +4,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'globals.dart';
+import 'package:intl/intl.dart';
 
 class Data {
   List<Voto> votiList = [];
@@ -65,7 +66,12 @@ class Data {
       String materia = element['materia'];
       int presenza = element['ore_presenza'];
       int assenza = element['ore_assenza'];
-      PresenzaAssenza pres_ass = PresenzaAssenza(materia, presenza, assenza);
+      DateTime data = DateTime.parse(
+          element['date'].replaceAll('/', '-').split('-').reversed.join());
+      DateTime inizio = DateFormat('HH:mm').parse(element['ora_inizio']);
+      DateTime fine = DateFormat('HH:mm').parse(element['ora_fine']);
+      PresenzaAssenza pres_ass =
+          PresenzaAssenza(materia, presenza, assenza, data, inizio, fine);
       presenzeList.add(pres_ass);
     });
   }
@@ -128,6 +134,10 @@ class PresenzaAssenza {
   String materia;
   int ore_presenza;
   int ore_assenza;
+  DateTime data;
+  DateTime inizio;
+  DateTime fine;
 
-  PresenzaAssenza(this.materia, this.ore_presenza, this.ore_assenza);
+  PresenzaAssenza(this.materia, this.ore_presenza, this.ore_assenza, this.data,
+      this.inizio, this.fine);
 }

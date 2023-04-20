@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../globals.dart';
 import '../data.dart';
-import 'package:circular_seek_bar/circular_seek_bar.dart';
 
 import '../widgets/average.dart';
 
