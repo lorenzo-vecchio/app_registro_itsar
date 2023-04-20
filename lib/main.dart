@@ -9,6 +9,7 @@ import 'data.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  // keeps the splash screen until startup operations are finished
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(MyApp());
 }
@@ -75,6 +76,7 @@ class _MyAppState extends State<MyApp> {
         child: CircularProgressIndicator(),
       );
     } else {
+      // removes the splashscreen
       FlutterNativeSplash.remove();
       return MaterialApp(
         debugShowCheckedModeBanner: false,
