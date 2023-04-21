@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
                       _mediaQueryData.size.width * 0.03,
                       _mediaQueryData.size.width * 0.03,
                       _mediaQueryData.size.width * 0.03,
-                      _mediaQueryData.size.width * 0.12),
+                      _mediaQueryData.size.width * 0.04),
                   child: ListTile(
                     contentPadding: EdgeInsets.fromLTRB(
                       0,
