@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushAndRemoveUntil<dynamic>(
           context,
           MaterialPageRoute<dynamic>(
-            builder: (BuildContext context) => HomePage(),
+            builder: (BuildContext context) => const HomePage(),
           ),
           (route) => false,
         );
@@ -37,12 +37,12 @@ class _LoginPageState extends State<LoginPage> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text('Error'),
-            content: Text('Login failed. Please check your credentials.'),
+            title: const Text('Error'),
+            content: const Text('Login failed. Please check your credentials.'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           ),
@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Form(
           key: _formKey,
           child: Padding(
@@ -111,9 +111,9 @@ class _LoginPageState extends State<LoginPage> {
                         },
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     _isLoading
-                        ? CircularProgressIndicator()
+                        ? const CircularProgressIndicator()
                         : Container(
                             width: 100,
                             height: 50,
@@ -126,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                                   borderRadius: BorderRadius.circular(70.0),
                                 )),
                               ),
-                              child: Text('Login'),
+                              child: const Text('Login'),
                             ),
                           ),
                   ],

@@ -25,19 +25,25 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData _mediaQueryData = MediaQuery.of(context);
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
         color: Colors.black,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
+          padding: EdgeInsets.symmetric(
+            vertical: _mediaQueryData.size.width * 0.025,
+            horizontal: _mediaQueryData.size.width * 0.025,
+          ),
           child: GNav(
             backgroundColor: Colors.black,
             color: Colors.white,
             activeColor: Colors.white,
             tabBackgroundColor: Colors.grey.shade900.withOpacity(0.50),
-            padding: const EdgeInsets.all(16),
-            gap: 8,
+            padding: EdgeInsets.all(
+              _mediaQueryData.size.width * 0.035,
+            ),
+            gap: _mediaQueryData.size.width * 0.02,
             tabs: const [
               GButton(icon: Icons.home, text: 'Home'),
               GButton(

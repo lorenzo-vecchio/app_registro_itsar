@@ -125,6 +125,7 @@ class _HomeState extends State<Home> {
                                         _mediaQueryData.size.width *
                                             0.06), //0,30,0,30
                                     child: Container(
+                                      height: 272,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
                                         color: Colors.green,
@@ -135,16 +136,15 @@ class _HomeState extends State<Home> {
                                           0,
                                           _mediaQueryData.size.width *
                                               0.04), //0,15,0,15
-                                      child: FractionallySizedBox(
+                                      child: const FractionallySizedBox(
                                         widthFactor: 0.80,
-                                        child: Padding(
-                                          padding: EdgeInsets.all(
-                                              _mediaQueryData.size.width *
-                                                  0.02),
-                                          child: const Text(
+                                        child: Center(
+                                          child: Text(
                                             'Oggi niente!!!',
                                             style: TextStyle(
-                                                fontWeight: FontWeight.bold),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 32,
+                                            ),
                                           ),
                                         ),
                                       ),

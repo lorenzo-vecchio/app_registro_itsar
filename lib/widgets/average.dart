@@ -19,8 +19,13 @@ class Average extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData _mediaQueryData = MediaQuery.of(context);
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+      padding: EdgeInsets.fromLTRB(
+          _mediaQueryData.size.width * 0.048,
+          _mediaQueryData.size.width * 0.048,
+          _mediaQueryData.size.width * 0.048,
+          _mediaQueryData.size.width * 0.048),
       child: ListTile(
         contentPadding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
         shape: RoundedRectangleBorder(

@@ -14,6 +14,7 @@ class Voti extends StatefulWidget {
 class _VotiState extends State<Voti> {
   @override
   Widget build(BuildContext context) {
+    MediaQueryData _mediaQueryData = MediaQuery.of(context);
     return Scaffold(
       backgroundColor: Colors.black,
       body: ListView.builder(
@@ -33,9 +34,14 @@ class _VotiState extends State<Voti> {
             return Average();
           }
           if (index == 1) {
-            return const Padding(
-              padding: EdgeInsets.fromLTRB(25, 8, 8, 0),
-              child: ListTile(
+            return Padding(
+              padding: EdgeInsets.fromLTRB(
+                _mediaQueryData.size.width * 0.065,
+                _mediaQueryData.size.width * 0.02,
+                _mediaQueryData.size.width * 0.065,
+                _mediaQueryData.size.width * 0.02,
+              ), //25,8,8,0
+              child: const ListTile(
                 tileColor: Colors.black,
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
@@ -45,26 +51,30 @@ class _VotiState extends State<Voti> {
                 title: Text(
                   "Grades",
                   style: TextStyle(
+                    backgroundColor: Colors.black,
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                contentPadding: EdgeInsets.symmetric(
+                    horizontal: 0,
+                    vertical: 0), //posizione in orizzontale del titolo "Grades"
               ),
             );
           } else {
             final voto = globalData.votiList[index - 2];
             return Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
+              padding: EdgeInsets.symmetric(
+                  horizontal: _mediaQueryData.size.width *
+                      0.048, // distanza orizzontale dai bordi del dispositivo per quanto riguarda il container dei voti
+                  vertical: _mediaQueryData.size.width * 0.012), //15,5
               child: ListTile(
                 title: Text(
                   voto.nomeMateria,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 trailing: Container(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: EdgeInsets.all(15), //15
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: getCircleColor(voto),
@@ -77,8 +87,9 @@ class _VotiState extends State<Voti> {
                     ),
                   ),
                 ),
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                contentPadding: EdgeInsets.symmetric(
+                    horizontal: _mediaQueryData.size.width * 0.02,
+                    vertical: _mediaQueryData.size.width * 0.02),
               ),
             );
           }
