@@ -241,6 +241,10 @@ class _HomeState extends State<Home> {
               CarouselIndicator(
                 count: materie.length,
                 index: currentPageIndex,
+                color: isDarkMode
+                    ? Colors.white30
+                    : Colors.grey.shade400.withOpacity(0.50),
+                activeColor: isDarkMode ? Colors.white : Colors.black,
               ),
             ]),
             Padding(
