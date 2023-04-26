@@ -14,8 +14,11 @@ class Voti extends StatefulWidget {
 class _VotiState extends State<Voti> {
   @override
   Widget build(BuildContext context) {
+    // gets if it's in dark mode or not
+    final brightness = MediaQuery.of(context).platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: ListView.builder(
         itemCount: globalData.votiList.length + 2,
         itemBuilder: (context, index) {
@@ -33,13 +36,13 @@ class _VotiState extends State<Voti> {
             return Average();
           }
           if (index == 1) {
-            return const Padding(
+            return Padding(
               padding: EdgeInsets.fromLTRB(25, 8, 8, 0),
               child: ListTile(
-                tileColor: Colors.black,
+                tileColor: isDarkMode ? Colors.black : Colors.white,
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
-                    color: Colors.black,
+                    color: isDarkMode ? Colors.black : Colors.white,
                   ),
                 ),
                 title: Text(

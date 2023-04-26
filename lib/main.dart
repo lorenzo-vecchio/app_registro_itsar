@@ -7,6 +7,7 @@ import 'package:prova_registro/globals.dart';
 import 'homepage.dart';
 import 'loginpage.dart';
 import 'data.dart';
+import 'dart:ui' as ui;
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -72,6 +73,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = ui.window.platformBrightness;
+    final isDarkMode = brightness == ui.Brightness.dark;
     if (_isLoading) {
       return const Center(
         child: CircularProgressIndicator(),
@@ -84,25 +87,29 @@ class _MyAppState extends State<MyApp> {
         home: alreadyHaveData ? HomePage() : LoginPage(),
         theme: ThemeData(
           listTileTheme: ListTileThemeData(
-            tileColor: Colors.grey.shade900.withOpacity(0.50),
+            tileColor: isDarkMode
+                ? Colors.grey.shade900.withOpacity(0.50)
+                : Colors.grey.shade400.withOpacity(0.50),
             contentPadding: const EdgeInsets.all(10),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
               side: BorderSide(
-                color: Colors.grey.shade900.withOpacity(0.50),
+                color: Colors.transparent,
               ),
             ),
           ),
           // Define the default brightness and colors.
-          brightness: Brightness.dark,
-          primaryColor: Colors.black,
+          brightness: isDarkMode ? Brightness.dark : Brightness.light,
+          primaryColor: isDarkMode ? Colors.black : Colors.white,
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFc00d0e)),
           ),
           inputDecorationTheme: InputDecorationTheme(
             filled: true,
-            fillColor: Colors.grey.shade900.withOpacity(0.50),
+            fillColor: isDarkMode
+                ? Colors.grey.shade900.withOpacity(0.50)
+                : Colors.grey.shade400.withOpacity(0.50),
           ),
           // Define the default font family.
           fontFamily: 'Montserrat',
