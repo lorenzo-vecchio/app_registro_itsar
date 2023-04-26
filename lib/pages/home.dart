@@ -73,7 +73,6 @@ class _HomeState extends State<Home> {
                 onPageChanged: (index, reason) {
                   setState(() {
                     currentPageIndex = index;
-                    print(currentPageIndex);
                   });
                 },
               ),
@@ -117,7 +116,7 @@ class _HomeState extends State<Home> {
                             borderRadius: BorderRadius.circular(25),
                             color: isDarkMode
                                 ? Colors.grey.shade900.withOpacity(0.50)
-                                : Colors.grey.shade400.withOpacity(0.50),
+                                : Colors.grey.shade300.withOpacity(0.50),
                           ),
                           child: () {
                             if (i.isEmpty) {
@@ -131,7 +130,6 @@ class _HomeState extends State<Home> {
                                         _mediaQueryData.size.width *
                                             0.06), //0,30,0,30
                                     child: Container(
-                                      height: 272,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
                                         color: isDarkMode
@@ -144,15 +142,16 @@ class _HomeState extends State<Home> {
                                           0,
                                           _mediaQueryData.size.width *
                                               0.04), //0,15,0,15
-                                      child: const FractionallySizedBox(
+                                      child: FractionallySizedBox(
                                         widthFactor: 0.80,
-                                        child: Center(
-                                          child: Text(
+                                        child: Padding(
+                                          padding: EdgeInsets.all(
+                                              _mediaQueryData.size.width *
+                                                  0.02),
+                                          child: const Text(
                                             'Oggi niente!!!',
                                             style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 32,
-                                            ),
+                                                fontWeight: FontWeight.bold),
                                           ),
                                         ),
                                       ),
@@ -186,10 +185,10 @@ class _HomeState extends State<Home> {
                                                 '09:00:00.000'
                                             ? isDarkMode
                                                 ? Colors.red
-                                                : Colors.red.shade400
+                                                : Colors.yellow
                                             : isDarkMode
                                                 ? Colors.indigo
-                                                : Colors.indigo.shade300,
+                                                : Colors.lightBlue,
                                       ),
                                       padding: EdgeInsets.fromLTRB(
                                           0,
@@ -243,7 +242,7 @@ class _HomeState extends State<Home> {
                 index: currentPageIndex,
                 color: isDarkMode
                     ? Colors.white30
-                    : Colors.grey.shade400.withOpacity(0.50),
+                    : Colors.grey.shade300.withOpacity(0.50),
                 activeColor: isDarkMode ? Colors.white : Colors.black,
               ),
             ]),
@@ -288,7 +287,7 @@ class _HomeState extends State<Home> {
                       borderRadius: BorderRadius.circular(15),
                       color: isDarkMode
                           ? Colors.grey.shade900.withOpacity(0.50)
-                          : Colors.grey.shade400.withOpacity(0.50),
+                          : Colors.grey.shade300.withOpacity(0.50),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -298,7 +297,7 @@ class _HomeState extends State<Home> {
                             borderRadius: BorderRadius.circular(15),
                             color: isDarkMode
                                 ? Colors.green
-                                : Colors.green.shade500,
+                                : Colors.green.shade400,
                           ),
                           height: 60,
                           alignment: Alignment.center,
@@ -317,7 +316,7 @@ class _HomeState extends State<Home> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             color:
-                                isDarkMode ? Colors.red : Colors.red.shade400,
+                                isDarkMode ? Colors.red : Colors.red.shade300,
                           ),
                           padding: EdgeInsets.all(
                               _mediaQueryData.size.width * 0.025),

@@ -89,7 +89,7 @@ class _MyAppState extends State<MyApp> {
           listTileTheme: ListTileThemeData(
             tileColor: isDarkMode
                 ? Colors.grey.shade900.withOpacity(0.50)
-                : Colors.grey.shade400.withOpacity(0.50),
+                : Colors.grey.shade300.withOpacity(0.50),
             contentPadding: const EdgeInsets.all(10),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
