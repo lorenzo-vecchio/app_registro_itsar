@@ -19,42 +19,113 @@ class _CalendarioState extends State<Calendario> {
     _createNeatCleanEventList();
   }
 
-  List<String> getInterval(String room) {
+  String getInterval(Materia materia) {
+    var room = materia.aula;
+    bool hasFourHours =
+        materia.fine.difference(materia.inizio) == Duration(hours: 4);
     switch (room) {
       case "CRESPI-1":
-        return ['10:15', '15:15'];
+        if (materia.inizio.hour < 11) {
+          return '10:15';
+        }
+        if (!(materia.inizio.hour < 11)) {
+          return '15:15';
+        } else {
+          return 'Non Definito';
+        }
       case "CRESPI-3":
-        return ['11:15', '16:15'];
+        if (materia.inizio.hour < 11) {
+          return '11:15';
+        }
+        if (!(materia.inizio.hour < 11)) {
+          return '16:15';
+        } else {
+          return 'Non Definito';
+        }
       case "CRESPI-4":
-        return ['11:30', '16:30'];
+        if (materia.inizio.hour < 11) {
+          return '11:30';
+        }
+        if (!(materia.inizio.hour < 11)) {
+          return '16:30';
+        } else {
+          return 'Non Definito';
+        }
       case "CRESPI-5":
-        return ['10:45 ', ' 15:45'];
+        if (materia.inizio.hour < 11) {
+          return '10:45';
+        }
+        if (!(materia.inizio.hour < 11)) {
+          return '15:45';
+        } else {
+          return 'Non Definito';
+        }
       case "CRESPI-6":
-        return ['10:30 ', ' 15:30'];
+        if (materia.inizio.hour < 11) {
+          return '10:30';
+        }
+        if (!(materia.inizio.hour < 11)) {
+          return '15:30';
+        } else {
+          return 'Non Definito';
+        }
       case "CRESPI-7":
-        return ['11:00 ', ' 16:00'];
+        if (materia.inizio.hour < 11) {
+          return '11:00';
+        }
+        if (!(materia.inizio.hour < 11)) {
+          return '16:00';
+        } else {
+          return 'Non Definito';
+        }
       case "CRESPI-P1":
-        return ['11:00 ', ' 16:00'];
+        if (materia.inizio.hour < 11) {
+          return '11:00';
+        }
+        if (!(materia.inizio.hour < 11)) {
+          return '16:00';
+        } else {
+          return 'Non Definito';
+        }
       case "CRESPI-P2":
-        return ['11:15 ', ' 16:15'];
+        if (materia.inizio.hour < 11) {
+          return '11:15';
+        }
+        if (!(materia.inizio.hour < 11)) {
+          return '16:15';
+        } else {
+          return 'Non Definito';
+        }
       default:
-        return ['Non Fisso', 'Non Fisso'];
+        return 'Non Definito';
     }
   }
 
   void _createNeatCleanEventList() {
     List<Materia> eventiMaterie = globalData.materieList;
     for (Materia materia in eventiMaterie) {
-      String intervallo =
-          'Intervallo: ${materia.inizio.toString().substring(11) == '09:00:00.000' ? getInterval(materia.aula)[0] : getInterval(materia.aula)[1]}';
+      String intervallo = 'Intervallo: ${getInterval(materia)}';
       NeatCleanCalendarEvent evento = NeatCleanCalendarEvent(
         '${materia.nomeMateria}\n\n${materia.aula}',
         startTime: materia.inizio,
         endTime: materia.fine,
         description: intervallo,
-        color: materia.inizio.toString().substring(11) == '09:00:00.000'
-            ? Colors.red
-            : Colors.indigo,
+        color: () {
+          bool hasFourHours =
+              materia.fine.difference(materia.inizio) == Duration(hours: 4);
+          if (hasFourHours && materia.inizio.hour < 11) {
+            return Colors.red;
+          }
+          if (hasFourHours && !(materia.inizio.hour < 11)) {
+            return Colors.indigo;
+          }
+          if (materia.fine.difference(materia.inizio) ==
+              const Duration(hours: 9)) {
+            return Colors.green;
+          } else {
+            return Colors.yellow;
+          }
+        }(),
       );
       _eventList.add(evento);
     }
@@ -71,7 +142,7 @@ class _CalendarioState extends State<Calendario> {
         child: Calendar(
           eventTileHeight: 130,
           startOnMonday: true,
-          weekDays: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
+          weekDays: ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'],
           eventsList: _eventList,
           isExpandable: true,
           eventDoneColor: Colors.green,
@@ -79,12 +150,12 @@ class _CalendarioState extends State<Calendario> {
           selectedTodayColor: Colors.red,
           todayColor: Colors.red,
           eventColor: null,
-          locale: 'en_US',
-          todayButtonText: 'Today',
+          locale: 'it_IT',
+          todayButtonText: 'Giorno',
           allDayEventText: 'All Day',
           multiDayEndText: 'End',
           isExpanded: true,
-          expandableDateFormat: 'EEEE, dd. MMMM yyyy',
+          expandableDateFormat: 'EEEE dd MMMM yyyy',
           datePickerType: DatePickerType.date,
           dayOfWeekStyle: TextStyle(
               color: isDarkMode ? Colors.white : Colors.black,
