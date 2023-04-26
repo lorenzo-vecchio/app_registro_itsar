@@ -53,9 +53,13 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    // gets if it's in dark mode or not
+    final brightness = MediaQuery.of(context).platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
+
     MediaQueryData _mediaQueryData = MediaQuery.of(context);
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: GestureDetector(
         onTap: () => {debugPrint("pollo")},
         child: ListView(
@@ -79,7 +83,7 @@ class _HomeState extends State<Home> {
                       _mediaQueryData.size.width * 0.03,
                       _mediaQueryData.size.width * 0.03,
                       _mediaQueryData.size.width * 0.03,
-                      _mediaQueryData.size.width * 0.12),
+                      _mediaQueryData.size.width * 0.04),
                   child: ListTile(
                     contentPadding: EdgeInsets.fromLTRB(
                       0,
@@ -111,7 +115,9 @@ class _HomeState extends State<Home> {
                       child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),
-                            color: Colors.grey.shade900.withOpacity(0.50),
+                            color: isDarkMode
+                                ? Colors.grey.shade900.withOpacity(0.50)
+                                : Colors.grey.shade400.withOpacity(0.50),
                           ),
                           child: () {
                             if (i.isEmpty) {
@@ -128,7 +134,9 @@ class _HomeState extends State<Home> {
                                       height: 272,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
-                                        color: Colors.green,
+                                        color: isDarkMode
+                                            ? Colors.green
+                                            : Colors.green.shade500,
                                       ),
                                       padding: EdgeInsets.fromLTRB(
                                           0,
@@ -176,8 +184,12 @@ class _HomeState extends State<Home> {
                                                     .toString()
                                                     .substring(11) ==
                                                 '09:00:00.000'
-                                            ? Colors.red
-                                            : Colors.indigo,
+                                            ? isDarkMode
+                                                ? Colors.red
+                                                : Colors.red.shade400
+                                            : isDarkMode
+                                                ? Colors.indigo
+                                                : Colors.indigo.shade300,
                                       ),
                                       padding: EdgeInsets.fromLTRB(
                                           0,
@@ -229,6 +241,10 @@ class _HomeState extends State<Home> {
               CarouselIndicator(
                 count: materie.length,
                 index: currentPageIndex,
+                color: isDarkMode
+                    ? Colors.white30
+                    : Colors.grey.shade400.withOpacity(0.50),
+                activeColor: isDarkMode ? Colors.white : Colors.black,
               ),
             ]),
             Padding(
@@ -270,7 +286,9 @@ class _HomeState extends State<Home> {
                         horizontal: _mediaQueryData.size.width * 0.058), //28
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: Colors.grey.shade900.withOpacity(0.50),
+                      color: isDarkMode
+                          ? Colors.grey.shade900.withOpacity(0.50)
+                          : Colors.grey.shade400.withOpacity(0.50),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -278,7 +296,9 @@ class _HomeState extends State<Home> {
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            color: Colors.green,
+                            color: isDarkMode
+                                ? Colors.green
+                                : Colors.green.shade500,
                           ),
                           height: 60,
                           alignment: Alignment.center,
@@ -286,8 +306,8 @@ class _HomeState extends State<Home> {
                               _mediaQueryData.size.width * 0.025),
                           child: Text(
                             'Presenza: ${sommaPresenze}h',
-                            style: const TextStyle(
-                                color: Colors.white,
+                            style: TextStyle(
+                                color: isDarkMode ? Colors.white : Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -296,14 +316,15 @@ class _HomeState extends State<Home> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            color: Colors.red,
+                            color:
+                                isDarkMode ? Colors.red : Colors.red.shade400,
                           ),
                           padding: EdgeInsets.all(
                               _mediaQueryData.size.width * 0.025),
                           child: Text(
                             'Assenza: ${sommaAssenze}h',
-                            style: const TextStyle(
-                                color: Colors.white,
+                            style: TextStyle(
+                                color: isDarkMode ? Colors.white : Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),

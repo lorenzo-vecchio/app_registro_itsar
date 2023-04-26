@@ -1,0 +1,48 @@
+PODS:
+  - connectivity_plus (0.0.1):
+    - Flutter
+    - ReachabilitySwift
+  - Flutter (1.0.0)
+  - flutter_native_splash (0.0.1):
+    - Flutter
+  - flutter_secure_storage (6.0.0):
+    - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - ReachabilitySwift (5.0.0)
+
+DEPENDENCIES:
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
+  - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
+
+SPEC REPOS:
+  trunk:
+    - ReachabilitySwift
+
+EXTERNAL SOURCES:
+  connectivity_plus:
+    :path: ".symlinks/plugins/connectivity_plus/ios"
+  Flutter:
+    :path: Flutter
+  flutter_native_splash:
+    :path: ".symlinks/plugins/flutter_native_splash/ios"
+  flutter_secure_storage:
+    :path: ".symlinks/plugins/flutter_secure_storage/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/ios"
+
+SPEC CHECKSUMS:
+  connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
+  flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
+  path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+
+PODFILE CHECKSUM: 7adbc9d59f05e1b01f554ea99b6c79e97f2214a2
+
+COCOAPODS: 1.12.1

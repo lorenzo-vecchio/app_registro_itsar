@@ -62,8 +62,11 @@ class _CalendarioState extends State<Calendario> {
 
   @override
   Widget build(BuildContext context) {
+    // gets if it's in dark mode or not
+    final brightness = MediaQuery.of(context).platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: SafeArea(
         child: Calendar(
           eventTileHeight: 130,
@@ -83,12 +86,14 @@ class _CalendarioState extends State<Calendario> {
           isExpanded: true,
           expandableDateFormat: 'EEEE, dd. MMMM yyyy',
           datePickerType: DatePickerType.date,
-          dayOfWeekStyle: const TextStyle(
-              color: Colors.white, fontWeight: FontWeight.w800, fontSize: 11),
-          displayMonthTextStyle: const TextStyle(
-            color: Colors.white,
+          dayOfWeekStyle: TextStyle(
+              color: isDarkMode ? Colors.white : Colors.black,
+              fontWeight: FontWeight.w800,
+              fontSize: 11),
+          displayMonthTextStyle: TextStyle(
+            color: isDarkMode ? Colors.white : Colors.black,
           ),
-          defaultDayColor: Colors.white,
+          defaultDayColor: isDarkMode ? Colors.white : Colors.black,
           defaultOutOfMonthDayColor: Colors.grey.shade500,
         ),
       ),

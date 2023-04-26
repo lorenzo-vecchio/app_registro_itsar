@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:prova_registro/pages/home.dart';
 import 'package:prova_registro/pages/calendario.dart';
@@ -25,21 +26,30 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // gets if it's in dark mode or not
+    final brightness = MediaQuery.of(context).platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
     MediaQueryData _mediaQueryData = MediaQuery.of(context);
     return Scaffold(
-      body: _pages[_selectedIndex],
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: isDarkMode
+              ? SystemUiOverlayStyle.light
+              : SystemUiOverlayStyle.dark,
+          child: _pages[_selectedIndex]),
       bottomNavigationBar: Container(
-        color: Colors.black,
+        color: isDarkMode ? Colors.black : Colors.white,
         child: Padding(
           padding: EdgeInsets.symmetric(
             vertical: _mediaQueryData.size.width * 0.025,
             horizontal: _mediaQueryData.size.width * 0.025,
           ),
           child: GNav(
-            backgroundColor: Colors.black,
-            color: Colors.white,
-            activeColor: Colors.white,
-            tabBackgroundColor: Colors.grey.shade900.withOpacity(0.50),
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            color: isDarkMode ? Colors.white : Colors.black,
+            activeColor: isDarkMode ? Colors.white : Colors.black,
+            tabBackgroundColor: isDarkMode
+                ? Colors.grey.shade900.withOpacity(0.50)
+                : Colors.grey.shade400.withOpacity(0.50),
             padding: EdgeInsets.all(
               _mediaQueryData.size.width * 0.035,
             ),
