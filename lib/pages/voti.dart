@@ -54,12 +54,12 @@ class _VotiState extends State<Voti> {
                 title: Text(
                   "Grades",
                   style: TextStyle(
-                    backgroundColor: Colors.black,
+                    backgroundColor: isDarkMode ? Colors.black : Colors.white,
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                contentPadding: EdgeInsets.symmetric(
+                contentPadding: const EdgeInsets.symmetric(
                     horizontal: 0,
                     vertical: 0), //posizione in orizzontale del titolo "Grades"
               ),
@@ -77,7 +77,7 @@ class _VotiState extends State<Voti> {
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 trailing: Container(
-                  padding: EdgeInsets.all(15), //15
+                  padding: const EdgeInsets.all(15), //15
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: getCircleColor(voto),
