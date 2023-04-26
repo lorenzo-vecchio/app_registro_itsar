@@ -9,19 +9,7 @@ Per estrarre i dati dal sito è stata utilizzata un'API sviluppata appositamente
 
 Se si desidera installare l'app si può andare a [questo indirizzo](https://github.com/lorenzo-vecchio/prova_registro/tags), cercare la versione più recente e scaricare l'apk, per chi ha iOS al momento non abbiamo ancora fatto nessuna build, quindi l'unica opzione è quella di copiarsi la codebase e buildarla personalmente
 
+## Funzioni
 
-
-
-
-## Getting Started with Flutter
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+L'app permette di visionare il registro anche senza connessione internet.
+Sono disponibili una Light Mode e una Dark Mode, l'attivamento di una o dell'altra è dato dal tema di sistema.
