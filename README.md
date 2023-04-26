@@ -11,5 +11,5 @@ Se si desidera installare l'app si può andare a [questo indirizzo](https://gith
 
 ## Funzioni
 
-L'app permette di visionare il registro anche senza connessione internet.
+L'app permette di visionare il registro (voti, presenze e assenze, calendario) anche senza connessione internet.
 Sono disponibili una Light Mode e una Dark Mode, l'attivamento di una o dell'altra è dato dal tema di sistema.
