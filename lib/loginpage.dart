@@ -53,8 +53,12 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    // gets if it's in dark mode or not
+    final brightness = MediaQuery.of(context).platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Form(
@@ -68,11 +72,13 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.all(25.0),
                       child: Image(
-                          image:
-                              AssetImage('lib/assets/ITS-Logo-Negativo.png')),
+                          image: isDarkMode
+                              ? AssetImage('lib/assets/ITS-Logo-Negativo.png')
+                              : AssetImage(
+                                  'lib/assets/ITS-Logo-Positivo-Login.png')),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
