@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     // gets if it's in dark mode or not
     final brightness = MediaQuery.of(context).platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
-
+    MediaQueryData _mediaQueryData = MediaQuery.of(context);
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: isDarkMode
@@ -39,7 +39,10 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: Container(
         color: isDarkMode ? Colors.black : Colors.white,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(15, 10, 15, 40),
+          padding: EdgeInsets.symmetric(
+            vertical: _mediaQueryData.size.width * 0.025,
+            horizontal: _mediaQueryData.size.width * 0.025,
+          ),
           child: GNav(
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -47,8 +50,10 @@ class _HomePageState extends State<HomePage> {
             tabBackgroundColor: isDarkMode
                 ? Colors.grey.shade900.withOpacity(0.50)
                 : Colors.grey.shade400.withOpacity(0.50),
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-            gap: 8,
+            padding: EdgeInsets.all(
+              _mediaQueryData.size.width * 0.035,
+            ),
+            gap: _mediaQueryData.size.width * 0.02,
             tabs: const [
               GButton(icon: Icons.home, text: 'Home'),
               GButton(
