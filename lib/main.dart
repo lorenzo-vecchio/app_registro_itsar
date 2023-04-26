@@ -92,7 +92,7 @@ class _MyAppState extends State<MyApp> {
                 : Colors.grey.shade400.withOpacity(0.50),
             contentPadding: const EdgeInsets.all(10),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(8),
               side: BorderSide(
                 color: Colors.transparent,
               ),

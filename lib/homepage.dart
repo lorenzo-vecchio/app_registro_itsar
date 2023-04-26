@@ -39,10 +39,11 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: Container(
         color: isDarkMode ? Colors.black : Colors.white,
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: _mediaQueryData.size.width * 0.025,
-            horizontal: _mediaQueryData.size.width * 0.025,
-          ),
+          padding: EdgeInsets.fromLTRB(
+              _mediaQueryData.size.width * 0.025,
+              _mediaQueryData.size.width * 0.025,
+              _mediaQueryData.size.width * 0.025,
+              _mediaQueryData.size.width * 0.05),
           child: GNav(
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
             color: isDarkMode ? Colors.white : Colors.black,
