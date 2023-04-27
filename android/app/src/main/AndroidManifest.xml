@@ -1,10 +1,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.prova_registro">
+    <!-- Add below permission inside 'manifest' tag -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
    <application
         android:label="ITSAR"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+            <!-- Add below permission inside 'application' tag -->
+    <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+    <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+        <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+    </intent-filter>
+</receiver>
         <activity
             android:name=".MainActivity"
             android:exported="true"

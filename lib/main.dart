@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:prova_registro/globals.dart';
 import 'package:workmanager/workmanager.dart';
 import 'homepage.dart';
 import 'loginpage.dart';
 import 'data.dart';
 import 'dart:ui' as ui;
+import 'notifi_service.dart';
+import 'package:notification_permissions/notification_permissions.dart';
 
 const fetchBackground = "fetchBackground";
 
@@ -31,13 +34,7 @@ void callbackDispatcher() {
           Voto? newVoto = data_from_API.checkGradesDifference(data_from_disc);
           if (newVoto != null) {
             // da aggiungere notifica
-
-
-
-
-
-
-            
+            NotificationService().showNotification(title: 'ITSAR', body: 'Hai un nuovo voto: ${newVoto.voto} in ${newVoto.nomeMateria}');
           }
         } catch (e) {
           // errore
@@ -50,6 +47,15 @@ void callbackDispatcher() {
 
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  // allow notifications
+  await Permission.notification.isDenied.then((value) {
+        if (value) {
+          Permission.notification.request();
+        }
+      });
+  // notifications
+  NotificationService().initNotification();
+  // background configuration
   await Workmanager().initialize(callbackDispatcher, isInDebugMode: false);
   await Workmanager().registerPeriodicTask(
     "1",

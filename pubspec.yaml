@@ -48,6 +48,9 @@ dependencies:
   carousel_indicator: ^1.0.6
   intl: ^0.18.1
   workmanager: ^0.5.1
+  flutter_local_notifications: ^14.0.0
+  notification_permissions: ^0.6.1
+  permission_handler: ^10.2.0
 
 dev_dependencies:
   flutter_test:
