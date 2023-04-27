@@ -115,12 +115,18 @@ class Data {
   Voto? checkGradesDifference(Data oldData) {
     Data newData = this;
 
-    // Create a set of all the grades in oldData
-    Set<Voto> oldGrades = Set<Voto>.from(oldData.votiList);
-    // Check if each grade in newData is already in oldGrades
+    // Create a map of all the grades in oldData, with the nomeMateria field as the key
+    Map<String, Voto> oldGrades = Map.fromIterable(
+      oldData.votiList,
+      key: (v) => v.nomeMateria,
+      value: (v) => v,
+    );
+
+    // Check if each grade in newData is already in oldGrades, comparing the nomeMateria field
     for (Voto newGrade in newData.votiList) {
-      if (!oldGrades.contains(newGrade)) {
-        // If a new grade is found, return it
+      Voto? oldGrade = oldGrades[newGrade.nomeMateria];
+      if (oldGrade == null || oldGrade.voto != newGrade.voto) {
+        // If a new grade is found or the grade has changed, return it
         return newGrade;
       }
     }
