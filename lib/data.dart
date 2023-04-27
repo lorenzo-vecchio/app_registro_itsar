@@ -111,6 +111,22 @@ class Data {
     await storage.write(key: 'username', value: username);
     await storage.write(key: 'password', value: password);
   }
+
+  Voto? checkGradesDifference(Data oldData) {
+    Data newData = this;
+
+    // Create a set of all the grades in oldData
+    Set<Voto> oldGrades = Set<Voto>.from(oldData.votiList);
+    // Check if each grade in newData is already in oldGrades
+    for (Voto newGrade in newData.votiList) {
+      if (!oldGrades.contains(newGrade)) {
+        // If a new grade is found, return it
+        return newGrade;
+      }
+    }
+    // If no new grades are found, return null
+    return null;
+  }
 }
 
 class Voto {

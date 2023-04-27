@@ -3,13 +3,62 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:prova_registro/globals.dart';
+import 'package:workmanager/workmanager.dart';
 import 'homepage.dart';
 import 'loginpage.dart';
 import 'data.dart';
 import 'dart:ui' as ui;
 
-void main() {
+const fetchBackground = "fetchBackground";
+
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) async {
+    switch (task) {
+      case fetchBackground:
+        // Code to run in background
+        AndroidOptions getAndroidOptions() => const AndroidOptions(
+              encryptedSharedPreferences: true,
+            );
+        final storage = FlutterSecureStorage(aOptions: getAndroidOptions());
+        final username = await storage.read(key: 'username');
+        final password = await storage.read(key: 'password');
+        Data data_from_disc = Data.fromDisc();
+        try {
+          data_from_disc.initialize();
+          Data data_from_API = Data.fromCredentials(username!, password!);
+          data_from_API.initialize();
+          // confront old data with new data to check for new grades
+          Voto? newVoto = data_from_API.checkGradesDifference(data_from_disc);
+          if (newVoto != null) {
+            // da aggiungere notifica
+
+
+
+
+
+
+            
+          }
+        } catch (e) {
+          // errore
+        }
+        break;
+    }
+    return Future.value(true);
+  });
+}
+
+Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  await Workmanager().initialize(callbackDispatcher, isInDebugMode: false);
+  await Workmanager().registerPeriodicTask(
+    "1",
+    fetchBackground,
+    frequency: Duration(minutes: 15),
+    constraints: Constraints(
+      networkType: NetworkType.connected,
+    ),
+  );
   // keeps the splash screen until startup operations are finished
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(MyApp());
