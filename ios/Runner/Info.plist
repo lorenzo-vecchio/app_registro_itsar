@@ -54,6 +54,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<!-- Remove with build -->
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_dartobservatory._tcp</string>

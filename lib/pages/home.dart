@@ -216,7 +216,7 @@ class _HomeState extends State<Home> {
                                                 ),
                                                 TextSpan(
                                                     text:
-                                                        '\n\nAula: ${i[j].aula} Orario: ${i[j].inizio.toString().substring(11).substring(0, 5)}-${i[j].fine.toString().substring(11).substring(0, 5)}'),
+                                                        '\nAula: ${i[j].aula}\nOrario: ${i[j].inizio.toString().substring(11).substring(0, 5)}-${i[j].fine.toString().substring(11).substring(0, 5)}\nIntervallo: ${getInterval(i[j])}'),
                                               ],
                                             ),
                                           ),

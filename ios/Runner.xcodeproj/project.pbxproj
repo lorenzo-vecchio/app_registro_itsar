@@ -1,4 +1,9 @@
 // !$*UTF8*$!
+SystemCapabilities = {
+	com.apple.BackgroundModes = {
+		enabled = 1;
+	};
+};
 {
 	archiveVersion = 1;
 	classes = {
