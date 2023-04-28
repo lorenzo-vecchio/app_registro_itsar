@@ -55,7 +55,7 @@ class _CalendarioState extends State<Calendario> {
     final brightness = MediaQuery.of(context).platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: isDarkMode ? Colors.black : Colors.white,
+      backgroundColor: isDarkMode ? backgroundDarkMode : backgroundLightMode,
       body: SafeArea(
         child: Calendar(
           eventTileHeight: 130,

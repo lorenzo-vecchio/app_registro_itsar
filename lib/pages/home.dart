@@ -59,7 +59,7 @@ class _HomeState extends State<Home> {
 
     MediaQueryData _mediaQueryData = MediaQuery.of(context);
     return Scaffold(
-      backgroundColor: isDarkMode ? Colors.black : Colors.white,
+      backgroundColor: isDarkMode ? backgroundDarkMode : backgroundLightMode,
       body: GestureDetector(
         onTap: () => {debugPrint("pollo")},
         child: ListView(
@@ -133,8 +133,8 @@ class _HomeState extends State<Home> {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
                                         color: isDarkMode
-                                            ? Colors.green
-                                            : Colors.green.shade500,
+                                            ? backgroundOggiNienteDarkMode
+                                            : backgroundOggiNienteLightMode,
                                       ),
                                       padding: EdgeInsets.fromLTRB(
                                           0,
@@ -184,11 +184,11 @@ class _HomeState extends State<Home> {
                                                     .substring(11) ==
                                                 '09:00:00.000'
                                             ? isDarkMode
-                                                ? Colors.red
-                                                : Colors.yellow
+                                                ? morningLessonDarkMode
+                                                : morningLessonLightMode
                                             : isDarkMode
-                                                ? Colors.indigo
-                                                : Colors.lightBlue,
+                                                ? afternoonLessonDarkMode
+                                                : afternoonLessonLightMode,
                                       ),
                                       padding: EdgeInsets.fromLTRB(
                                           0,
@@ -241,9 +241,9 @@ class _HomeState extends State<Home> {
                 count: materie.length,
                 index: currentPageIndex,
                 color: isDarkMode
-                    ? Colors.white30
-                    : Colors.grey.shade300.withOpacity(0.50),
-                activeColor: isDarkMode ? Colors.white : Colors.black,
+                    ? carouselIndicatorNotActiveDarkMode
+                    : carouselIndicatorNotActiveLightMode,
+                activeColor: isDarkMode ? carouselIndicatorActiveDarkMode : carouselIndicatorActiveLightMode,
               ),
             ]),
             Padding(

@@ -6,6 +6,7 @@ import 'package:prova_registro/pages/calendario.dart';
 import 'package:prova_registro/pages/presenze.dart';
 import 'package:prova_registro/pages/voti.dart';
 import 'package:prova_registro/pages/account.dart';
+import 'package:prova_registro/globals.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
               : SystemUiOverlayStyle.dark,
           child: _pages[_selectedIndex]),
       bottomNavigationBar: Container(
-        color: isDarkMode ? Colors.black : Colors.white,
+        color: isDarkMode ? backgroundDarkMode : backgroundLightMode,
         child: Padding(
           padding: EdgeInsets.fromLTRB(
               _mediaQueryData.size.width * 0.025,
@@ -45,12 +46,12 @@ class _HomePageState extends State<HomePage> {
               _mediaQueryData.size.width * 0.025,
               _mediaQueryData.size.width * 0.05),
           child: GNav(
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-            color: isDarkMode ? Colors.white : Colors.black,
-            activeColor: isDarkMode ? Colors.white : Colors.black,
+            backgroundColor: isDarkMode ? backgroundDarkMode : backgroundLightMode,
+            color: isDarkMode ? notActiveTextDarkMode : notActiveTextLightMode,
+            activeColor: isDarkMode ? activeTextDarkMode : activeTextLightMode,
             tabBackgroundColor: isDarkMode
-                ? Colors.grey.shade900.withOpacity(0.50)
-                : Colors.grey.shade400.withOpacity(0.50),
+                ? tabBackgroundColorDarkMode
+                : tabBackgroundColorLightMode,
             padding: EdgeInsets.all(
               _mediaQueryData.size.width * 0.035,
             ),

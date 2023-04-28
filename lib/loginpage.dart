@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:prova_registro/homepage.dart';
 import 'package:prova_registro/data.dart';
+import 'package:prova_registro/globals.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -58,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
     final isDarkMode = brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDarkMode ? Colors.black : Colors.white,
+      backgroundColor: isDarkMode ? backgroundDarkMode : backgroundLightMode,
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Form(
