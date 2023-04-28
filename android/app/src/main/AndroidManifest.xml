@@ -11,11 +11,11 @@
         android:icon="@mipmap/launcher_icon">
             <!-- Add below permission inside 'application' tag -->
     <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
-    <intent-filter>
-        <action android:name="android.intent.action.BOOT_COMPLETED"/>
-        <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
-    </intent-filter>
-</receiver>
+        <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+        </intent-filter>
+    </receiver>
         <activity
             android:name=".MainActivity"
             android:exported="true"
