@@ -2,11 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIApplicationSceneManifest</key>
-    <dict>
-        <key>UISceneConfigurations</key>
-        <dict/>
-    </dict>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>task-identifier</string>
+  	</array>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>workmanager.background.task</string>
+  	</array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -31,8 +34,23 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_dartobservatory._tcp</string>
+	</array>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UISceneConfigurations</key>
+		<dict/>
+	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -54,27 +72,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<!-- Remove with build -->
-	<key>NSBonjourServices</key>
-	<array>
-		<string>_dartobservatory._tcp</string>
-	</array>
-	<!-- Background Processing -->
-	<key>UIBackgroundModes</key>
-	<array>
-    <string>processing</string>
-	</array>
-	
-	<!-- Task Schedulling -->
-	<key>BGTaskSchedulerPermittedIdentifiers</key>
-	<array>
-	   <string>workmanager.background.task</string>
-	</array>
-	
-	<!-- Background Fetching -->
-	<key>UIBackgroundModes</key>
-	<array>
-	    <string>fetch</string>
-	</array>
-	</dict>
-	</plist>
+</dict>
+</plist>
