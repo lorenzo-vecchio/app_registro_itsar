@@ -79,11 +79,13 @@ Future<void> main() async {
       ),
     );
   }
-  // background configuration ios
-  // Register the background task method
-  const backgroundTaskChannel =
-      MethodChannel('com.example.myapp/background_task');
-  backgroundTaskChannel.setMethodCallHandler((call) => backgroundSync());
+  if (Platform.isIOS) {
+    // background configuration ios
+    // Register the background task method
+    const backgroundTaskChannel =
+        MethodChannel('com.example.myapp/background_task');
+    backgroundTaskChannel.setMethodCallHandler((call) => backgroundSync());
+  }
 
   runApp(MyApp());
 }
