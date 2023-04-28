@@ -53,6 +53,10 @@ class Average extends StatelessWidget {
             outerThumbRadius: 13,
             outerThumbStrokeWidth: 10,
             outerThumbColor: Colors.blueAccent,
+            // gap
+            dashWidth: 80,
+            dashGap: 15,
+            // gap end
             animation: true,
             valueNotifier: _valueNotifier,
             child: Center(
