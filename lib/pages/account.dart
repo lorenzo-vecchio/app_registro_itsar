@@ -13,6 +13,7 @@ class Account extends StatefulWidget {
 
 class _AccountState extends State<Account> {
   bool _isLoading = false;
+  String Username = '';
 
   AndroidOptions _getAndroidOptions() => const AndroidOptions(
         encryptedSharedPreferences: true,
@@ -27,29 +28,67 @@ class _AccountState extends State<Account> {
     await storage.delete(key: 'password');
   }
 
+  Future<void> _getUsername() async {
+    final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
+    String? username = await storage.read(key: 'username');
+    if (username != null) {
+      Username = username;
+    } else {
+      Username = 'errore';
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getUsername();
+  }
+
   @override
   Widget build(BuildContext context) {
+    MediaQueryData _mediaQueryData = MediaQuery.of(context);
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            setState(() {
-              _isLoading = true;
-            });
-            await _logout();
-            Navigator.pushAndRemoveUntil<dynamic>(
-              context,
-              MaterialPageRoute<dynamic>(
-                builder: (BuildContext context) => LoginPage(),
-              ),
-              (route) => false,
-            );
-            setState(() {
-              _isLoading = false;
-            });
-          },
-          child: _isLoading ? CircularProgressIndicator() : Text('Logout'),
-        ),
+      body: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(
+                vertical: _mediaQueryData.size.height / 6,
+                horizontal: _mediaQueryData.size.width),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: const Text(
+              'Il tuo account attuale è:',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              '${Username}',
+              style: TextStyle(fontSize: 16),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              setState(() {
+                _isLoading = true;
+              });
+              await _logout();
+              Navigator.pushAndRemoveUntil<dynamic>(
+                context,
+                MaterialPageRoute<dynamic>(
+                  builder: (BuildContext context) => LoginPage(),
+                ),
+                (route) => false,
+              );
+              setState(() {
+                _isLoading = false;
+              });
+            },
+            child: _isLoading ? CircularProgressIndicator() : Text('Logout'),
+          ),
+        ],
       ),
     );
   }
