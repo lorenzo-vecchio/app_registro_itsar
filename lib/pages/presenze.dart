@@ -13,12 +13,14 @@ class Presenze extends StatefulWidget {
 }
 
 class _PresenzeState extends State<Presenze> {
-  int sommaPresenze = globalData.presenzeList
+  double sommaPresenze = globalData.presenzeList
       .fold(0, (total, presenza) => total + presenza.ore_presenza);
-  int sommaAssenze = globalData.presenzeList
+  double sommaAssenze = globalData.presenzeList
       .fold(0, (total, presenza) => total + presenza.ore_assenza);
   @override
   Widget build(BuildContext context) {
+    MediaQueryData _mediaQueryData = MediaQuery.of(context);
+
     // gets if it's in dark mode or not
     final brightness = MediaQuery.of(context).platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
@@ -83,7 +85,8 @@ class _PresenzeState extends State<Presenze> {
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: Container(
                 height: 150,
-                padding: EdgeInsets.symmetric(horizontal: 28),
+                padding: EdgeInsets.symmetric(
+                    horizontal: _mediaQueryData.size.width * 0.025),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: isDarkMode

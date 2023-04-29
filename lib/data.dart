@@ -68,8 +68,8 @@ class Data {
     materieList.sort((a, b) => a.inizio.compareTo(b.inizio));
     jsonMap['presenze_assenze'].forEach((element) {
       String materia = element['materia'];
-      int presenza = element['ore_presenza'];
-      int assenza = element['ore_assenza'];
+      double presenza = element['ore_presenza'];
+      double assenza = element['ore_assenza'];
       DateTime data = DateTime.parse(
           element['date'].replaceAll('/', '-').split('-').reversed.join());
       DateTime inizio = DateFormat('HH:mm').parse(element['ora_inizio']);
@@ -160,8 +160,8 @@ class Materia {
 
 class PresenzaAssenza {
   String materia;
-  int ore_presenza;
-  int ore_assenza;
+  double ore_presenza;
+  double ore_assenza;
   DateTime data;
   DateTime inizio;
   DateTime fine;

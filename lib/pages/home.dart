@@ -15,9 +15,9 @@ class _HomeState extends State<Home> {
   List<Materia> materieOggi = [];
   List<Materia> materieDomani = [];
   List<List<Materia>> materie = [];
-  int sommaPresenze = globalData.presenzeList
+  double sommaPresenze = globalData.presenzeList
       .fold(0, (total, presenza) => total + presenza.ore_presenza);
-  int sommaAssenze = globalData.presenzeList
+  double sommaAssenze = globalData.presenzeList
       .fold(0, (total, presenza) => total + presenza.ore_assenza);
 
   int currentPageIndex = 0;
@@ -243,7 +243,9 @@ class _HomeState extends State<Home> {
                 color: isDarkMode
                     ? carouselIndicatorNotActiveDarkMode
                     : carouselIndicatorNotActiveLightMode,
-                activeColor: isDarkMode ? carouselIndicatorActiveDarkMode : carouselIndicatorActiveLightMode,
+                activeColor: isDarkMode
+                    ? carouselIndicatorActiveDarkMode
+                    : carouselIndicatorActiveLightMode,
               ),
             ]),
             Padding(
@@ -275,10 +277,10 @@ class _HomeState extends State<Home> {
                 ),
                 subtitle: Padding(
                   padding: EdgeInsets.fromLTRB(
-                      _mediaQueryData.size.width * 0.05,
+                      _mediaQueryData.size.width * 0.025,
                       0,
-                      _mediaQueryData.size.width * 0.05,
-                      _mediaQueryData.size.width * 0.05), //20,0,20,20
+                      _mediaQueryData.size.width * 0.025,
+                      _mediaQueryData.size.width * 0.025), //20,0,20,20
                   child: Container(
                     height: 100,
                     padding: EdgeInsets.symmetric(
