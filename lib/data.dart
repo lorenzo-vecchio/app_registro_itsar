@@ -53,12 +53,16 @@ class Data {
       votiList.add(Voto(key, value));
     });
     jsonMap['calendario'].forEach((element) {
+      bool esame = false;
       String nomeMateria = element['title'];
       DateTime inizio = DateTime.parse(element['start']);
       DateTime fine = DateTime.parse(element['end']);
       int sede = int.parse(element['AltraSede']);
       String aula = element['aula'];
-      Materia materia = Materia(sede, fine, inizio, nomeMateria, aula);
+      if (nomeMateria.contains('ESAME')) {
+        esame = true;
+      }
+      Materia materia = Materia(sede, fine, inizio, nomeMateria, aula, esame);
       materieList.add(materia);
     });
     materieList.sort((a, b) => a.inizio.compareTo(b.inizio));
@@ -148,8 +152,10 @@ class Materia {
   DateTime inizio;
   String nomeMateria;
   String aula;
+  bool isExam;
 
-  Materia(this.sede, this.fine, this.inizio, this.nomeMateria, this.aula);
+  Materia(this.sede, this.fine, this.inizio, this.nomeMateria, this.aula,
+      this.isExam);
 }
 
 class PresenzaAssenza {

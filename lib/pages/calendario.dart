@@ -12,11 +12,14 @@ class Calendario extends StatefulWidget {
 
 class _CalendarioState extends State<Calendario> {
   final List<NeatCleanCalendarEvent> _eventList = [];
+  final List<NeatCleanCalendarEvent> _examList = [];
+  bool soloEsami = false;
 
   @override
   void initState() {
     super.initState();
     _createNeatCleanEventList();
+    _createExamList();
   }
 
   void _createNeatCleanEventList() {
@@ -49,6 +52,47 @@ class _CalendarioState extends State<Calendario> {
     }
   }
 
+  void _createExamList() {
+    List<Materia> eventiMaterie = globalData.materieList;
+    for (Materia materia in eventiMaterie) {
+      if (materia.isExam) {
+        String intervallo = 'Intervallo: ${getInterval(materia)}';
+        NeatCleanCalendarEvent evento = NeatCleanCalendarEvent(
+          '${materia.nomeMateria}\n\n${materia.aula}',
+          startTime: materia.inizio,
+          endTime: materia.fine,
+          description: intervallo,
+          color: () {
+            bool hasFourHours =
+                materia.fine.difference(materia.inizio) == Duration(hours: 4);
+            if (materia.isExam) {
+              return Colors.deepPurple;
+            }
+            if (hasFourHours && materia.inizio.hour < 11) {
+              return Colors.red;
+            }
+            if (hasFourHours && !(materia.inizio.hour < 11)) {
+              return Colors.indigo;
+            }
+            if (materia.fine.difference(materia.inizio) ==
+                const Duration(hours: 9)) {
+              return Colors.green;
+            } else {
+              return Colors.yellow;
+            }
+          }(),
+        );
+        _examList.add(evento);
+      }
+    }
+  }
+
+  void _filtroSoloEsami() {
+    setState(() {
+      soloEsami = !soloEsami; // toggle the boolean value
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // gets if it's in dark mode or not
@@ -56,12 +100,16 @@ class _CalendarioState extends State<Calendario> {
     final isDarkMode = brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: isDarkMode ? backgroundDarkMode : backgroundLightMode,
+      floatingActionButton: FloatingActionButton(
+        onPressed: _filtroSoloEsami,
+        child: Icon(Icons.filter_list),
+      ),
       body: SafeArea(
         child: Calendar(
           eventTileHeight: 130,
           startOnMonday: true,
           weekDays: ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'],
-          eventsList: _eventList,
+          eventsList: soloEsami ? _examList : _eventList,
           isExpandable: true,
           eventDoneColor: Colors.green,
           selectedColor: Colors.pink,
