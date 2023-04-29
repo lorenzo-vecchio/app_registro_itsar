@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:intl/intl.dart';
 import 'package:prova_registro/data.dart';
 import 'package:prova_registro/globals.dart';
+import 'package:prova_registro/screen_size.dart';
 
 class Presenze extends StatefulWidget {
   const Presenze({super.key});
@@ -13,12 +13,20 @@ class Presenze extends StatefulWidget {
 }
 
 class _PresenzeState extends State<Presenze> {
+
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    ScreenSize.init(context);
+  }
   int sommaPresenze = globalData.presenzeList
       .fold(0, (total, presenza) => total + presenza.ore_presenza);
   int sommaAssenze = globalData.presenzeList
       .fold(0, (total, presenza) => total + presenza.ore_assenza);
   @override
   Widget build(BuildContext context) {
+
     // gets if it's in dark mode or not
     final brightness = MediaQuery.of(context).platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
@@ -30,7 +38,7 @@ class _PresenzeState extends State<Presenze> {
           if (index >= 2) {
             PresenzaAssenza presenza = globalData.presenzeList[index - 2];
             return Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              padding: EdgeInsets.fromLTRB(ScreenSize.padding10, ScreenSize.padding10, ScreenSize.padding10, 0),
               child: ListTile(
                 title: Text(
                   presenza.materia,
@@ -80,10 +88,10 @@ class _PresenzeState extends State<Presenze> {
           }
           if (index == 0) {
             return Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              padding: EdgeInsets.fromLTRB(ScreenSize.padding10, ScreenSize.padding10, ScreenSize.padding10, 0),
               child: Container(
                 height: 150,
-                padding: EdgeInsets.symmetric(horizontal: 28),
+                padding: EdgeInsets.symmetric(horizontal: ScreenSize.padding30),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: isDarkMode
@@ -101,7 +109,7 @@ class _PresenzeState extends State<Presenze> {
                       ),
                       height: 90,
                       alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      padding: EdgeInsets.symmetric(horizontal: ScreenSize.padding30),
                       child: RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
@@ -131,7 +139,7 @@ class _PresenzeState extends State<Presenze> {
                         borderRadius: BorderRadius.circular(15),
                         color: isDarkMode ? Colors.red : Colors.red.shade400,
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      padding: EdgeInsets.symmetric(horizontal: ScreenSize.padding30),
                       child: RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
@@ -161,7 +169,7 @@ class _PresenzeState extends State<Presenze> {
           }
           if (index == 1) {
             return Padding(
-              padding: EdgeInsets.fromLTRB(25, 8, 8, 0),
+              padding: EdgeInsets.fromLTRB(ScreenSize.screenWidth * 0.05, ScreenSize.padding8, ScreenSize.padding8, 0),
               child: ListTile(
                 tileColor: isDarkMode ? Colors.black : Colors.white,
                 shape: RoundedRectangleBorder(
@@ -169,7 +177,7 @@ class _PresenzeState extends State<Presenze> {
                     color: isDarkMode ? Colors.black : Colors.white,
                   ),
                 ),
-                title: Text(
+                title: const Text(
                   "Presenze",
                   style: TextStyle(
                     fontSize: 30,
@@ -177,7 +185,7 @@ class _PresenzeState extends State<Presenze> {
                   ),
                 ),
                 contentPadding:
-                    EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                    const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
               ),
             );
           }

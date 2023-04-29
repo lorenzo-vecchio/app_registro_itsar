@@ -7,9 +7,10 @@ import 'package:prova_registro/pages/presenze.dart';
 import 'package:prova_registro/pages/voti.dart';
 import 'package:prova_registro/pages/account.dart';
 import 'package:prova_registro/globals.dart';
+import 'screen_size.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -18,19 +19,24 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   final List<Widget> _pages = [
-    Home(),
-    Voti(),
-    Calendario(),
-    Presenze(),
-    Account(),
+    const Home(),
+    const Voti(),
+    const Calendario(),
+    const Presenze(),
+    const Account(),
   ];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    ScreenSize.init(context);
+  }
 
   @override
   Widget build(BuildContext context) {
     // gets if it's in dark mode or not
     final brightness = MediaQuery.of(context).platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
-    MediaQueryData _mediaQueryData = MediaQuery.of(context);
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: isDarkMode
@@ -41,10 +47,10 @@ class _HomePageState extends State<HomePage> {
         color: isDarkMode ? backgroundDarkMode : backgroundLightMode,
         child: Padding(
           padding: EdgeInsets.fromLTRB(
-              _mediaQueryData.size.width * 0.025,
-              _mediaQueryData.size.width * 0.025,
-              _mediaQueryData.size.width * 0.025,
-              _mediaQueryData.size.width * 0.05),
+              ScreenSize.screenWidth * 0.025,
+              ScreenSize.screenHeight * 0.025,
+              ScreenSize.screenWidth * 0.025,
+              ScreenSize.screenHeight * 0.05),
           child: GNav(
             backgroundColor: isDarkMode ? backgroundDarkMode : backgroundLightMode,
             color: isDarkMode ? notActiveTextDarkMode : notActiveTextLightMode,
@@ -53,9 +59,9 @@ class _HomePageState extends State<HomePage> {
                 ? tabBackgroundColorDarkMode
                 : tabBackgroundColorLightMode,
             padding: EdgeInsets.all(
-              _mediaQueryData.size.width * 0.035,
+              ScreenSize.screenWidth * 0.035,
             ),
-            gap: _mediaQueryData.size.width * 0.02,
+            gap: ScreenSize.screenWidth * 0.02,
             tabs: const [
               GButton(icon: Icons.home, text: 'Home'),
               GButton(

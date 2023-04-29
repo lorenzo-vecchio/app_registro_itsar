@@ -22,6 +22,7 @@ class _CalendarioState extends State<Calendario> {
   void _createNeatCleanEventList() {
     List<Materia> eventiMaterie = globalData.materieList;
     for (Materia materia in eventiMaterie) {
+      num j=0;
       String intervallo = 'Intervallo: ${getInterval(materia)}';
       NeatCleanCalendarEvent evento = NeatCleanCalendarEvent(
         '${materia.nomeMateria}\n\n${materia.aula}',
@@ -31,6 +32,9 @@ class _CalendarioState extends State<Calendario> {
         color: () {
           bool hasFourHours =
               materia.fine.difference(materia.inizio) == Duration(hours: 4);
+          if(materia.nomeMateria.endsWith(" [ESAME]")){
+            return Colors.purpleAccent;
+          }
           if (hasFourHours && materia.inizio.hour < 11) {
             return Colors.red;
           }
@@ -40,12 +44,14 @@ class _CalendarioState extends State<Calendario> {
           if (materia.fine.difference(materia.inizio) ==
               const Duration(hours: 9)) {
             return Colors.green;
-          } else {
+          }
+          else {
             return Colors.yellow;
           }
         }(),
       );
       _eventList.add(evento);
+      print(materia.nomeMateria.endsWith(" [ESAME]"));
     }
   }
 

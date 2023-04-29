@@ -1,0 +1,24 @@
+com.example.prova_registro.app-jetified-annotation-experimental-1.1.0-0 C:\Users\GiovanniErcolano\.gradle\caches\transforms-3\369ba75e4c7f33583f011c220195f98e\transformed\jetified-annotation-experimental-1.1.0\res
+com.example.prova_registro.app-jetified-startup-runtime-1.0.0-1 C:\Users\GiovanniErcolano\.gradle\caches\transforms-3\5dde5130c5f068e28cb3d6551a7c5287\transformed\jetified-startup-runtime-1.0.0\res
+com.example.prova_registro.app-jetified-window-1.0.0-2 C:\Users\GiovanniErcolano\.gradle\caches\transforms-3\665d5bedccec993f6c74b6c4816d4f2d\transformed\jetified-window-1.0.0\res
+com.example.prova_registro.app-media-1.1.0-3 C:\Users\GiovanniErcolano\.gradle\caches\transforms-3\90ee27f1b843a71de10fb54717039d58\transformed\media-1.1.0\res
+com.example.prova_registro.app-work-runtime-2.7.1-4 C:\Users\GiovanniErcolano\.gradle\caches\transforms-3\a2dc4243670290412d5d4f74158e7d19\transformed\work-runtime-2.7.1\res
+com.example.prova_registro.app-jetified-security-crypto-1.1.0-alpha04-5 C:\Users\GiovanniErcolano\.gradle\caches\transforms-3\acdb2a704570c6c6e1c155d7186093a1\transformed\jetified-security-crypto-1.1.0-alpha04\res
+com.example.prova_registro.app-core-1.6.0-6 C:\Users\GiovanniErcolano\.gradle\caches\transforms-3\b8203fe242bcd1c096ac2fef8b83226d\transformed\core-1.6.0\res
+com.example.prova_registro.app-jetified-window-java-1.0.0-7 C:\Users\GiovanniErcolano\.gradle\caches\transforms-3\ecade101cd279b888fb51717f2238bb7\transformed\jetified-window-java-1.0.0\res
+com.example.prova_registro.app-debug-8 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\android\app\src\debug\res
+com.example.prova_registro.app-main-9 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\android\app\src\main\res
+com.example.prova_registro.app-pngs-10 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\build\app\generated\res\pngs\debug
+com.example.prova_registro.app-resValues-11 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\build\app\generated\res\resValues\debug
+com.example.prova_registro.app-rs-12 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\build\app\generated\res\rs\debug
+com.example.prova_registro.app-mergeDebugResources-13 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.example.prova_registro.app-mergeDebugResources-14 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.example.prova_registro.app-merged_res-15 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\build\app\intermediates\merged_res\debug
+com.example.prova_registro.app-packaged_res-16 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\build\connectivity_plus\intermediates\packaged_res\debug
+com.example.prova_registro.app-packaged_res-17 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\build\flutter_local_notifications\intermediates\packaged_res\debug
+com.example.prova_registro.app-packaged_res-18 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\build\flutter_native_splash\intermediates\packaged_res\debug
+com.example.prova_registro.app-packaged_res-19 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\build\flutter_secure_storage\intermediates\packaged_res\debug
+com.example.prova_registro.app-packaged_res-20 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\build\notification_permissions\intermediates\packaged_res\debug
+com.example.prova_registro.app-packaged_res-21 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\build\path_provider_android\intermediates\packaged_res\debug
+com.example.prova_registro.app-packaged_res-22 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\build\permission_handler_android\intermediates\packaged_res\debug
+com.example.prova_registro.app-packaged_res-23 C:\Users\GiovanniErcolano\OneDrive - ITS Angelo Rizzoli\Desktop\Dev\Git\prova_registro\build\workmanager\intermediates\packaged_res\debug

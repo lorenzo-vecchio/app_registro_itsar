@@ -60,14 +60,14 @@ Future<void> main() async {
   await Workmanager().registerPeriodicTask(
     "1",
     fetchBackground,
-    frequency: Duration(minutes: 15),
+    frequency: const Duration(minutes: 15),
     constraints: Constraints(
       networkType: NetworkType.connected,
     ),
   );
   // keeps the splash screen until startup operations are finished
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -138,7 +138,7 @@ class _MyAppState extends State<MyApp> {
       FlutterNativeSplash.remove();
       return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: alreadyHaveData ? HomePage() : LoginPage(),
+        home: alreadyHaveData ? const HomePage() : const LoginPage(),
         theme: ThemeData(
           listTileTheme: ListTileThemeData(
             tileColor: isDarkMode
@@ -147,7 +147,7 @@ class _MyAppState extends State<MyApp> {
             contentPadding: const EdgeInsets.all(10),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
-              side: BorderSide(
+              side: const BorderSide(
                 color: Colors.transparent,
               ),
             ),
