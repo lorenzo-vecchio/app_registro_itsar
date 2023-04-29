@@ -84,6 +84,7 @@ Future<void> main() async {
     }
   });
   // notifications
+  
   NotificationService().initNotification();
   // background configuration android
   await Workmanager().initialize(callbackDispatcher, isInDebugMode: false);
