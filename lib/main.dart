@@ -161,9 +161,7 @@ class _MyAppState extends State<MyApp> {
         home: alreadyHaveData ? HomePage() : LoginPage(),
         theme: ThemeData(
           listTileTheme: ListTileThemeData(
-            tileColor: isDarkMode
-                ? Colors.grey.shade900.withOpacity(0.50)
-                : Colors.grey.shade300.withOpacity(0.50),
+            tileColor: Colors.grey.shade300.withOpacity(0.50),
             contentPadding: const EdgeInsets.all(10),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
@@ -173,7 +171,7 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
           // Define the default brightness and colors.
-          brightness: isDarkMode ? Brightness.dark : Brightness.light,
+          brightness: Brightness.light,
           primaryColor: isDarkMode ? Colors.black : Colors.white,
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
@@ -195,6 +193,19 @@ class _MyAppState extends State<MyApp> {
                 TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
             titleLarge: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
             bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Montserrat'),
+          ),
+        ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          listTileTheme: ListTileThemeData(
+            tileColor: Colors.grey.shade900.withOpacity(0.50),
+            contentPadding: const EdgeInsets.all(10),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+              side: BorderSide(
+                color: Colors.transparent,
+              ),
+            ),
           ),
         ),
       );

@@ -12,8 +12,8 @@ bool alreadyHaveData = false;
 Color backgroundDarkMode = Colors.black;
 Color backgroundLightMode = Colors.white;
 // barra di navigazione
-Color notActiveTextDarkMode = Colors.white;
-Color notActiveTextLightMode = Colors.black;
+Color notActiveTextDarkMode = Color.fromARGB(255, 126, 126, 126);
+Color notActiveTextLightMode = Color.fromARGB(255, 124, 124, 124);
 Color activeTextDarkMode = Colors.white;
 Color activeTextLightMode = Colors.black;
 Color tabBackgroundColorDarkMode = Colors.grey.shade900.withOpacity(0.50);
