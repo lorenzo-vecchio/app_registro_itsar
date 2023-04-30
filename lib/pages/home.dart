@@ -69,7 +69,6 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: isDarkMode ? backgroundDarkMode : backgroundLightMode,
       body: GestureDetector(
-        onTap: () => {debugPrint("pollo")},
         child: ListView(
           children: [
             CarouselSlider(
@@ -151,7 +150,7 @@ class _HomeState extends State<Home> {
                                           padding: EdgeInsets.all(
                                               ScreenSize.screenWidth * 0.02),
                                           child: const Text(
-                                            'Oggi niente!!!',
+                                            'Niente!!!',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
