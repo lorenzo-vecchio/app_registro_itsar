@@ -18,15 +18,17 @@ class _PresenzeState extends State<Presenze> {
       .fold(0, (total, presenza) => total + presenza.ore_presenza);
   double sommaAssenze = globalData.presenzeList
       .fold(0, (total, presenza) => total + presenza.ore_assenza);
-  
-    @override
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     ScreenSize.init(context);
   }
-  
+
   @override
   Widget build(BuildContext context) {
+    List<int> presenza = hoursToDifferent(sommaPresenze);
+    List<int> assenza = hoursToDifferent(sommaAssenze);
 
     // gets if it's in dark mode or not
     final brightness = MediaQuery.of(context).platformBrightness;
@@ -39,7 +41,8 @@ class _PresenzeState extends State<Presenze> {
           if (index >= 2) {
             PresenzaAssenza presenza = globalData.presenzeList[index - 2];
             return Padding(
-              padding: EdgeInsets.fromLTRB(ScreenSize.padding10, ScreenSize.padding10, ScreenSize.padding10, 0),
+              padding: EdgeInsets.fromLTRB(ScreenSize.padding10,
+                  ScreenSize.padding10, ScreenSize.padding10, 0),
               child: ListTile(
                 title: Text(
                   presenza.materia,
@@ -54,7 +57,8 @@ class _PresenzeState extends State<Presenze> {
                   children: [
                     Container(
                       padding: EdgeInsets.symmetric(
-                          horizontal: ScreenSize.padding10, vertical: ScreenSize.padding8),
+                          horizontal: ScreenSize.padding10,
+                          vertical: ScreenSize.padding8),
                       decoration: BoxDecoration(
                         color:
                             isDarkMode ? Colors.green : Colors.green.shade500,
@@ -70,7 +74,8 @@ class _PresenzeState extends State<Presenze> {
                     const SizedBox(width: 8),
                     Container(
                       padding: EdgeInsets.symmetric(
-                          horizontal: ScreenSize.padding10, vertical: ScreenSize.padding8),
+                          horizontal: ScreenSize.padding10,
+                          vertical: ScreenSize.padding8),
                       decoration: BoxDecoration(
                         color: isDarkMode ? Colors.red : Colors.red.shade400,
                         borderRadius: BorderRadius.circular(5),
@@ -89,7 +94,8 @@ class _PresenzeState extends State<Presenze> {
           }
           if (index == 0) {
             return Padding(
-              padding: EdgeInsets.fromLTRB(ScreenSize.padding10, ScreenSize.padding10, ScreenSize.padding10, 0),
+              padding: EdgeInsets.fromLTRB(ScreenSize.padding10,
+                  ScreenSize.padding10, ScreenSize.padding10, 0),
               child: Container(
                 height: 150,
                 padding: EdgeInsets.symmetric(horizontal: ScreenSize.padding30),
@@ -110,7 +116,8 @@ class _PresenzeState extends State<Presenze> {
                       ),
                       height: 90,
                       alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(horizontal: ScreenSize.padding30),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ScreenSize.padding30),
                       child: RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
@@ -122,11 +129,11 @@ class _PresenzeState extends State<Presenze> {
                           ),
                           children: [
                             TextSpan(
-                              text: '${sommaPresenze}h',
+                              text: '${presenza[0]}h ${presenza[1]}m',
                               style: TextStyle(
                                 color: isDarkMode ? Colors.white : Colors.black,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 25,
+                                fontSize: 20,
                               ),
                             ),
                           ],
@@ -140,7 +147,8 @@ class _PresenzeState extends State<Presenze> {
                         borderRadius: BorderRadius.circular(15),
                         color: isDarkMode ? Colors.red : Colors.red.shade400,
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: ScreenSize.padding30),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ScreenSize.padding30),
                       child: RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
@@ -152,11 +160,11 @@ class _PresenzeState extends State<Presenze> {
                           ),
                           children: [
                             TextSpan(
-                              text: '${sommaAssenze}h',
+                              text: '${assenza[0]}h ${assenza[1]}m',
                               style: TextStyle(
                                 color: isDarkMode ? Colors.white : Colors.black,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 25,
+                                fontSize: 20,
                               ),
                             ),
                           ],
@@ -170,7 +178,8 @@ class _PresenzeState extends State<Presenze> {
           }
           if (index == 1) {
             return Padding(
-              padding: EdgeInsets.fromLTRB(ScreenSize.screenWidth * 0.05, ScreenSize.padding8, ScreenSize.padding8, 0),
+              padding: EdgeInsets.fromLTRB(ScreenSize.screenWidth * 0.05,
+                  ScreenSize.padding8, ScreenSize.padding8, 0),
               child: ListTile(
                 tileColor: isDarkMode ? Colors.black : Colors.white,
                 shape: RoundedRectangleBorder(

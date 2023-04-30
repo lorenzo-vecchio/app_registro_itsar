@@ -37,6 +37,22 @@ Color carouselIndicatorActiveDarkMode = Colors.white;
 Color carouselIndicatorActiveLightMode = Colors.black;
 
 // ========================================= FINE-COLORI =========================================
+List<int> hoursToDifferent(double val) {
+  double num = val;
+  String numString = num.toString();
+
+  List<String> parts = numString.split('.');
+  String decimalPart = parts.length > 1 ? parts[1] : '';
+
+  int integerPartInt = int.parse(parts[0]);
+  int decimalPartInt = int.parse(decimalPart);
+
+  if (decimalPartInt >= 60) {
+    integerPartInt += 1;
+    decimalPartInt -= 60;
+  }
+  return [integerPartInt, decimalPartInt];
+}
 
 String getInterval(Materia materia) {
   var room = materia.aula;
