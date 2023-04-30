@@ -8,6 +8,8 @@ import 'package:prova_registro/pages/voti.dart';
 import 'package:prova_registro/pages/account.dart';
 import 'package:prova_registro/globals.dart';
 
+import 'screen_size.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -26,11 +28,16 @@ class _HomePageState extends State<HomePage> {
   ];
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    ScreenSize.init(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     // gets if it's in dark mode or not
     final brightness = MediaQuery.of(context).platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
-    MediaQueryData _mediaQueryData = MediaQuery.of(context);
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: isDarkMode
@@ -41,21 +48,22 @@ class _HomePageState extends State<HomePage> {
         color: isDarkMode ? backgroundDarkMode : backgroundLightMode,
         child: Padding(
           padding: EdgeInsets.fromLTRB(
-              _mediaQueryData.size.width * 0.025,
-              _mediaQueryData.size.width * 0.025,
-              _mediaQueryData.size.width * 0.025,
-              _mediaQueryData.size.width * 0.05),
+              ScreenSize.padding10,
+              ScreenSize.padding10,
+              ScreenSize.padding10,
+              ScreenSize.padding20),
           child: GNav(
-            backgroundColor: isDarkMode ? backgroundDarkMode : backgroundLightMode,
+            backgroundColor:
+                isDarkMode ? backgroundDarkMode : backgroundLightMode,
             color: isDarkMode ? notActiveTextDarkMode : notActiveTextLightMode,
             activeColor: isDarkMode ? activeTextDarkMode : activeTextLightMode,
             tabBackgroundColor: isDarkMode
                 ? tabBackgroundColorDarkMode
                 : tabBackgroundColorLightMode,
             padding: EdgeInsets.all(
-              _mediaQueryData.size.width * 0.035,
+              ScreenSize.screenWidth * 0.035,
             ),
-            gap: _mediaQueryData.size.width * 0.02,
+            gap: ScreenSize.screenWidth * 0.02,
             tabs: const [
               GButton(icon: Icons.home, text: 'Home'),
               GButton(
