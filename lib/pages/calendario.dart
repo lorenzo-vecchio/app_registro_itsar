@@ -103,6 +103,8 @@ class _CalendarioState extends State<Calendario> {
       floatingActionButton: FloatingActionButton(
         onPressed: _filtroSoloEsami,
         child: Icon(Icons.filter_list),
+        backgroundColor: Colors.red,
+        
       ),
       body: SafeArea(
         child: Calendar(
