@@ -104,7 +104,6 @@ class _CalendarioState extends State<Calendario> {
         onPressed: _filtroSoloEsami,
         child: Icon(Icons.filter_list),
         backgroundColor: Colors.red,
-        
       ),
       body: SafeArea(
         child: Calendar(
@@ -119,7 +118,7 @@ class _CalendarioState extends State<Calendario> {
           todayColor: Colors.red,
           eventColor: null,
           locale: 'it_IT',
-          todayButtonText: 'Giorno',
+          todayButtonText: 'Oggi',
           allDayEventText: 'All Day',
           multiDayEndText: 'End',
           isExpanded: true,
