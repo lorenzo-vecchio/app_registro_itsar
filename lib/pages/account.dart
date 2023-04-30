@@ -3,6 +3,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:io';
 import '../loginpage.dart';
+import '../globals.dart';
 
 class Account extends StatefulWidget {
   const Account({Key? key}) : super(key: key);
@@ -28,22 +29,6 @@ class _AccountState extends State<Account> {
     await storage.delete(key: 'password');
   }
 
-  Future<void> _getUsername() async {
-    final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
-    String? username = await storage.read(key: 'username');
-    if (username != null) {
-      Username = username;
-    } else {
-      Username = 'errore';
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _getUsername();
-  }
-
   @override
   Widget build(BuildContext context) {
     MediaQueryData _mediaQueryData = MediaQuery.of(context);
@@ -65,7 +50,7 @@ class _AccountState extends State<Account> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              '${Username}',
+              globalData.username,
               style: TextStyle(fontSize: 16),
             ),
           ),
