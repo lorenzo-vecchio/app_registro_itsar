@@ -21,23 +21,6 @@ class _HomeState extends State<Home> {
   double sommaAssenze = globalData.presenzeList
       .fold(0, (total, presenza) => total + presenza.ore_assenza);
 
-  List<int> hoursToDifferent(double val) {
-    double num = val;
-    String numString = num.toString();
-
-    List<String> parts = numString.split('.');
-    String decimalPart = parts.length > 1 ? parts[1] : '';
-
-    int integerPartInt = int.parse(parts[0]);
-    int decimalPartInt = int.parse(decimalPart);
-
-    if (decimalPartInt >= 60) {
-      integerPartInt += 1;
-      decimalPartInt -= 60;
-    }
-    return [integerPartInt, decimalPartInt];
-  }
-
   int currentPageIndex = 0;
 
   @override
@@ -68,7 +51,8 @@ class _HomeState extends State<Home> {
             materia.inizio.day == now.day + 1)
         .toList();
   }
-    @override
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     ScreenSize.init(context);
@@ -76,11 +60,12 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    List<int> presenza = hoursToDifferent(sommaPresenze);
+    List<int> assenza = hoursToDifferent(sommaAssenze);
     // gets if it's in dark mode or not
     final brightness = MediaQuery.of(context).platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
 
-  
     return Scaffold(
       backgroundColor: isDarkMode ? backgroundDarkMode : backgroundLightMode,
       body: GestureDetector(
@@ -147,9 +132,8 @@ class _HomeState extends State<Home> {
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.symmetric(
-                                        vertical:
-                                        ScreenSize.padding30,
-                                        ), //0,30,0,30
+                                      vertical: ScreenSize.padding30,
+                                    ), //0,30,0,30
                                     child: Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
@@ -159,14 +143,13 @@ class _HomeState extends State<Home> {
                                       ),
                                       padding: EdgeInsets.symmetric(
                                         vertical:
-                                        ScreenSize.screenHeight * 0.04,
+                                            ScreenSize.screenHeight * 0.04,
                                       ), //0,15,0,15
                                       child: FractionallySizedBox(
                                         widthFactor: 0.80,
                                         child: Padding(
                                           padding: EdgeInsets.all(
-                                              ScreenSize.screenWidth *
-                                                  0.02),
+                                              ScreenSize.screenWidth * 0.02),
                                           child: const Text(
                                             'Oggi niente!!!',
                                             style: TextStyle(
@@ -183,7 +166,7 @@ class _HomeState extends State<Home> {
                               for (var j = 0; j < i.length; j++) {
                                 listaMaterie.add(
                                   Padding(
-                                    padding:  j == 0
+                                    padding: j == 0
                                         ? EdgeInsets.fromLTRB(
                                             0,
                                             ScreenSize.screenHeight * 0.07,
@@ -211,7 +194,7 @@ class _HomeState extends State<Home> {
                                       ),
                                       padding: EdgeInsets.symmetric(
                                         vertical:
-                                        ScreenSize.screenHeight * 0.04,
+                                            ScreenSize.screenHeight * 0.04,
                                       ), //0,15,0,15
                                       child: FractionallySizedBox(
                                         widthFactor: 0.80,
@@ -272,30 +255,22 @@ class _HomeState extends State<Home> {
                   ScreenSize.padding20,
                   ScreenSize.padding10), //20,50,20,10
               child: ListTile(
-                contentPadding: EdgeInsets.fromLTRB(
-                    0,
-                    ScreenSize.padding20,
-                    0,
+                contentPadding: EdgeInsets.fromLTRB(0, ScreenSize.padding20, 0,
                     ScreenSize.padding10), //0,25,0,10
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
                 ),
                 title: Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      ScreenSize.screenWidth * 0.055, 0,
-                      0,
-                      ScreenSize.screenHeight * 0.02), //25,0,0,25
+                  padding: EdgeInsets.fromLTRB(ScreenSize.screenWidth * 0.055,
+                      0, 0, ScreenSize.screenHeight * 0.02), //25,0,0,25
                   child: const Text(
                     'Presenze',
                     style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                   ),
                 ),
                 subtitle: Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      ScreenSize.padding20,
-                      0,
-                      ScreenSize.padding20,
-                      ScreenSize.padding10), //20,0,20,20
+                  padding: EdgeInsets.fromLTRB(ScreenSize.padding20, 0,
+                      ScreenSize.padding20, ScreenSize.padding10), //20,0,20,20
                   child: Container(
                     height: 100,
                     padding: EdgeInsets.symmetric(
@@ -318,13 +293,35 @@ class _HomeState extends State<Home> {
                           ),
                           height: 60,
                           alignment: Alignment.center,
-                          padding: EdgeInsets.all(
-                              ScreenSize.padding10),
-                          child: Text(
-                            'Presenza: ${sommaPresenze}h',
-                            style: TextStyle(
-                                color: isDarkMode ? Colors.white : Colors.black,
-                                fontWeight: FontWeight.bold),
+                          padding: EdgeInsets.fromLTRB(ScreenSize.padding30,
+                              ScreenSize.padding10, ScreenSize.padding30, 0),
+                          child: Column(
+                            children: [
+                              Text(
+                                'Presenza: ',
+                                style: TextStyle(
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                '${presenza[0]}h',
+                                style: TextStyle(
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                '${presenza[1]}m',
+                                style: TextStyle(
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
                         ),
                         Container(
@@ -335,13 +332,35 @@ class _HomeState extends State<Home> {
                             color:
                                 isDarkMode ? Colors.red : Colors.red.shade300,
                           ),
-                          padding: EdgeInsets.all(
-                              ScreenSize.padding10),
-                          child: Text(
-                            'Assenza: ${sommaAssenze}h',
-                            style: TextStyle(
-                                color: isDarkMode ? Colors.white : Colors.black,
-                                fontWeight: FontWeight.bold),
+                          padding: EdgeInsets.fromLTRB(ScreenSize.padding30,
+                              ScreenSize.padding10, ScreenSize.padding30, 0),
+                          child: Column(
+                            children: [
+                              Text(
+                                'Assenza:',
+                                style: TextStyle(
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                '${assenza[0]}h',
+                                style: TextStyle(
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                '${assenza[1]}m',
+                                style: TextStyle(
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
                           ),
                         ),
                       ],
