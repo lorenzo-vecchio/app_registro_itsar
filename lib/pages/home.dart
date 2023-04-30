@@ -293,8 +293,8 @@ class _HomeState extends State<Home> {
                           ),
                           height: 60,
                           alignment: Alignment.center,
-                          padding: EdgeInsets.fromLTRB(ScreenSize.padding30,
-                              ScreenSize.padding10, ScreenSize.padding30, 0),
+                          padding: EdgeInsets.fromLTRB(ScreenSize.padding20,
+                              ScreenSize.padding10, ScreenSize.padding20, 0),
                           child: Column(
                             children: [
                               Text(
@@ -306,15 +306,7 @@ class _HomeState extends State<Home> {
                                     fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                '${presenza[0]}h',
-                                style: TextStyle(
-                                    color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                '${presenza[1]}m',
+                                '${presenza[0]}h ${presenza[1]}m',
                                 style: TextStyle(
                                     color: isDarkMode
                                         ? Colors.white
@@ -332,8 +324,8 @@ class _HomeState extends State<Home> {
                             color:
                                 isDarkMode ? Colors.red : Colors.red.shade300,
                           ),
-                          padding: EdgeInsets.fromLTRB(ScreenSize.padding30,
-                              ScreenSize.padding10, ScreenSize.padding30, 0),
+                          padding: EdgeInsets.fromLTRB(ScreenSize.padding20,
+                              ScreenSize.padding10, ScreenSize.padding20, 0),
                           child: Column(
                             children: [
                               Text(
@@ -345,21 +337,13 @@ class _HomeState extends State<Home> {
                                     fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                '${assenza[0]}h',
+                                '${assenza[0]}h ${assenza[1]}m',
                                 style: TextStyle(
                                     color: isDarkMode
                                         ? Colors.white
                                         : Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Text(
-                                '${assenza[1]}m',
-                                style: TextStyle(
-                                    color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              )
                             ],
                           ),
                         ),
