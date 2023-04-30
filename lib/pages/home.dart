@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import '../globals.dart';
 import '../data.dart';
+import '../screen_size.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -67,6 +68,11 @@ class _HomeState extends State<Home> {
             materia.inizio.day == now.day + 1)
         .toList();
   }
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    ScreenSize.init(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +80,7 @@ class _HomeState extends State<Home> {
     final brightness = MediaQuery.of(context).platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
 
-    MediaQueryData _mediaQueryData = MediaQuery.of(context);
+  
     return Scaffold(
       backgroundColor: isDarkMode ? backgroundDarkMode : backgroundLightMode,
       body: GestureDetector(
@@ -96,26 +102,26 @@ class _HomeState extends State<Home> {
               items: materie.map((i) {
                 return Padding(
                   padding: EdgeInsets.fromLTRB(
-                      _mediaQueryData.size.width * 0.03,
-                      _mediaQueryData.size.width * 0.03,
-                      _mediaQueryData.size.width * 0.03,
-                      _mediaQueryData.size.width * 0.04),
+                      ScreenSize.screenWidth * 0.03,
+                      ScreenSize.screenHeight * 0.02,
+                      ScreenSize.screenWidth * 0.03,
+                      ScreenSize.screenHeight * 0.02),
                   child: ListTile(
                     contentPadding: EdgeInsets.fromLTRB(
                       0,
-                      _mediaQueryData.size.width * 0.03,
+                      ScreenSize.screenHeight * 0.03,
                       0,
-                      _mediaQueryData.size.width * 0.15,
+                      ScreenSize.screenHeight * 0.08,
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
                     ),
                     title: Padding(
                       padding: EdgeInsets.fromLTRB(
-                          _mediaQueryData.size.width * 0.055,
+                          ScreenSize.screenWidth * 0.055,
                           0,
                           0,
-                          _mediaQueryData.size.width * 0.04),
+                          ScreenSize.screenHeight * 0.02),
                       child: Text(
                         '${materie.indexOf(i) == 0 ? 'Today' : 'Tomorrow'}',
                         style: const TextStyle(
@@ -124,10 +130,10 @@ class _HomeState extends State<Home> {
                     ),
                     subtitle: Padding(
                       padding: EdgeInsets.fromLTRB(
-                          _mediaQueryData.size.width * 0.05,
+                          ScreenSize.padding20,
                           0,
-                          _mediaQueryData.size.width * 0.05,
-                          _mediaQueryData.size.width * 0.1), //20,0,20,40
+                          ScreenSize.padding20,
+                          ScreenSize.screenWidth * 0.07), //20,0,20,40
                       child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),
@@ -140,12 +146,10 @@ class _HomeState extends State<Home> {
                               return Column(
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(
-                                        0,
-                                        _mediaQueryData.size.width * 0.06,
-                                        0,
-                                        _mediaQueryData.size.width *
-                                            0.06), //0,30,0,30
+                                    padding: EdgeInsets.symmetric(
+                                        vertical:
+                                        ScreenSize.padding30,
+                                        ), //0,30,0,30
                                     child: Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
@@ -153,17 +157,15 @@ class _HomeState extends State<Home> {
                                             ? backgroundOggiNienteDarkMode
                                             : backgroundOggiNienteLightMode,
                                       ),
-                                      padding: EdgeInsets.fromLTRB(
-                                          0,
-                                          _mediaQueryData.size.width * 0.04,
-                                          0,
-                                          _mediaQueryData.size.width *
-                                              0.04), //0,15,0,15
+                                      padding: EdgeInsets.symmetric(
+                                        vertical:
+                                        ScreenSize.screenHeight * 0.04,
+                                      ), //0,15,0,15
                                       child: FractionallySizedBox(
                                         widthFactor: 0.80,
                                         child: Padding(
                                           padding: EdgeInsets.all(
-                                              _mediaQueryData.size.width *
+                                              ScreenSize.screenWidth *
                                                   0.02),
                                           child: const Text(
                                             'Oggi niente!!!',
@@ -181,15 +183,15 @@ class _HomeState extends State<Home> {
                               for (var j = 0; j < i.length; j++) {
                                 listaMaterie.add(
                                   Padding(
-                                    padding: j == 0
+                                    padding:  j == 0
                                         ? EdgeInsets.fromLTRB(
                                             0,
-                                            _mediaQueryData.size.width * 0.07,
+                                            ScreenSize.screenHeight * 0.07,
                                             0,
                                             0) //0,30,0,0
                                         : EdgeInsets.fromLTRB(
                                             0,
-                                            _mediaQueryData.size.width * 0.07,
+                                            ScreenSize.screenHeight * 0.07,
                                             0,
                                             0), //0,30,0,0
                                     child: Container(
@@ -207,18 +209,15 @@ class _HomeState extends State<Home> {
                                                 ? afternoonLessonDarkMode
                                                 : afternoonLessonLightMode,
                                       ),
-                                      padding: EdgeInsets.fromLTRB(
-                                          0,
-                                          _mediaQueryData.size.width * 0.04,
-                                          0,
-                                          _mediaQueryData.size.width *
-                                              0.04), //0,15,0,15
+                                      padding: EdgeInsets.symmetric(
+                                        vertical:
+                                        ScreenSize.screenHeight * 0.04,
+                                      ), //0,15,0,15
                                       child: FractionallySizedBox(
                                         widthFactor: 0.80,
                                         child: Padding(
                                           padding: EdgeInsets.all(
-                                              _mediaQueryData.size.width *
-                                                  0.02), //8
+                                              ScreenSize.padding8), //8
                                           child: RichText(
                                             text: TextSpan(
                                               style:
@@ -267,26 +266,25 @@ class _HomeState extends State<Home> {
             ]),
             Padding(
               padding: EdgeInsets.fromLTRB(
-                  _mediaQueryData.size.width * 0.05,
-                  _mediaQueryData.size.width *
-                      0.12, //modificare distanza dal Carosel indicator
-                  _mediaQueryData.size.width * 0.05,
-                  _mediaQueryData.size.width * 0.025), //20,50,20,10
+                  ScreenSize.padding20,
+                  ScreenSize.screenHeight *
+                      0.05, //modificare distanza dal Carosel indicator
+                  ScreenSize.padding20,
+                  ScreenSize.padding10), //20,50,20,10
               child: ListTile(
                 contentPadding: EdgeInsets.fromLTRB(
                     0,
-                    _mediaQueryData.size.width * 0.055,
+                    ScreenSize.padding20,
                     0,
-                    _mediaQueryData.size.width * 0.025), //0,25,0,10
+                    ScreenSize.padding10), //0,25,0,10
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
                 ),
                 title: Padding(
                   padding: EdgeInsets.fromLTRB(
-                      _mediaQueryData.size.width * 0.055,
+                      ScreenSize.screenWidth * 0.055, 0,
                       0,
-                      0,
-                      _mediaQueryData.size.width * 0.055), //25,0,0,25
+                      ScreenSize.screenHeight * 0.02), //25,0,0,25
                   child: const Text(
                     'Presenze',
                     style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
@@ -294,14 +292,14 @@ class _HomeState extends State<Home> {
                 ),
                 subtitle: Padding(
                   padding: EdgeInsets.fromLTRB(
-                      _mediaQueryData.size.width * 0.025,
+                      ScreenSize.padding20,
                       0,
-                      _mediaQueryData.size.width * 0.025,
-                      _mediaQueryData.size.width * 0.025), //20,0,20,20
+                      ScreenSize.padding20,
+                      ScreenSize.padding10), //20,0,20,20
                   child: Container(
                     height: 100,
                     padding: EdgeInsets.symmetric(
-                        horizontal: _mediaQueryData.size.width * 0.058), //28
+                        horizontal: ScreenSize.screenWidth * 0.058), //28
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: isDarkMode
@@ -321,7 +319,7 @@ class _HomeState extends State<Home> {
                           height: 60,
                           alignment: Alignment.center,
                           padding: EdgeInsets.all(
-                              _mediaQueryData.size.width * 0.025),
+                              ScreenSize.padding10),
                           child: Text(
                             'Presenza: ${sommaPresenze}h',
                             style: TextStyle(
@@ -338,7 +336,7 @@ class _HomeState extends State<Home> {
                                 isDarkMode ? Colors.red : Colors.red.shade300,
                           ),
                           padding: EdgeInsets.all(
-                              _mediaQueryData.size.width * 0.025),
+                              ScreenSize.padding10),
                           child: Text(
                             'Assenza: ${sommaAssenze}h',
                             style: TextStyle(
