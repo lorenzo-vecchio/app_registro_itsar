@@ -187,12 +187,12 @@ class _HomeState extends State<Home> {
                                     padding: j == 0
                                         ? EdgeInsets.fromLTRB(
                                             0,
-                                            ScreenSize.screenHeight * 0.07,
+                                            ScreenSize.screenHeight * 0.04,
                                             0,
                                             0) //0,30,0,0
                                         : EdgeInsets.fromLTRB(
                                             0,
-                                            ScreenSize.screenHeight * 0.07,
+                                            ScreenSize.screenHeight * 0.04,
                                             0,
                                             0), //0,30,0,0
                                     child: Container(
@@ -212,7 +212,8 @@ class _HomeState extends State<Home> {
                                       ),
                                       padding: EdgeInsets.symmetric(
                                         vertical:
-                                            ScreenSize.screenHeight * 0.04,
+                                            ScreenSize.screenHeight * 0.008,
+                                        horizontal: ScreenSize.padding8
                                       ), //0,15,0,15
                                       child: FractionallySizedBox(
                                         widthFactor: 0.80,
@@ -294,18 +295,18 @@ class _HomeState extends State<Home> {
                         if (upcomingExams.length == 0) {
                           return [
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(ScreenSize.padding8),
                               child: Container(
                                 width: ScreenSize.screenWidth * 0.7,
                                 decoration: BoxDecoration(
                                   color: isDarkMode
-                                      ? Color.fromARGB(255, 139, 50, 50)
-                                      : Color.fromARGB(255, 255, 129, 129),
+                                      ? const Color.fromARGB(255, 139, 50, 50)
+                                      : const Color.fromARGB(255, 255, 129, 129),
                                   borderRadius: BorderRadius.circular(
                                       10.0), // You can adjust the value to change the degree of rounding
                                 ),
                                 child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: EdgeInsets.all(ScreenSize.padding8),
                                     child: RichText(
                                       text: TextSpan(
                                         children: [
@@ -329,18 +330,18 @@ class _HomeState extends State<Home> {
                           for (Materia esame in upcomingExams) {
                             prossimiEsami.add(
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: EdgeInsets.all(ScreenSize.padding8),
                                 child: Container(
                                   width: ScreenSize.screenWidth * 0.7,
                                   decoration: BoxDecoration(
                                     color: isDarkMode
-                                        ? Color.fromARGB(255, 139, 50, 50)
-                                        : Color.fromARGB(255, 255, 129, 129),
+                                        ? const Color.fromARGB(255, 139, 50, 50)
+                                        : const Color.fromARGB(255, 255, 129, 129),
                                     borderRadius: BorderRadius.circular(
                                         10.0), // You can adjust the value to change the degree of rounding
                                   ),
                                   child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: EdgeInsets.all(ScreenSize.padding8),
                                       child: RichText(
                                         text: TextSpan(
                                           children: [
