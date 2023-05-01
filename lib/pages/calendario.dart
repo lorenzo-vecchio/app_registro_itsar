@@ -35,6 +35,9 @@ class _CalendarioState extends State<Calendario> {
         color: () {
           bool hasFourHours =
               materia.fine.difference(materia.inizio) == Duration(hours: 4);
+          if (materia.isExam) {
+            return Colors.deepPurple;
+          }
           if (hasFourHours && materia.inizio.hour < 11) {
             return Colors.red;
           }
