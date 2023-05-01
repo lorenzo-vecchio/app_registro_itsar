@@ -34,7 +34,7 @@ class _CalendarioState extends State<Calendario> {
         description: intervallo,
         color: () {
           bool hasFourHours =
-              materia.fine.difference(materia.inizio) == Duration(hours: 4);
+              materia.fine.difference(materia.inizio) == const Duration(hours: 4);
           if (materia.isExam) {
             return Colors.deepPurple;
           }
@@ -68,7 +68,7 @@ class _CalendarioState extends State<Calendario> {
           description: intervallo,
           color: () {
             bool hasFourHours =
-                materia.fine.difference(materia.inizio) == Duration(hours: 4);
+                materia.fine.difference(materia.inizio) == const Duration(hours: 4);
             if (materia.isExam) {
               return Colors.deepPurple;
             }
@@ -108,19 +108,19 @@ class _CalendarioState extends State<Calendario> {
     return Scaffold(
       backgroundColor: isDarkMode ? backgroundDarkMode : backgroundLightMode,
       floatingActionButton: AnimatedSwitcher(
-        duration: Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 200),
         child: FloatingActionButton(
           key: ValueKey(filterIcon),
           onPressed: _filtroSoloEsami,
-          child: Icon(filterIcon),
           backgroundColor: Colors.red,
+          child: Icon(filterIcon),
         ),
       ),
       body: SafeArea(
         child: Calendar(
           eventTileHeight: 130,
           startOnMonday: true,
-          weekDays: ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'],
+          weekDays: const ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'],
           eventsList: soloEsami ? _examList : _eventList,
           isExpandable: true,
           eventDoneColor: Colors.green,

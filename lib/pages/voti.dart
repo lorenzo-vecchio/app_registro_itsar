@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../globals.dart';
 import '../data.dart';
-
+import '../screen_size.dart';
 import '../widgets/average.dart';
 
 class Voti extends StatefulWidget {
@@ -12,12 +12,18 @@ class Voti extends StatefulWidget {
 }
 
 class _VotiState extends State<Voti> {
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    ScreenSize.init(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     // gets if it's in dark mode or not
     final brightness = MediaQuery.of(context).platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
-    MediaQueryData _mediaQueryData = MediaQuery.of(context);
     return Scaffold(
       backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: ListView.builder(
@@ -39,10 +45,10 @@ class _VotiState extends State<Voti> {
           if (index == 1) {
             return Padding(
               padding: EdgeInsets.fromLTRB(
-                _mediaQueryData.size.width * 0.065,
-                _mediaQueryData.size.width * 0.02,
-                _mediaQueryData.size.width * 0.065,
-                _mediaQueryData.size.width * 0.02,
+                ScreenSize.screenWidth * 0.065,
+                ScreenSize.screenHeight * 0.01,
+                ScreenSize.screenWidth * 0.065,
+                ScreenSize.screenHeight * 0.01,
               ), //25,8,8,0
               child: ListTile(
                 tileColor: isDarkMode ? Colors.black : Colors.white,
@@ -68,9 +74,9 @@ class _VotiState extends State<Voti> {
             final voto = globalData.votiList[index - 2];
             return Padding(
               padding: EdgeInsets.symmetric(
-                  horizontal: _mediaQueryData.size.width *
+                  horizontal: ScreenSize.screenWidth *
                       0.048, // distanza orizzontale dai bordi del dispositivo per quanto riguarda il container dei voti
-                  vertical: _mediaQueryData.size.width * 0.012), //15,5
+                  vertical: ScreenSize.screenHeight * 0.007), //15,5
               child: ListTile(
                 title: Text(
                   voto.nomeMateria,
@@ -91,8 +97,8 @@ class _VotiState extends State<Voti> {
                   ),
                 ),
                 contentPadding: EdgeInsets.symmetric(
-                    horizontal: _mediaQueryData.size.width * 0.02,
-                    vertical: _mediaQueryData.size.width * 0.02),
+                    horizontal: ScreenSize.screenWidth * 0.02,
+                    vertical: ScreenSize.screenHeight * 0.009),
               ),
             );
           }
