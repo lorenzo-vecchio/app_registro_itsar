@@ -14,6 +14,7 @@ class _CalendarioState extends State<Calendario> {
   final List<NeatCleanCalendarEvent> _eventList = [];
   final List<NeatCleanCalendarEvent> _examList = [];
   bool soloEsami = false;
+  IconData filterIcon = Icons.filter_list;
 
   @override
   void initState() {
@@ -90,6 +91,9 @@ class _CalendarioState extends State<Calendario> {
   void _filtroSoloEsami() {
     setState(() {
       soloEsami = !soloEsami; // toggle the boolean value
+      filterIcon = soloEsami
+          ? Icons.filter_list_off
+          : Icons.filter_list; // update the icon
     });
   }
 
@@ -100,10 +104,14 @@ class _CalendarioState extends State<Calendario> {
     final isDarkMode = brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: isDarkMode ? backgroundDarkMode : backgroundLightMode,
-      floatingActionButton: FloatingActionButton(
-        onPressed: _filtroSoloEsami,
-        child: Icon(Icons.filter_list),
-        backgroundColor: Colors.red,
+      floatingActionButton: AnimatedSwitcher(
+        duration: Duration(milliseconds: 200),
+        child: FloatingActionButton(
+          key: ValueKey(filterIcon),
+          onPressed: _filtroSoloEsami,
+          child: Icon(filterIcon),
+          backgroundColor: Colors.red,
+        ),
       ),
       body: SafeArea(
         child: Calendar(
