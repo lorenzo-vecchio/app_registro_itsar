@@ -16,6 +16,7 @@ class _HomeState extends State<Home> {
   List<Materia> materieOggi = [];
   List<Materia> materieDomani = [];
   List<List<Materia>> materie = [];
+  List<Materia> upcomingExams = [];
   double sommaPresenze = globalData.presenzeList
       .fold(0, (total, presenza) => total + presenza.ore_presenza);
   double sommaAssenze = globalData.presenzeList
@@ -30,6 +31,7 @@ class _HomeState extends State<Home> {
     materieDomani = _findTomorrowMaterie();
     materie.add(materieOggi);
     materie.add(materieDomani);
+    upcomingExams = _getUpcomingExams();
   }
 
   List<Materia> _findTodayMaterie() {
@@ -50,6 +52,22 @@ class _HomeState extends State<Home> {
             materia.inizio.month == now.month &&
             materia.inizio.day == now.day + 1)
         .toList();
+  }
+
+  List<Materia> _getUpcomingExams() {
+    DateTime now = DateTime.now();
+    List<Materia> materie = globalData.materieList;
+
+    // Filter the list of Materia objects based on the criteria
+    List<Materia> filteredMaterie = materie
+        .where((materia) => materia.isExam && materia.inizio.isAfter(now))
+        .toList();
+
+    // Sort the filtered list by the inizio property
+    filteredMaterie.sort((a, b) => a.inizio.compareTo(b.inizio));
+
+    // Return the first three items in the sorted list (or fewer if there are less than three)
+    return filteredMaterie.take(3).toList();
   }
 
   @override
@@ -247,6 +265,119 @@ class _HomeState extends State<Home> {
                     : carouselIndicatorActiveLightMode,
               ),
             ]),
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                  ScreenSize.padding20,
+                  ScreenSize.screenHeight *
+                      0.05, //modificare distanza dal Carosel indicator
+                  ScreenSize.padding20,
+                  ScreenSize.padding10), //20,50,20,10
+              child: ListTile(
+                contentPadding: EdgeInsets.fromLTRB(0, ScreenSize.padding20, 0,
+                    ScreenSize.padding10), //0,25,0,10
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                title: Padding(
+                  padding: EdgeInsets.fromLTRB(ScreenSize.screenWidth * 0.055,
+                      0, 0, ScreenSize.screenHeight * 0.02), //25,0,0,25
+                  child: const Text(
+                    'Prossimi esami',
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                subtitle: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: () {
+                        if (upcomingExams.length == 0) {
+                          return [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: ScreenSize.screenWidth * 0.7,
+                                decoration: BoxDecoration(
+                                  color: isDarkMode
+                                      ? Color.fromARGB(255, 139, 50, 50)
+                                      : Color.fromARGB(255, 255, 129, 129),
+                                  borderRadius: BorderRadius.circular(
+                                      10.0), // You can adjust the value to change the degree of rounding
+                                ),
+                                child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: 'Nessun esame previsto',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )),
+                              ),
+                            ),
+                          ];
+                        } else {
+                          List<Widget> prossimiEsami = [];
+                          for (Materia esame in upcomingExams) {
+                            prossimiEsami.add(
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  width: ScreenSize.screenWidth * 0.7,
+                                  decoration: BoxDecoration(
+                                    color: isDarkMode
+                                        ? Color.fromARGB(255, 139, 50, 50)
+                                        : Color.fromARGB(255, 255, 129, 129),
+                                    borderRadius: BorderRadius.circular(
+                                        10.0), // You can adjust the value to change the degree of rounding
+                                  ),
+                                  child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text:
+                                                  '${esame.nomeMateria.replaceAll('[ESAME]', '')}',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                              ),
+                                            ),
+                                            TextSpan(
+                                              text:
+                                                  '\n\n${esame.inizio.toString().replaceAll(':00.000', '')}',
+                                              style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )),
+                                ),
+                              ),
+                            );
+                          }
+                          return prossimiEsami;
+                        }
+                      }(),
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Padding(
               padding: EdgeInsets.fromLTRB(
                   ScreenSize.padding20,
