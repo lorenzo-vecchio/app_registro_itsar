@@ -33,7 +33,7 @@ Future<dynamic> backgroundSync() async {
     // confront old data with new data to check for new grades
     Voto? newVoto = data_from_API.checkGradesDifference(data_from_disc);
     if (newVoto != null) {
-      // da aggiungere notifica
+      // notifica
       NotificationService().showNotification(
           title: 'ITSAR',
           body: 'Hai un nuovo voto: ${newVoto.voto} in ${newVoto.nomeMateria}');
@@ -178,11 +178,18 @@ class _MyAppState extends State<MyApp> {
                 backgroundColor: const Color(0xFFc00d0e)),
           ),
           inputDecorationTheme: InputDecorationTheme(
-            filled: true,
-            fillColor: isDarkMode
-                ? Colors.grey.shade900.withOpacity(0.50)
-                : Colors.grey.shade400.withOpacity(0.50),
-          ),
+              filled: true,
+              fillColor: isDarkMode
+                  ? Colors.grey.shade900.withOpacity(0.50)
+                  : Colors.grey.shade400.withOpacity(0.50),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.circular(500)),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black),
+                borderRadius: BorderRadius.circular(500),
+              ),
+              floatingLabelStyle: TextStyle(color: Colors.black)),
           // Define the default font family.
           fontFamily: 'Montserrat',
 
@@ -207,6 +214,19 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
           ),
+          inputDecorationTheme: InputDecorationTheme(
+              filled: true,
+              fillColor: isDarkMode
+                  ? Colors.grey.shade900.withOpacity(0.50)
+                  : Colors.grey.shade400.withOpacity(0.50),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.circular(500)),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(500),
+              ),
+              floatingLabelStyle: TextStyle(color: Colors.white)),
         ),
       );
     }

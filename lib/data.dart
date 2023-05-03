@@ -17,6 +17,7 @@ class Data {
   String username;
   String password;
   bool fromCred;
+  Map<String, int> sommaPresenzeAssenze = {};
 
   Data()
       : fromCred = false,
@@ -70,14 +71,19 @@ class Data {
       String materia = element['materia'];
       double presenza = element['ore_presenza'];
       double assenza = element['ore_assenza'];
+      int ore_presenza = presenza.floor();
+      int minuti_presenza = ((presenza - ore_presenza) * 100).toInt();
+      int ore_assenza = assenza.floor();
+      int minuti_assenza = ((assenza - ore_assenza) * 100).toInt();
       DateTime data = DateTime.parse(
           element['date'].replaceAll('/', '-').split('-').reversed.join());
       DateTime inizio = DateFormat('HH:mm').parse(element['ora_inizio']);
       DateTime fine = DateFormat('HH:mm').parse(element['ora_fine']);
-      PresenzaAssenza pres_ass =
-          PresenzaAssenza(materia, presenza, assenza, data, inizio, fine);
+      PresenzaAssenza pres_ass = PresenzaAssenza(materia, ore_presenza,
+          minuti_presenza, ore_assenza, minuti_assenza, data, inizio, fine);
       presenzeList.add(pres_ass);
     });
+    _getSommaPresenzeAssenze();
   }
 
   Future<void> _APIconnection(String username, String password) async {
@@ -137,6 +143,30 @@ class Data {
     // If no new grades are found, return null
     return null;
   }
+
+  void _getSommaPresenzeAssenze() {
+    int oreP = 0;
+    int minutiP = 0;
+    int oreA = 0;
+    int minutiA = 0;
+    for (PresenzaAssenza item in presenzeList) {
+      oreP = oreP + item.ore_presenza;
+      minutiP = minutiP + item.minuti_presenza;
+      oreA = oreA + item.ore_assenza;
+      minutiA = minutiA + item.minuti_assenza;
+    }
+    oreP = oreP + (minutiP ~/ 60);
+    minutiP = minutiP % 60;
+    oreA = oreA + (minutiA ~/ 60);
+    minutiA = minutiA % 60;
+    Map<String, int> risultato = {
+      "tot_ore_presenza": oreP,
+      "tot_min_presenza": minutiP,
+      "tot_ore_assenza": oreA,
+      "tot_min_assenza": minutiA
+    };
+    sommaPresenzeAssenze = risultato;
+  }
 }
 
 class Voto {
@@ -160,12 +190,14 @@ class Materia {
 
 class PresenzaAssenza {
   String materia;
-  double ore_presenza;
-  double ore_assenza;
+  int ore_presenza;
+  int minuti_presenza;
+  int ore_assenza;
+  int minuti_assenza;
   DateTime data;
   DateTime inizio;
   DateTime fine;
 
-  PresenzaAssenza(this.materia, this.ore_presenza, this.ore_assenza, this.data,
-      this.inizio, this.fine);
+  PresenzaAssenza(this.materia, this.ore_presenza, this.minuti_presenza,
+      this.ore_assenza, this.minuti_assenza, this.data, this.inizio, this.fine);
 }

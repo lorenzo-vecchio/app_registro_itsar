@@ -17,10 +17,6 @@ class _HomeState extends State<Home> {
   List<Materia> materieDomani = [];
   List<List<Materia>> materie = [];
   List<Materia> upcomingExams = [];
-  double sommaPresenze = globalData.presenzeList
-      .fold(0, (total, presenza) => total + presenza.ore_presenza);
-  double sommaAssenze = globalData.presenzeList
-      .fold(0, (total, presenza) => total + presenza.ore_assenza);
 
   int currentPageIndex = 0;
 
@@ -78,8 +74,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    List<int> presenza = hoursToDifferent(sommaPresenze);
-    List<int> assenza = hoursToDifferent(sommaAssenze);
     // gets if it's in dark mode or not
     final brightness = MediaQuery.of(context).platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
@@ -438,7 +432,7 @@ class _HomeState extends State<Home> {
                                     fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                '${presenza[0]}h ${presenza[1]}m',
+                                '${globalData.sommaPresenzeAssenze['tot_ore_presenza']}h ${globalData.sommaPresenzeAssenze['tot_min_presenza']}m',
                                 style: TextStyle(
                                     color: isDarkMode
                                         ? Colors.white
@@ -469,7 +463,7 @@ class _HomeState extends State<Home> {
                                     fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                '${assenza[0]}h ${assenza[1]}m',
+                                '${globalData.sommaPresenzeAssenze['tot_ore_assenza']}h ${globalData.sommaPresenzeAssenze['tot_min_assenza']}m',
                                 style: TextStyle(
                                     color: isDarkMode
                                         ? Colors.white
