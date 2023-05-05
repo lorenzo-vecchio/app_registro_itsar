@@ -7,6 +7,8 @@ import 'package:prova_registro/globals.dart';
 import 'package:prova_registro/screen_size.dart';
 import 'package:flutter_custom_selector/flutter_custom_selector.dart';
 
+import '../widgets/customMultiSelect.dart';
+
 class Presenze extends StatefulWidget {
   const Presenze({super.key});
 
@@ -235,8 +237,10 @@ class _PresenzeState extends State<Presenze> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(ScreenSize.padding10,
                       ScreenSize.padding10, ScreenSize.padding10, 0),
-                  child: CustomMultiSelectField<String>(
+                  child: MyCustomMultiSelectField<String>(
                     title: "Filtra per materia",
+                    selectedItemColor: Colors.red,
+                    titleColor: isDarkMode ? Colors.white : Colors.black,
                     decoration: InputDecoration(
                         fillColor: isDarkMode ? Colors.black : Colors.white,
                         suffixIconColor:

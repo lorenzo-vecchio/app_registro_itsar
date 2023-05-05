@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -215,18 +214,20 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
           inputDecorationTheme: InputDecorationTheme(
-              filled: true,
-              fillColor: isDarkMode
-                  ? Colors.grey.shade900.withOpacity(0.50)
-                  : Colors.grey.shade400.withOpacity(0.50),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.transparent),
-                  borderRadius: BorderRadius.circular(500)),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.circular(500),
-              ),
-              floatingLabelStyle: TextStyle(color: Colors.white)),
+            filled: true,
+            fillColor: isDarkMode
+                ? Colors.grey.shade900.withOpacity(0.50)
+                : Colors.grey.shade400.withOpacity(0.50),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.transparent),
+                borderRadius: BorderRadius.circular(500)),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(500),
+            ),
+            floatingLabelStyle: TextStyle(color: Colors.white),
+          ),
+          textTheme: TextTheme(subtitle1: TextStyle(color: Colors.white)),
         ),
       );
     }

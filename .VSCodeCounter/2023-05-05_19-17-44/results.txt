@@ -1,0 +1,104 @@
+Date : 2023-05-05 19:17:44
+Directory : /Users/lorenzovecchio/Desktop/prova_registro
+Total : 40 files,  2471 codes, 310 comments, 231 blanks, all 3012 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| Dart       |         14 |      1,916 |         50 |        132 |      2,098 |
+| XML        |         11 |        181 |         50 |         12 |        243 |
+| JSON       |          3 |        166 |          0 |          3 |        169 |
+| Groovy     |          3 |         91 |          6 |         21 |        118 |
+| YAML       |          2 |         49 |        198 |         38 |        285 |
+| Swift      |          1 |         45 |          5 |         15 |         65 |
+| Markdown   |          3 |         14 |          0 |          8 |         22 |
+| Properties |          2 |          8 |          1 |          1 |         10 |
+| C++        |          1 |          1 |          0 |          1 |          2 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                            | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                               |         40 |      2,471 |        310 |        231 |      3,012 |
+| . (Files)                                                                                                       |          4 |         60 |        198 |         44 |        302 |
+| android                                                                                                         |         14 |        212 |         55 |         32 |        299 |
+| android (Files)                                                                                                 |          3 |         38 |          0 |          8 |         46 |
+| android/app                                                                                                     |         10 |        169 |         54 |         23 |        246 |
+| android/app (Files)                                                                                             |          1 |         56 |          6 |         13 |         75 |
+| android/app/src                                                                                                 |          9 |        113 |         48 |         10 |        171 |
+| android/app/src/debug                                                                                           |          1 |          4 |          4 |          1 |          9 |
+| android/app/src/main                                                                                            |          7 |        105 |         40 |          8 |        153 |
+| android/app/src/main (Files)                                                                                    |          1 |         37 |          8 |          2 |         47 |
+| android/app/src/main/res                                                                                        |          6 |         68 |         32 |          6 |        106 |
+| android/app/src/main/res/drawable                                                                               |          1 |          9 |          0 |          1 |         10 |
+| android/app/src/main/res/drawable-v21                                                                           |          1 |          9 |          0 |          1 |         10 |
+| android/app/src/main/res/values                                                                                 |          1 |         13 |          9 |          1 |         23 |
+| android/app/src/main/res/values-night                                                                           |          1 |          9 |          9 |          1 |         19 |
+| android/app/src/main/res/values-night-v31                                                                       |          1 |         14 |          7 |          1 |         22 |
+| android/app/src/main/res/values-v31                                                                             |          1 |         14 |          7 |          1 |         22 |
+| android/app/src/profile                                                                                         |          1 |          4 |          4 |          1 |          9 |
+| android/gradle                                                                                                  |          1 |          5 |          1 |          1 |          7 |
+| android/gradle/wrapper                                                                                          |          1 |          5 |          1 |          1 |          7 |
+| ios                                                                                                             |          8 |        283 |          7 |         23 |        313 |
+| ios/Runner                                                                                                      |          8 |        283 |          7 |         23 |        313 |
+| ios/Runner (Files)                                                                                              |          2 |         46 |          5 |         16 |         67 |
+| ios/Runner/Assets.xcassets                                                                                      |          4 |        169 |          0 |          5 |        174 |
+| ios/Runner/Assets.xcassets/AppIcon.appiconset                                                                   |          1 |        122 |          0 |          1 |        123 |
+| ios/Runner/Assets.xcassets/LaunchBackground.imageset                                                            |          1 |         21 |          0 |          1 |         22 |
+| ios/Runner/Assets.xcassets/LaunchImage.imageset                                                                 |          2 |         26 |          0 |          3 |         29 |
+| ios/Runner/Base.lproj                                                                                           |          2 |         68 |          2 |          2 |         72 |
+| lib                                                                                                             |         13 |      1,902 |         40 |        125 |      2,067 |
+| lib (Files)                                                                                                     |          7 |        785 |         33 |         72 |        890 |
+| lib/pages                                                                                                       |          5 |      1,037 |          7 |         47 |      1,091 |
+| lib/widgets                                                                                                     |          1 |         80 |          0 |          6 |         86 |
+| test                                                                                                            |          1 |         14 |         10 |          7 |         31 |
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                        | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/lorenzovecchio/Desktop/prova_registro/README.md                                                          | Markdown   |          9 |          0 |          6 |         15 |
+| /Users/lorenzovecchio/Desktop/prova_registro/analysis_options.yaml                                              | YAML       |          3 |         23 |          4 |         30 |
+| /Users/lorenzovecchio/Desktop/prova_registro/android/app/build.gradle                                           | Groovy     |         56 |          6 |         13 |         75 |
+| /Users/lorenzovecchio/Desktop/prova_registro/android/app/src/debug/AndroidManifest.xml                          | XML        |          4 |          4 |          1 |          9 |
+| /Users/lorenzovecchio/Desktop/prova_registro/android/app/src/main/AndroidManifest.xml                           | XML        |         37 |          8 |          2 |         47 |
+| /Users/lorenzovecchio/Desktop/prova_registro/android/app/src/main/res/drawable-v21/launch_background.xml        | XML        |          9 |          0 |          1 |         10 |
+| /Users/lorenzovecchio/Desktop/prova_registro/android/app/src/main/res/drawable/launch_background.xml            | XML        |          9 |          0 |          1 |         10 |
+| /Users/lorenzovecchio/Desktop/prova_registro/android/app/src/main/res/values-night-v31/styles.xml               | XML        |         14 |          7 |          1 |         22 |
+| /Users/lorenzovecchio/Desktop/prova_registro/android/app/src/main/res/values-night/styles.xml                   | XML        |          9 |          9 |          1 |         19 |
+| /Users/lorenzovecchio/Desktop/prova_registro/android/app/src/main/res/values-v31/styles.xml                     | XML        |         14 |          7 |          1 |         22 |
+| /Users/lorenzovecchio/Desktop/prova_registro/android/app/src/main/res/values/styles.xml                         | XML        |         13 |          9 |          1 |         23 |
+| /Users/lorenzovecchio/Desktop/prova_registro/android/app/src/profile/AndroidManifest.xml                        | XML        |          4 |          4 |          1 |          9 |
+| /Users/lorenzovecchio/Desktop/prova_registro/android/build.gradle                                               | Groovy     |         27 |          0 |          4 |         31 |
+| /Users/lorenzovecchio/Desktop/prova_registro/android/gradle.properties                                          | Properties |          3 |          0 |          0 |          3 |
+| /Users/lorenzovecchio/Desktop/prova_registro/android/gradle/wrapper/gradle-wrapper.properties                   | Properties |          5 |          1 |          1 |          7 |
+| /Users/lorenzovecchio/Desktop/prova_registro/android/settings.gradle                                            | Groovy     |          8 |          0 |          4 |         12 |
+| /Users/lorenzovecchio/Desktop/prova_registro/ios/Runner/AppDelegate.swift                                       | Swift      |         45 |          5 |         15 |         65 |
+| /Users/lorenzovecchio/Desktop/prova_registro/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json        | JSON       |        122 |          0 |          1 |        123 |
+| /Users/lorenzovecchio/Desktop/prova_registro/ios/Runner/Assets.xcassets/LaunchBackground.imageset/Contents.json | JSON       |         21 |          0 |          1 |         22 |
+| /Users/lorenzovecchio/Desktop/prova_registro/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json      | JSON       |         23 |          0 |          1 |         24 |
+| /Users/lorenzovecchio/Desktop/prova_registro/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md          | Markdown   |          3 |          0 |          2 |          5 |
+| /Users/lorenzovecchio/Desktop/prova_registro/ios/Runner/Base.lproj/LaunchScreen.storyboard                      | XML        |         43 |          1 |          1 |         45 |
+| /Users/lorenzovecchio/Desktop/prova_registro/ios/Runner/Base.lproj/Main.storyboard                              | XML        |         25 |          1 |          1 |         27 |
+| /Users/lorenzovecchio/Desktop/prova_registro/ios/Runner/Runner-Bridging-Header.h                                | C++        |          1 |          0 |          1 |          2 |
+| /Users/lorenzovecchio/Desktop/prova_registro/lib/data.dart                                                      | Dart       |        180 |          4 |         20 |        204 |
+| /Users/lorenzovecchio/Desktop/prova_registro/lib/globals.dart                                                   | Dart       |        118 |          9 |         11 |        138 |
+| /Users/lorenzovecchio/Desktop/prova_registro/lib/homepage.dart                                                  | Dart       |         90 |          1 |          7 |         98 |
+| /Users/lorenzovecchio/Desktop/prova_registro/lib/loginpage.dart                                                 | Dart       |        139 |          3 |          7 |        149 |
+| /Users/lorenzovecchio/Desktop/prova_registro/lib/main.dart                                                      | Dart       |        203 |         16 |         16 |        235 |
+| /Users/lorenzovecchio/Desktop/prova_registro/lib/notifi_service.dart                                            | Dart       |         31 |          0 |          6 |         37 |
+| /Users/lorenzovecchio/Desktop/prova_registro/lib/pages/account.dart                                             | Dart       |         74 |          0 |          7 |         81 |
+| /Users/lorenzovecchio/Desktop/prova_registro/lib/pages/calendario.dart                                          | Dart       |        142 |          1 |          9 |        152 |
+| /Users/lorenzovecchio/Desktop/prova_registro/lib/pages/home.dart                                                | Dart       |        469 |          4 |         15 |        488 |
+| /Users/lorenzovecchio/Desktop/prova_registro/lib/pages/presenze.dart                                            | Dart       |        250 |          1 |          9 |        260 |
+| /Users/lorenzovecchio/Desktop/prova_registro/lib/pages/voti.dart                                                | Dart       |        102 |          1 |          7 |        110 |
+| /Users/lorenzovecchio/Desktop/prova_registro/lib/screen_size.dart                                               | Dart       |         24 |          0 |          5 |         29 |
+| /Users/lorenzovecchio/Desktop/prova_registro/lib/widgets/average.dart                                           | Dart       |         80 |          0 |          6 |         86 |
+| /Users/lorenzovecchio/Desktop/prova_registro/pubspec.yaml                                                       | YAML       |         46 |        175 |         34 |        255 |
+| /Users/lorenzovecchio/Desktop/prova_registro/ricordatiios.md                                                    | Markdown   |          2 |          0 |          0 |          2 |
+| /Users/lorenzovecchio/Desktop/prova_registro/test/widget_test.dart                                              | Dart       |         14 |         10 |          7 |         31 |
+| Total                                                                                                           |            |      2,471 |        310 |        231 |      3,012 |
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
