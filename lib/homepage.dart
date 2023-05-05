@@ -7,6 +7,8 @@ import 'package:prova_registro/pages/presenze.dart';
 import 'package:prova_registro/pages/voti.dart';
 import 'package:prova_registro/pages/account.dart';
 import 'package:prova_registro/globals.dart';
+import 'package:prova_registro/providers/themeProvider.dart';
+import 'package:provider/provider.dart';
 
 import 'screen_size.dart';
 
@@ -35,29 +37,29 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // gets if it's in dark mode or not
-    final brightness = MediaQuery.of(context).platformBrightness;
-    final isDarkMode = brightness == Brightness.dark;
+    final model = context.watch<ThemeModel>(); // definizione di model
+
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: isDarkMode
-              ? SystemUiOverlayStyle.light
-              : SystemUiOverlayStyle.dark,
-          child: _pages[_selectedIndex]),
+        value: model.isDarkMode
+            ? SystemUiOverlayStyle.dark
+            : SystemUiOverlayStyle.light,
+        child: _pages[_selectedIndex],
+      ),
       bottomNavigationBar: Container(
-        color: isDarkMode ? backgroundDarkMode : backgroundLightMode,
+        color: model.isDarkMode ? backgroundDarkMode : backgroundLightMode,
         child: Padding(
-          padding: EdgeInsets.fromLTRB(
-              ScreenSize.padding10,
-              ScreenSize.padding10,
-              ScreenSize.padding10,
-              ScreenSize.padding20),
+          padding: EdgeInsets.fromLTRB(ScreenSize.padding10,
+              ScreenSize.padding10, ScreenSize.padding10, ScreenSize.padding20),
           child: GNav(
             backgroundColor:
-                isDarkMode ? backgroundDarkMode : backgroundLightMode,
-            color: isDarkMode ? notActiveTextDarkMode : notActiveTextLightMode,
-            activeColor: isDarkMode ? activeTextDarkMode : activeTextLightMode,
-            tabBackgroundColor: isDarkMode
+                model.isDarkMode ? backgroundDarkMode : backgroundLightMode,
+            color: model.isDarkMode
+                ? notActiveTextDarkMode
+                : notActiveTextLightMode,
+            activeColor:
+                model.isDarkMode ? activeTextDarkMode : activeTextLightMode,
+            tabBackgroundColor: model.isDarkMode
                 ? tabBackgroundColorDarkMode
                 : tabBackgroundColorLightMode,
             padding: EdgeInsets.all(
