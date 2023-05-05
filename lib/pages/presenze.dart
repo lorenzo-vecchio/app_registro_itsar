@@ -29,6 +29,23 @@ class _PresenzeState extends State<Presenze> {
     return risultato;
   }
 
+  void _selezioneMaterie(List<dynamic> value) {
+    List<String> selectedItems = value.cast<String>();
+    List<PresenzaAssenza> filteredList = [];
+    if (selectedItems.length == 0) {
+      listaMaterie = globalData.presenzeList;
+      setState(() {});
+      return;
+    }
+    for (PresenzaAssenza item in globalData.presenzeList) {
+      if (selectedItems.contains(item.materia)) {
+        filteredList.add(item);
+      }
+    }
+    listaMaterie = filteredList;
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -49,10 +66,10 @@ class _PresenzeState extends State<Presenze> {
     return Scaffold(
       backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: ListView.builder(
-        itemCount: globalData.presenzeList.length + 2,
+        itemCount: listaMaterie.length + 2,
         itemBuilder: (context, index) {
           if (index >= 2) {
-            PresenzaAssenza presenza = globalData.presenzeList[index - 2];
+            PresenzaAssenza presenza = listaMaterie[index - 2];
             return Padding(
               padding: EdgeInsets.fromLTRB(ScreenSize.padding10,
                   ScreenSize.padding10, ScreenSize.padding10, 0),
@@ -215,13 +232,22 @@ class _PresenzeState extends State<Presenze> {
                         const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                   ),
                 ),
-                CustomMultiSelectField<String>(
-              title: "Country",
-              items: listaNomiMaterie,
-              enableAllOptionSelect: true,
-              onSelectionDone: (List<String> giorgio) => {},
-              itemAsString: (item) => item.toString(),
-            ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(ScreenSize.padding10,
+                      ScreenSize.padding10, ScreenSize.padding10, 0),
+                  child: CustomMultiSelectField<String>(
+                    title: "Filtra per materia",
+                    decoration: InputDecoration(
+                        fillColor: isDarkMode ? Colors.black : Colors.white,
+                        suffixIconColor:
+                            isDarkMode ? Colors.white : Colors.black,
+                        suffixIcon: Icon(Icons.expand_more)),
+                    items: listaNomiMaterie,
+                    enableAllOptionSelect: true,
+                    onSelectionDone: _selezioneMaterie,
+                    itemAsString: (item) => item.toString(),
+                  ),
+                ),
               ],
             );
           }
