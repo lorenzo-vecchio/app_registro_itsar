@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:prova_registro/data.dart';
 import 'package:prova_registro/globals.dart';
 import 'package:prova_registro/screen_size.dart';
+import 'package:flutter_custom_selector/flutter_custom_selector.dart';
 
 class Presenze extends StatefulWidget {
   const Presenze({super.key});
@@ -14,6 +15,26 @@ class Presenze extends StatefulWidget {
 }
 
 class _PresenzeState extends State<Presenze> {
+  List<String> listaNomiMaterie = [];
+  List<PresenzaAssenza> listaMaterie = globalData.presenzeList;
+
+  List<String> _getNomiMaterie() {
+    List<String> risultato = [];
+    for (PresenzaAssenza materia in globalData.presenzeList) {
+      String titolo = materia.materia;
+      if (!risultato.contains(titolo)) {
+        risultato.add(titolo);
+      }
+    }
+    return risultato;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    listaNomiMaterie = _getNomiMaterie();
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -171,26 +192,37 @@ class _PresenzeState extends State<Presenze> {
             );
           }
           if (index == 1) {
-            return Padding(
-              padding: EdgeInsets.fromLTRB(ScreenSize.screenWidth * 0.05,
-                  ScreenSize.padding8, ScreenSize.padding8, 0),
-              child: ListTile(
-                tileColor: isDarkMode ? Colors.black : Colors.white,
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    color: isDarkMode ? Colors.black : Colors.white,
+            return Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(ScreenSize.screenWidth * 0.05,
+                      ScreenSize.padding8, ScreenSize.padding8, 0),
+                  child: ListTile(
+                    tileColor: isDarkMode ? Colors.black : Colors.white,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: isDarkMode ? Colors.black : Colors.white,
+                      ),
+                    ),
+                    title: const Text(
+                      "Presenze",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                   ),
                 ),
-                title: const Text(
-                  "Presenze",
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-              ),
+                CustomMultiSelectField<String>(
+              title: "Country",
+              items: listaNomiMaterie,
+              enableAllOptionSelect: true,
+              onSelectionDone: (List<String> giorgio) => {},
+              itemAsString: (item) => item.toString(),
+            ),
+              ],
             );
           }
         },

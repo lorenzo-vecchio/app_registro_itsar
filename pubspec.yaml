@@ -51,6 +51,7 @@ dependencies:
   flutter_local_notifications: ^14.0.0
   notification_permissions: ^0.6.1
   permission_handler: ^10.2.0
+  flutter_custom_selector: ^0.0.3
 
 dev_dependencies:
   flutter_test:
