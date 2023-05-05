@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neat_and_clean_calendar/flutter_neat_and_clean_calendar.dart';
 import 'package:prova_registro/data.dart';
 import 'package:prova_registro/globals.dart';
+import 'package:provider/provider.dart';
+import '../providers/themeProvider.dart';
 
 class Calendario extends StatefulWidget {
   const Calendario({Key? key}) : super(key: key);
@@ -103,10 +105,9 @@ class _CalendarioState extends State<Calendario> {
   @override
   Widget build(BuildContext context) {
     // gets if it's in dark mode or not
-    final brightness = MediaQuery.of(context).platformBrightness;
-    final isDarkMode = brightness == Brightness.dark;
+    return Consumer<ThemeModel>(builder: (context, model, child) {
     return Scaffold(
-      backgroundColor: isDarkMode ? backgroundDarkMode : backgroundLightMode,
+      backgroundColor: model.isDarkMode ? backgroundDarkMode : backgroundLightMode,
       floatingActionButton: AnimatedSwitcher(
         duration: const Duration(milliseconds: 200),
         child: FloatingActionButton(
@@ -136,16 +137,19 @@ class _CalendarioState extends State<Calendario> {
           expandableDateFormat: 'EEEE dd MMMM yyyy',
           datePickerType: DatePickerType.date,
           dayOfWeekStyle: TextStyle(
-              color: isDarkMode ? Colors.white : Colors.black,
+              color: model.isDarkMode ? Colors.white : Colors.black,
               fontWeight: FontWeight.w800,
               fontSize: 11),
           displayMonthTextStyle: TextStyle(
-            color: isDarkMode ? Colors.white : Colors.black,
+            color: model.isDarkMode ? Colors.white : Colors.black,
           ),
-          defaultDayColor: isDarkMode ? Colors.white : Colors.black,
+          defaultDayColor: model.isDarkMode ? Colors.white : Colors.black,
           defaultOutOfMonthDayColor: Colors.grey.shade500,
+          bottomBarTextStyle: TextStyle(color: model.isDarkMode ? Colors.white : Colors.black,),
+          
         ),
       ),
     );
+  });
   }
 }

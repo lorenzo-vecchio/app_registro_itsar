@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:provider/provider.dart';
 import 'dart:io';
 import '../loginpage.dart';
 import '../globals.dart';
+import '../providers/themeProvider.dart';
 
 class Account extends StatefulWidget {
   const Account({Key? key}) : super(key: key);
@@ -39,6 +41,18 @@ class _AccountState extends State<Account> {
             margin: EdgeInsets.symmetric(
                 vertical: _mediaQueryData.size.height / 6,
                 horizontal: _mediaQueryData.size.width),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              final themeModel =
+                  Provider.of<ThemeModel>(context, listen: false);
+              themeModel.toggleTheme();
+            },
+            child: Icon(
+              context.watch<ThemeModel>().isDarkMode
+                  ? Icons.wb_sunny
+                  : Icons.nightlight_round,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
