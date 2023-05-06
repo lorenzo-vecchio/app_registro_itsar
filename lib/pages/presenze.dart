@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:intl/intl.dart';
 import 'package:prova_registro/data.dart';
 import 'package:prova_registro/globals.dart';
 import 'package:prova_registro/screen_size.dart';
-import 'package:flutter_custom_selector/flutter_custom_selector.dart';
-
-import '../widgets/customMultiSelect.dart';
+import '../widgets/filter.dart';
 
 class Presenze extends StatefulWidget {
   const Presenze({super.key});
@@ -19,6 +18,7 @@ class Presenze extends StatefulWidget {
 class _PresenzeState extends State<Presenze> {
   List<String> listaNomiMaterie = [];
   List<PresenzaAssenza> listaMaterie = globalData.presenzeList;
+  List<String> selectedFilters = [];
 
   List<String> _getNomiMaterie() {
     List<String> risultato = [];
@@ -33,6 +33,7 @@ class _PresenzeState extends State<Presenze> {
 
   void _selezioneMaterie(List<dynamic> value) {
     List<String> selectedItems = value.cast<String>();
+    selectedFilters = selectedItems;
     List<PresenzaAssenza> filteredList = [];
     if (selectedItems.length == 0) {
       listaMaterie = globalData.presenzeList;
@@ -234,22 +235,37 @@ class _PresenzeState extends State<Presenze> {
                         const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(ScreenSize.padding10,
-                      ScreenSize.padding10, ScreenSize.padding10, 0),
-                  child: MyCustomMultiSelectField<String>(
-                    title: "Filtra per materia",
-                    selectedItemColor: Colors.red,
-                    titleColor: isDarkMode ? Colors.white : Colors.black,
-                    decoration: InputDecoration(
-                        fillColor: isDarkMode ? Colors.black : Colors.white,
-                        suffixIconColor:
-                            isDarkMode ? Colors.white : Colors.black,
-                        suffixIcon: Icon(Icons.expand_more)),
-                    items: listaNomiMaterie,
-                    enableAllOptionSelect: true,
-                    onSelectionDone: _selezioneMaterie,
-                    itemAsString: (item) => item.toString(),
+                MaterialButton(
+                  onPressed: () => {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Theme(
+                          data: Theme.of(context),
+                          child: FilterDialog(
+                            items: listaNomiMaterie,
+                            onApply: _selezioneMaterie,
+                            selectedItems: selectedFilters,
+                            backgroundColor:
+                                isDarkMode ? Colors.black : Colors.white,
+                            activeColor: Colors.red,
+                            notActiveColor:
+                                isDarkMode ? Colors.white : Colors.black,
+                            tileBackgroundColor: isDarkMode
+                                ? Colors.grey.shade900.withOpacity(0.50)
+                                : Colors.grey.shade300.withOpacity(0.50),
+                            buttonColor: Colors.red,
+                          ),
+                        );
+                      },
+                    )
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Filtra per materia'),
+                      Icon(Icons.expand_more)
+                    ],
                   ),
                 ),
               ],
