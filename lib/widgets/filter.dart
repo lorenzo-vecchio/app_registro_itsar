@@ -39,12 +39,27 @@ class _FilterDialogState extends State<FilterDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      actionsPadding: EdgeInsets.zero,
+      titlePadding: EdgeInsets.zero,
       clipBehavior: Clip.hardEdge,
-      title: Text(
-        'Materie',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontStyle: FontStyle.normal,
+      title: Container(
+        child: const Padding(
+          padding: EdgeInsets.fromLTRB(15, 15, 0, 0),
+          child: Text(
+            'Materie',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.normal,
+              fontSize: 40,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(0.0, 0.0),
+                  blurRadius: 70.0,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
       shape: RoundedRectangleBorder(
@@ -98,29 +113,52 @@ class _FilterDialogState extends State<FilterDialog> {
         ),
       ),
       actions: <Widget>[
-        TextButton(
-          child: Text(
-            'Annulla',
-            style: TextStyle(
-                color: widget.buttonColor ?? Colors.red, fontSize: 18),
+        Container(
+          height: 140,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                widget.backgroundColor!.withOpacity(0.0) ??
+                    Colors.white.withOpacity(0),
+                widget.backgroundColor ?? Colors.white
+              ],
+            ),
           ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        ElevatedButton(
-          child: Text(
-            'Applica',
-            style: TextStyle(fontSize: 18),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                TextButton(
+                  child: Text(
+                    'Annulla',
+                    style: TextStyle(
+                        color: widget.buttonColor ?? Colors.red, fontSize: 18),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                ElevatedButton(
+                  child: Text(
+                    'Applica',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  onPressed: () {
+                    widget.onApply(_selectedItems);
+                    Navigator.of(context).pop();
+                  },
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(200.0)),
+                      backgroundColor: widget.buttonColor ?? Colors.red),
+                ),
+              ],
+            ),
           ),
-          onPressed: () {
-            widget.onApply(_selectedItems);
-            Navigator.of(context).pop();
-          },
-          style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(200.0)),
-              backgroundColor: widget.buttonColor ?? Colors.red),
         ),
       ],
     );
