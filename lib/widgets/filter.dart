@@ -39,6 +39,7 @@ class _FilterDialogState extends State<FilterDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      clipBehavior: Clip.hardEdge,
       title: Text(
         'Materie',
         style: TextStyle(
@@ -51,6 +52,7 @@ class _FilterDialogState extends State<FilterDialog> {
       ),
       backgroundColor: widget.backgroundColor ?? Colors.white,
       content: SingleChildScrollView(
+        clipBehavior: Clip.none,
         child: Column(
           children: widget.items.map((item) {
             return Padding(
@@ -59,7 +61,7 @@ class _FilterDialogState extends State<FilterDialog> {
                 title: Text(
                   item,
                   style: TextStyle(
-                    fontSize: 11,
+                    fontSize: 16,
                     fontWeight: FontWeight.normal,
                     color: _selectedItems.contains(item)
                         ? widget.activeColor ?? Colors.red
@@ -69,7 +71,7 @@ class _FilterDialogState extends State<FilterDialog> {
                 visualDensity: VisualDensity.compact,
                 tileColor: widget.tileBackgroundColor,
                 dense: true,
-                contentPadding: EdgeInsets.fromLTRB(12, 0, 0, 0),
+                contentPadding: EdgeInsets.fromLTRB(20, 5, 0, 5),
                 activeColor: widget.activeColor ?? Colors.blue,
                 checkboxShape: CircleBorder(
                   side: BorderSide(
@@ -98,15 +100,19 @@ class _FilterDialogState extends State<FilterDialog> {
       actions: <Widget>[
         TextButton(
           child: Text(
-            'Cancel',
-            style: TextStyle(color: widget.buttonColor ?? Colors.red),
+            'Annulla',
+            style: TextStyle(
+                color: widget.buttonColor ?? Colors.red, fontSize: 18),
           ),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
         ElevatedButton(
-          child: Text('Apply'),
+          child: Text(
+            'Applica',
+            style: TextStyle(fontSize: 18),
+          ),
           onPressed: () {
             widget.onApply(_selectedItems);
             Navigator.of(context).pop();
