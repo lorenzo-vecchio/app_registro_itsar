@@ -46,29 +46,29 @@ class _FilterDialogState extends State<FilterDialog> {
         actionsPadding: EdgeInsets.zero,
         titlePadding: EdgeInsets.zero,
         clipBehavior: Clip.hardEdge,
-        title: Padding(
-          padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-          child: Text(
-            'Materie',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontStyle: FontStyle.normal,
-              fontSize: 40,
-              shadows: <Shadow>[
-                Shadow(
-                  offset: const Offset(0.0, 0.0),
-                  blurRadius: 150.0,
-                  color: widget.notActiveColor ?? Colors.black,
-                ),
-                Shadow(
-                  offset: const Offset(0.0, 0.0),
-                  blurRadius: 220.0,
-                  color: widget.notActiveColor ?? Colors.black,
-                ),
-              ],
-            ),
-          ),
-        ),
+        // title: Padding(
+        //   padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+        //   child: Text(
+        //     'Materie',
+        //     style: TextStyle(
+        //       fontWeight: FontWeight.bold,
+        //       fontStyle: FontStyle.normal,
+        //       fontSize: 40,
+        //       shadows: <Shadow>[
+        //         Shadow(
+        //           offset: const Offset(0.0, 0.0),
+        //           blurRadius: 150.0,
+        //           color: widget.notActiveColor ?? Colors.black,
+        //         ),
+        //         Shadow(
+        //           offset: const Offset(0.0, 0.0),
+        //           blurRadius: 220.0,
+        //           color: widget.notActiveColor ?? Colors.black,
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
