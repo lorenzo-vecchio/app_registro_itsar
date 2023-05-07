@@ -46,28 +46,26 @@ class _FilterDialogState extends State<FilterDialog> {
         actionsPadding: EdgeInsets.zero,
         titlePadding: EdgeInsets.zero,
         clipBehavior: Clip.hardEdge,
-        title: Container(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(15, 15, 0, 0),
-            child: Text(
-              'Materie',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.normal,
-                fontSize: 40,
-                shadows: <Shadow>[
-                  Shadow(
-                    offset: Offset(0.0, 0.0),
-                    blurRadius: 130.0,
-                    color: widget.notActiveColor ?? Colors.black,
-                  ),
-                  Shadow(
-                    offset: Offset(0.0, 0.0),
-                    blurRadius: 200.0,
-                    color: widget.notActiveColor ?? Colors.black,
-                  ),
-                ],
-              ),
+        title: Padding(
+          padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+          child: Text(
+            'Materie',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.normal,
+              fontSize: 40,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: const Offset(0.0, 0.0),
+                  blurRadius: 130.0,
+                  color: widget.notActiveColor ?? Colors.black,
+                ),
+                Shadow(
+                  offset: const Offset(0.0, 0.0),
+                  blurRadius: 200.0,
+                  color: widget.notActiveColor ?? Colors.black,
+                ),
+              ],
             ),
           ),
         ),
@@ -95,7 +93,7 @@ class _FilterDialogState extends State<FilterDialog> {
                   visualDensity: VisualDensity.compact,
                   tileColor: widget.tileBackgroundColor,
                   dense: true,
-                  contentPadding: EdgeInsets.fromLTRB(20, 5, 0, 5),
+                  contentPadding: const EdgeInsets.fromLTRB(20, 5, 0, 5),
                   activeColor: widget.activeColor ?? Colors.blue,
                   checkboxShape: CircleBorder(
                     side: BorderSide(
@@ -154,10 +152,6 @@ class _FilterDialogState extends State<FilterDialog> {
                     },
                   ),
                   ElevatedButton(
-                    child: Text(
-                      'Applica',
-                      style: TextStyle(fontSize: 18),
-                    ),
                     onPressed: () {
                       widget.onApply(_selectedItems);
                       Navigator.of(context).pop();
@@ -166,6 +160,10 @@ class _FilterDialogState extends State<FilterDialog> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(200.0)),
                         backgroundColor: widget.buttonColor ?? Colors.red),
+                    child: const Text(
+                      'Applica',
+                      style: TextStyle(fontSize: 18),
+                    ),
                   ),
                 ],
               ),
