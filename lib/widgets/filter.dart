@@ -57,12 +57,12 @@ class _FilterDialogState extends State<FilterDialog> {
               shadows: <Shadow>[
                 Shadow(
                   offset: const Offset(0.0, 0.0),
-                  blurRadius: 130.0,
+                  blurRadius: 150.0,
                   color: widget.notActiveColor ?? Colors.black,
                 ),
                 Shadow(
                   offset: const Offset(0.0, 0.0),
-                  blurRadius: 200.0,
+                  blurRadius: 220.0,
                   color: widget.notActiveColor ?? Colors.black,
                 ),
               ],

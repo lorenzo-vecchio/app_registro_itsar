@@ -98,7 +98,7 @@ class _PresenzeState extends State<Presenze> {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Text(
-                        '${presenza.ore_presenza}h',
+                        '${presenza.ore_presenza}h ${presenza.minuti_presenza}m',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -114,7 +114,7 @@ class _PresenzeState extends State<Presenze> {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Text(
-                        '${presenza.ore_assenza}h',
+                        '${presenza.ore_assenza}h ${presenza.minuti_assenza}m',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -148,9 +148,8 @@ class _PresenzeState extends State<Presenze> {
                             isDarkMode ? Colors.green : Colors.green.shade500,
                       ),
                       height: 90,
+                      width: ScreenSize.screenWidth * 0.36,
                       alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(
-                          horizontal: ScreenSize.padding30),
                       child: RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
@@ -176,13 +175,12 @@ class _PresenzeState extends State<Presenze> {
                     ),
                     Container(
                       height: 90,
+                      width: ScreenSize.screenWidth * 0.36,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         color: isDarkMode ? Colors.red : Colors.red.shade400,
                       ),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: ScreenSize.padding30),
                       child: RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(

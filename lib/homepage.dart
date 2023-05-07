@@ -47,11 +47,8 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: Container(
         color: isDarkMode ? backgroundDarkMode : backgroundLightMode,
         child: Padding(
-          padding: EdgeInsets.fromLTRB(
-              ScreenSize.padding10,
-              ScreenSize.padding10,
-              ScreenSize.padding10,
-              ScreenSize.padding20),
+          padding: EdgeInsets.fromLTRB(ScreenSize.padding10,
+              ScreenSize.padding10, ScreenSize.padding10, ScreenSize.padding20),
           child: GNav(
             backgroundColor:
                 isDarkMode ? backgroundDarkMode : backgroundLightMode,
