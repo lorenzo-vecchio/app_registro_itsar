@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -38,129 +40,139 @@ class _FilterDialogState extends State<FilterDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      actionsPadding: EdgeInsets.zero,
-      titlePadding: EdgeInsets.zero,
-      clipBehavior: Clip.hardEdge,
-      title: Container(
-        child: const Padding(
-          padding: EdgeInsets.fromLTRB(15, 15, 0, 0),
-          child: Text(
-            'Materie',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontStyle: FontStyle.normal,
-              fontSize: 40,
-              shadows: <Shadow>[
-                Shadow(
-                  offset: Offset(0.0, 0.0),
-                  blurRadius: 70.0,
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      backgroundColor: widget.backgroundColor ?? Colors.white,
-      content: SingleChildScrollView(
-        clipBehavior: Clip.none,
-        child: Column(
-          children: widget.items.map((item) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 3.0),
-              child: CheckboxListTile(
-                title: Text(
-                  item,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
-                    color: _selectedItems.contains(item)
-                        ? widget.activeColor ?? Colors.red
-                        : widget.notActiveColor ?? Colors.black,
-                  ),
-                ),
-                visualDensity: VisualDensity.compact,
-                tileColor: widget.tileBackgroundColor,
-                dense: true,
-                contentPadding: EdgeInsets.fromLTRB(20, 5, 0, 5),
-                activeColor: widget.activeColor ?? Colors.blue,
-                checkboxShape: CircleBorder(
-                  side: BorderSide(
-                    width: 0.5,
+    return BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+      child: AlertDialog(
+        actionsPadding: EdgeInsets.zero,
+        titlePadding: EdgeInsets.zero,
+        clipBehavior: Clip.hardEdge,
+        title: Container(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(15, 15, 0, 0),
+            child: Text(
+              'Materie',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.normal,
+                fontSize: 40,
+                shadows: <Shadow>[
+                  Shadow(
+                    offset: Offset(0.0, 0.0),
+                    blurRadius: 130.0,
                     color: widget.notActiveColor ?? Colors.black,
                   ),
-                ),
-                value: _selectedItems.contains(item),
-                onChanged: (value) {
-                  setState(() {
-                    if (value != null && value) {
-                      _selectedItems.add(item);
-                    } else {
-                      _selectedItems.remove(item);
-                    }
-                  });
-                },
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(500.0),
-                ),
+                  Shadow(
+                    offset: Offset(0.0, 0.0),
+                    blurRadius: 200.0,
+                    color: widget.notActiveColor ?? Colors.black,
+                  ),
+                ],
               ),
-            );
-          }).toList(),
-        ),
-      ),
-      actions: <Widget>[
-        Container(
-          height: 140,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                widget.backgroundColor!.withOpacity(0.0) ??
-                    Colors.white.withOpacity(0),
-                widget.backgroundColor ?? Colors.white
-              ],
             ),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                TextButton(
-                  child: Text(
-                    'Annulla',
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        backgroundColor: widget.backgroundColor ?? Colors.white,
+        content: SingleChildScrollView(
+          clipBehavior: Clip.none,
+          child: Column(
+            children: widget.items.map((item) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 3.0),
+                child: CheckboxListTile(
+                  title: Text(
+                    item,
                     style: TextStyle(
-                        color: widget.buttonColor ?? Colors.red, fontSize: 18),
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      color: _selectedItems.contains(item)
+                          ? widget.activeColor ?? Colors.red
+                          : widget.notActiveColor ?? Colors.black,
+                    ),
                   ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                ElevatedButton(
-                  child: Text(
-                    'Applica',
-                    style: TextStyle(fontSize: 18),
+                  visualDensity: VisualDensity.compact,
+                  tileColor: widget.tileBackgroundColor,
+                  dense: true,
+                  contentPadding: EdgeInsets.fromLTRB(20, 5, 0, 5),
+                  activeColor: widget.activeColor ?? Colors.blue,
+                  checkboxShape: CircleBorder(
+                    side: BorderSide(
+                      width: 0.5,
+                      color: widget.notActiveColor ?? Colors.black,
+                    ),
                   ),
-                  onPressed: () {
-                    widget.onApply(_selectedItems);
-                    Navigator.of(context).pop();
+                  value: _selectedItems.contains(item),
+                  onChanged: (value) {
+                    setState(() {
+                      if (value != null && value) {
+                        _selectedItems.add(item);
+                      } else {
+                        _selectedItems.remove(item);
+                      }
+                    });
                   },
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(200.0)),
-                      backgroundColor: widget.buttonColor ?? Colors.red),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(500.0),
+                  ),
                 ),
-              ],
-            ),
+              );
+            }).toList(),
           ),
         ),
-      ],
+        actions: <Widget>[
+          Container(
+            height: 140,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  widget.backgroundColor!.withOpacity(0.0) ??
+                      Colors.white.withOpacity(0),
+                  widget.backgroundColor!.withOpacity(0.9) ?? Colors.white,
+                  widget.backgroundColor ?? Colors.white
+                ],
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextButton(
+                    child: Text(
+                      'Annulla',
+                      style: TextStyle(
+                          color: widget.buttonColor ?? Colors.red,
+                          fontSize: 18),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  ElevatedButton(
+                    child: Text(
+                      'Applica',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    onPressed: () {
+                      widget.onApply(_selectedItems);
+                      Navigator.of(context).pop();
+                    },
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(200.0)),
+                        backgroundColor: widget.buttonColor ?? Colors.red),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
