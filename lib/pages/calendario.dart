@@ -107,7 +107,6 @@ class _CalendarioState extends State<Calendario> {
     // gets if it's in dark mode or not
     return Consumer<ThemeModel>(builder: (context, model, child) {
     return Scaffold(
-      backgroundColor: model.isDarkMode ? backgroundDarkMode : backgroundLightMode,
       floatingActionButton: AnimatedSwitcher(
         duration: const Duration(milliseconds: 200),
         child: FloatingActionButton(
@@ -146,7 +145,6 @@ class _CalendarioState extends State<Calendario> {
           defaultDayColor: model.isDarkMode ? Colors.white : Colors.black,
           defaultOutOfMonthDayColor: Colors.grey.shade500,
           bottomBarTextStyle: TextStyle(color: model.isDarkMode ? Colors.white : Colors.black,),
-          
         ),
       ),
     );

@@ -75,7 +75,7 @@ Future<void> main() async {
     await Workmanager().registerPeriodicTask(
       "1",
       fetchBackground,
-      frequency: Duration(minutes: 15),
+      frequency: const Duration(minutes: 15),
       constraints: Constraints(
         networkType: NetworkType.connected,
       ),
@@ -89,7 +89,7 @@ Future<void> main() async {
     backgroundTaskChannel.setMethodCallHandler((call) => backgroundSync());
   }
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -162,14 +162,16 @@ class _MyAppState extends State<MyApp> {
         child: Consumer<ThemeModel>(builder: (context, model, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: alreadyHaveData ? HomePage() : LoginPage(),
+            home: alreadyHaveData ? const HomePage() : const LoginPage(),
             theme: ThemeData(
+              scaffoldBackgroundColor:
+                  model.isDarkMode ? Colors.black : Colors.white,
               listTileTheme: ListTileThemeData(
-                tileColor: Colors.grey.shade300.withOpacity(0.50),
+                tileColor: model.isDarkMode ? tileBackgroundDarkMode : tileBackgoundLightMode,
                 contentPadding: const EdgeInsets.all(10),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
-                  side: BorderSide(
+                  side: const BorderSide(
                     color: Colors.transparent,
                   ),
                 ),
@@ -187,34 +189,63 @@ class _MyAppState extends State<MyApp> {
                       ? Colors.grey.shade900.withOpacity(0.50)
                       : Colors.grey.shade400.withOpacity(0.50),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent),
+                      borderSide: const BorderSide(color: Colors.transparent),
                       borderRadius: BorderRadius.circular(500)),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide: const BorderSide(color: Colors.black),
                     borderRadius: BorderRadius.circular(500),
                   ),
-                  floatingLabelStyle: TextStyle(color: Colors.black)),
+                  floatingLabelStyle: const TextStyle(color: Colors.black)),
               // Define the default font family.
               fontFamily: 'Montserrat',
 
               // Define the default `TextTheme`. Use this to specify the default
               // text styling for headlines, titles, bodies of text, and more.
-              textTheme: const TextTheme(
-                displayLarge:
-                    TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-                titleLarge:
-                    TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-                bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Montserrat'),
+              textTheme: TextTheme(
+                displayLarge: TextStyle(
+                  fontSize: 72.0,
+                  fontWeight: FontWeight.bold,
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                titleLarge: TextStyle(
+                  fontSize: 36.0,
+                  fontStyle: FontStyle.italic,
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                bodyMedium: TextStyle(
+                  fontSize: 14.0,
+                  fontFamily: 'Montserrat',
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                bodySmall: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                displaySmall: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                displayMedium: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                titleSmall: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                titleMedium: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
               ),
             ),
             darkTheme: ThemeData(
+
+              scaffoldBackgroundColor:
+                  model.isDarkMode ? backgroundDarkMode : backgroundLightMode,
               brightness: Brightness.dark,
               listTileTheme: ListTileThemeData(
-                tileColor: Colors.grey.shade900.withOpacity(0.50),
+                textColor: model.isDarkMode ? Colors.white : Colors.black,
+                tileColor: model.isDarkMode ? tileBackgroundDarkMode : tileBackgoundLightMode,
                 contentPadding: const EdgeInsets.all(10),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
-                  side: BorderSide(
+                  side: const BorderSide(
                     color: Colors.transparent,
                   ),
                 ),
@@ -225,13 +256,13 @@ class _MyAppState extends State<MyApp> {
                       ? Colors.grey.shade900.withOpacity(0.50)
                       : Colors.grey.shade400.withOpacity(0.50),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent),
+                      borderSide: const BorderSide(color: Colors.transparent),
                       borderRadius: BorderRadius.circular(500)),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                     borderRadius: BorderRadius.circular(500),
                   ),
-                  floatingLabelStyle: TextStyle(color: Colors.white)),
+                  floatingLabelStyle: const TextStyle(color: Colors.white)),
             ),
           );
         }),

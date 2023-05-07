@@ -78,8 +78,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Consumer<ThemeModel>(builder: (context, model, child) {
       return Scaffold(
-        backgroundColor:
-            model.isDarkMode ? backgroundDarkMode : backgroundLightMode,
         body: GestureDetector(
           onTap: () => {debugPrint("pollo")},
           child: ListView(
@@ -104,6 +102,9 @@ class _HomeState extends State<Home> {
                         ScreenSize.screenWidth * 0.03,
                         ScreenSize.screenHeight * 0.02),
                     child: ListTile(
+                      tileColor: model.isDarkMode
+                          ? Colors.grey.shade900.withOpacity(0.50)
+                          : Colors.grey.shade300.withOpacity(0.50),
                       contentPadding: EdgeInsets.fromLTRB(
                         0,
                         ScreenSize.screenHeight * 0.03,
@@ -122,7 +123,9 @@ class _HomeState extends State<Home> {
                         child: Text(
                           '${materie.indexOf(i) == 0 ? 'Today' : 'Tomorrow'}',
                           style: const TextStyle(
-                              fontSize: 40, fontWeight: FontWeight.bold),
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       subtitle: Padding(
@@ -163,10 +166,14 @@ class _HomeState extends State<Home> {
                                           child: Padding(
                                             padding: EdgeInsets.all(
                                                 ScreenSize.screenWidth * 0.02),
-                                            child: const Text(
+                                            child: Text(
                                               'Oggi niente!!!',
                                               style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
+                                                fontWeight: FontWeight.bold,
+                                                color: model.isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -224,13 +231,22 @@ class _HomeState extends State<Home> {
                                                 children: <TextSpan>[
                                                   TextSpan(
                                                     text: '${i[j].nomeMateria}',
-                                                    style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: model.isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
+                                                    ),
                                                   ),
                                                   TextSpan(
                                                       text:
-                                                          '\nAula: ${i[j].aula}\nOrario: ${i[j].inizio.toString().substring(11).substring(0, 5)}-${i[j].fine.toString().substring(11).substring(0, 5)}\nIntervallo: ${getInterval(i[j])}'),
+                                                          '\nAula: ${i[j].aula}\nOrario: ${i[j].inizio.toString().substring(11).substring(0, 5)}-${i[j].fine.toString().substring(11).substring(0, 5)}\nIntervallo: ${getInterval(i[j])}',
+                                                      style: TextStyle(
+                                                        color: model.isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                      )),
                                                 ],
                                               ),
                                             ),
@@ -270,6 +286,9 @@ class _HomeState extends State<Home> {
                     ScreenSize.padding20,
                     ScreenSize.padding10), //20,50,20,10
                 child: ListTile(
+                  tileColor: model.isDarkMode
+                      ? Colors.grey.shade900.withOpacity(0.50)
+                      : Colors.grey.shade300.withOpacity(0.50),
                   contentPadding: EdgeInsets.fromLTRB(0, ScreenSize.padding20,
                       0, ScreenSize.padding10), //0,25,0,10
                   shape: RoundedRectangleBorder(
@@ -280,8 +299,10 @@ class _HomeState extends State<Home> {
                         0, 0, ScreenSize.screenHeight * 0.02), //25,0,0,25
                     child: const Text(
                       'Prossimi esami',
-                      style:
-                          TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   subtitle: Container(
@@ -389,6 +410,9 @@ class _HomeState extends State<Home> {
                     ScreenSize.padding20,
                     ScreenSize.padding10), //20,50,20,10
                 child: ListTile(
+                  tileColor: model.isDarkMode
+                      ? Colors.grey.shade900.withOpacity(0.50)
+                      : Colors.grey.shade300.withOpacity(0.50),
                   contentPadding: EdgeInsets.fromLTRB(0, ScreenSize.padding20,
                       0, ScreenSize.padding10), //0,25,0,10
                   shape: RoundedRectangleBorder(
@@ -397,10 +421,12 @@ class _HomeState extends State<Home> {
                   title: Padding(
                     padding: EdgeInsets.fromLTRB(ScreenSize.screenWidth * 0.055,
                         0, 0, ScreenSize.screenHeight * 0.02), //25,0,0,25
-                    child: const Text(
+                    child: Text(
                       'Presenze',
-                      style:
-                          TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   subtitle: Padding(
