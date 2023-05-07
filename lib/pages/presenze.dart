@@ -28,7 +28,6 @@ class _PresenzeState extends State<Presenze> {
     // gets if it's in dark mode or not
     return Consumer<ThemeModel>(builder: (context, model, child) {
       return Scaffold(
-        backgroundColor: model.isDarkMode ? Colors.black : Colors.white,
         body: ListView.builder(
           itemCount: globalData.presenzeList.length + 2,
           itemBuilder: (context, index) {

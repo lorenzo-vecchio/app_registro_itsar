@@ -34,61 +34,63 @@ class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
     MediaQueryData _mediaQueryData = MediaQuery.of(context);
-    return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(
-                vertical: _mediaQueryData.size.height / 6,
-                horizontal: _mediaQueryData.size.width),
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              final themeModel =
-                  Provider.of<ThemeModel>(context, listen: false);
-              themeModel.toggleTheme();
-            },
-            child: Icon(
-              context.watch<ThemeModel>().isDarkMode
-                  ? Icons.wb_sunny
-                  : Icons.nightlight_round,
+    return Consumer<ThemeModel>(builder: (context, model, child) {
+      return Scaffold(
+        body: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.symmetric(
+                  vertical: _mediaQueryData.size.height / 6,
+                  horizontal: _mediaQueryData.size.width),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: const Text(
-              'Il tuo account attuale è:',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            FloatingActionButton(
+              onPressed: () {
+                final themeModel =
+                    Provider.of<ThemeModel>(context, listen: false);
+                themeModel.toggleTheme();
+              },
+              child: Icon(
+                context.watch<ThemeModel>().isDarkMode
+                    ? Icons.wb_sunny
+                    : Icons.nightlight_round,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              globalData.username,
-              style: TextStyle(fontSize: 16),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Il tuo account attuale è:',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: model.isDarkMode ? Colors.white : Colors.black ),
+              ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              setState(() {
-                _isLoading = true;
-              });
-              await _logout();
-              Navigator.pushAndRemoveUntil<dynamic>(
-                context,
-                MaterialPageRoute<dynamic>(
-                  builder: (BuildContext context) => LoginPage(),
-                ),
-                (route) => false,
-              );
-              setState(() {
-                _isLoading = false;
-              });
-            },
-            child: _isLoading ? CircularProgressIndicator() : Text('Logout'),
-          ),
-        ],
-      ),
-    );
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                globalData.username,
+                style: TextStyle(fontSize: 16,color: model.isDarkMode ? Colors.white : Colors.black ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                setState(() {
+                  _isLoading = true;
+                });
+                await _logout();
+                Navigator.pushAndRemoveUntil<dynamic>(
+                  context,
+                  MaterialPageRoute<dynamic>(
+                    builder: (BuildContext context) => LoginPage(),
+                  ),
+                  (route) => false,
+                );
+                setState(() {
+                  _isLoading = false;
+                });
+              },
+              child: _isLoading ? CircularProgressIndicator() : Text('Logout',style: TextStyle(color: model.isDarkMode ? Colors.white : Colors.black ),),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
