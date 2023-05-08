@@ -252,6 +252,15 @@ class _MyAppState extends State<MyApp> {
                 headlineLarge: TextStyle(
                   color: model.isDarkMode ? Colors.white : Colors.black,
                 ),
+                labelSmall: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                labelMedium: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                labelLarge: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
               ),
             ),
             darkTheme: ThemeData(
@@ -271,7 +280,16 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
               ),
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                    textStyle: TextStyle(
+                      color: model.isDarkMode ? Colors.white : Colors.black,
+                    ),
+                    backgroundColor: darkRedITS),
+              ),
               inputDecorationTheme: InputDecorationTheme(
+                  labelStyle: TextStyle(
+                      color: model.isDarkMode ? Colors.white : Colors.black),
                   filled: true,
                   fillColor: model.isDarkMode
                       ? Colors.grey.shade900.withOpacity(0.50)
@@ -280,11 +298,13 @@ class _MyAppState extends State<MyApp> {
                       borderSide: const BorderSide(color: Colors.transparent),
                       borderRadius: BorderRadius.circular(500)),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
+                    borderSide: BorderSide(
+                        color: model.isDarkMode ? Colors.white : Colors.black),
                     borderRadius: BorderRadius.circular(500),
                   ),
-                  floatingLabelStyle: const TextStyle(color: Colors.white)),
-                  textTheme: TextTheme(
+                  floatingLabelStyle: TextStyle(
+                      color: model.isDarkMode ? Colors.white : Colors.black)),
+              textTheme: TextTheme(
                 displayLarge: TextStyle(
                   fontSize: 72.0,
                   fontWeight: FontWeight.bold,
@@ -325,6 +345,15 @@ class _MyAppState extends State<MyApp> {
                   color: model.isDarkMode ? Colors.white : Colors.black,
                 ),
                 headlineLarge: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                labelSmall: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                labelMedium: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                labelLarge: TextStyle(
                   color: model.isDarkMode ? Colors.white : Colors.black,
                 ),
               ),

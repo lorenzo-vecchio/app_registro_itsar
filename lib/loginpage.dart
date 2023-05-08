@@ -119,7 +119,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 16),
                       _isLoading
-                          ? const CircularProgressIndicator()
+                          ?  CircularProgressIndicator(
+                            color: darkRedITS,
+                          )
                           : Container(
                               width: 100,
                               height: 50,

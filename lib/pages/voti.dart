@@ -58,7 +58,7 @@ class _VotiState extends State<Voti> {
                     ),
                   ),
                   title: Text(
-                    "Grades",
+                    "Voti",
                     style: TextStyle(
                       backgroundColor: model.isDarkMode ? Colors.black : Colors.white,
                       fontSize: 30,

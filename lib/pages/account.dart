@@ -56,17 +56,22 @@ class _AccountState extends State<Account> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Il tuo account attuale è:',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: model.isDarkMode ? Colors.white : Colors.black ),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: model.isDarkMode ? Colors.white : Colors.black),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 globalData.username,
-                style: TextStyle(fontSize: 16,color: model.isDarkMode ? Colors.white : Colors.black ),
+                style: TextStyle(
+                    fontSize: 16,
+                    color: model.isDarkMode ? Colors.white : Colors.black),
               ),
             ),
             ElevatedButton(
@@ -78,7 +83,7 @@ class _AccountState extends State<Account> {
                 Navigator.pushAndRemoveUntil<dynamic>(
                   context,
                   MaterialPageRoute<dynamic>(
-                    builder: (BuildContext context) => LoginPage(),
+                    builder: (BuildContext context) => const LoginPage(),
                   ),
                   (route) => false,
                 );
@@ -86,7 +91,16 @@ class _AccountState extends State<Account> {
                   _isLoading = false;
                 });
               },
-              child: _isLoading ? CircularProgressIndicator() : Text('Logout',style: TextStyle(color: model.isDarkMode ? Colors.white : Colors.black ),),
+              child: _isLoading
+                  ? CircularProgressIndicator(
+                      color: darkRedITS,
+                    )
+                  : Text(
+                      'Logout',
+                      style: TextStyle(
+                          color:
+                              model.isDarkMode ? Colors.white : Colors.black),
+                    ),
             ),
           ],
         ),

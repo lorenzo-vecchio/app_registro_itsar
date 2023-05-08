@@ -121,7 +121,7 @@ class _HomeState extends State<Home> {
                             0,
                             ScreenSize.screenHeight * 0.02),
                         child: Text(
-                          '${materie.indexOf(i) == 0 ? 'Today' : 'Tomorrow'}',
+                          '${materie.indexOf(i) == 0 ? 'Oggi' : 'Domani'}',
                           style: const TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.bold,

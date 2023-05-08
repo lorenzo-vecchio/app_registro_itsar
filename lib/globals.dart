@@ -38,6 +38,8 @@ Color carouselIndicatorActiveLightMode = Colors.black;
 // sfondo componenti Listtile
 Color tileBackgroundDarkMode = Colors.grey.shade900.withOpacity(0.50);
 Color tileBackgoundLightMode = Colors.grey.shade300.withOpacity(0.50);
+// Colore Rosso ITS
+Color darkRedITS = const Color(0xFFc00d0e);
 // ========================================= FINE-COLORI =========================================
 List<int> hoursToDifferent(double val) {
   double num = val;
