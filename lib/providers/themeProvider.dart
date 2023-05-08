@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 
 class ThemeModel extends ChangeNotifier {
   bool isDarkMode = ui.window.platformBrightness == ui.Brightness.dark;
+  
 
   ThemeModel() {
     _loadThemePreference();

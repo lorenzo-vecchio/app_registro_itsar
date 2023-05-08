@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -67,6 +66,12 @@ Future<void> main() async {
       Permission.notification.request();
     }
   });
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle.dark.copyWith(
+      statusBarColor: Color.fromRGBO(0, 0, 0, 0.5),
+      statusBarBrightness: Brightness.dark,
+    ),
+  );
   // notifications
   NotificationService().initNotification();
   // background configuration android
@@ -167,7 +172,9 @@ class _MyAppState extends State<MyApp> {
               scaffoldBackgroundColor:
                   model.isDarkMode ? Colors.black : Colors.white,
               listTileTheme: ListTileThemeData(
-                tileColor: model.isDarkMode ? tileBackgroundDarkMode : tileBackgoundLightMode,
+                tileColor: model.isDarkMode
+                    ? tileBackgroundDarkMode
+                    : tileBackgoundLightMode,
                 contentPadding: const EdgeInsets.all(10),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -176,6 +183,7 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
               ),
+
               // Define the default brightness and colors.
               brightness: Brightness.light,
               primaryColor: model.isDarkMode ? Colors.black : Colors.white,
@@ -232,16 +240,29 @@ class _MyAppState extends State<MyApp> {
                 titleMedium: TextStyle(
                   color: model.isDarkMode ? Colors.white : Colors.black,
                 ),
+                bodyLarge: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                headlineSmall: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                headlineMedium: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                headlineLarge: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
               ),
             ),
             darkTheme: ThemeData(
-
               scaffoldBackgroundColor:
                   model.isDarkMode ? backgroundDarkMode : backgroundLightMode,
               brightness: Brightness.dark,
               listTileTheme: ListTileThemeData(
                 textColor: model.isDarkMode ? Colors.white : Colors.black,
-                tileColor: model.isDarkMode ? tileBackgroundDarkMode : tileBackgoundLightMode,
+                tileColor: model.isDarkMode
+                    ? tileBackgroundDarkMode
+                    : tileBackgoundLightMode,
                 contentPadding: const EdgeInsets.all(10),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -263,6 +284,50 @@ class _MyAppState extends State<MyApp> {
                     borderRadius: BorderRadius.circular(500),
                   ),
                   floatingLabelStyle: const TextStyle(color: Colors.white)),
+                  textTheme: TextTheme(
+                displayLarge: TextStyle(
+                  fontSize: 72.0,
+                  fontWeight: FontWeight.bold,
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                titleLarge: TextStyle(
+                  fontSize: 36.0,
+                  fontStyle: FontStyle.italic,
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                bodyMedium: TextStyle(
+                  fontSize: 14.0,
+                  fontFamily: 'Montserrat',
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                bodySmall: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                displaySmall: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                displayMedium: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                titleSmall: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                titleMedium: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                bodyLarge: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                headlineSmall: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                headlineMedium: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+                headlineLarge: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+              ),
             ),
           );
         }),
