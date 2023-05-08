@@ -41,9 +41,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: model.isDarkMode
-            ? SystemUiOverlayStyle.dark
-            : SystemUiOverlayStyle.light,
+        value: SystemUiOverlayStyle.light,
         child: _pages[_selectedIndex],
       ),
       bottomNavigationBar: Container(
