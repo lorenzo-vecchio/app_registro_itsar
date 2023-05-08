@@ -22,11 +22,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   final List<Widget> _pages = [
-    Home(),
-    Voti(),
-    Calendario(),
-    Presenze(),
-    Account(),
+    const Home(),
+    const Voti(),
+    const Calendario(),
+    const Presenze(),
+    const Account(),
   ];
 
   @override
@@ -37,61 +37,65 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<ThemeModel>(); // definizione di model
-
-    return Scaffold(
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child: _pages[_selectedIndex],
-      ),
-      bottomNavigationBar: Container(
-        color: model.isDarkMode ? backgroundDarkMode : backgroundLightMode,
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(ScreenSize.padding10,
-              ScreenSize.padding10, ScreenSize.padding10, ScreenSize.padding20),
-          child: GNav(
-            backgroundColor:
-                model.isDarkMode ? backgroundDarkMode : backgroundLightMode,
-            color: model.isDarkMode
-                ? notActiveTextDarkMode
-                : notActiveTextLightMode,
-            activeColor:
-                model.isDarkMode ? activeTextDarkMode : activeTextLightMode,
-            tabBackgroundColor: model.isDarkMode
-                ? tabBackgroundColorDarkMode
-                : tabBackgroundColorLightMode,
-            padding: EdgeInsets.all(
-              ScreenSize.screenWidth * 0.035,
+    // definizione di model
+    return Consumer<ThemeModel>(builder: (context, model, child) {
+      return Scaffold(
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.light,
+          child: _pages[_selectedIndex],
+        ),
+        bottomNavigationBar: Container(
+          color: model.isDarkMode ? backgroundDarkMode : backgroundLightMode,
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(
+                ScreenSize.padding10,
+                ScreenSize.padding10,
+                ScreenSize.padding10,
+                ScreenSize.padding20),
+            child: GNav(
+              backgroundColor:
+                  model.isDarkMode ? backgroundDarkMode : backgroundLightMode,
+              color: model.isDarkMode
+                  ? notActiveTextDarkMode
+                  : notActiveTextLightMode,
+              activeColor:
+                  model.isDarkMode ? activeTextDarkMode : activeTextLightMode,
+              tabBackgroundColor: model.isDarkMode
+                  ? tabBackgroundColorDarkMode
+                  : tabBackgroundColorLightMode,
+              padding: EdgeInsets.all(
+                ScreenSize.screenWidth * 0.035,
+              ),
+              gap: ScreenSize.screenWidth * 0.02,
+              tabs: const [
+                GButton(icon: Icons.home, text: 'Home'),
+                GButton(
+                  icon: Icons.calculate_outlined,
+                  text: 'Voti',
+                ),
+                GButton(
+                  icon: Icons.calendar_month_outlined,
+                  text: 'Calendario',
+                ),
+                GButton(
+                  icon: Icons.schedule,
+                  text: 'Presenze',
+                ),
+                GButton(
+                  icon: Icons.account_box_outlined,
+                  text: 'Account',
+                )
+              ],
+              selectedIndex: _selectedIndex,
+              onTabChange: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
             ),
-            gap: ScreenSize.screenWidth * 0.02,
-            tabs: const [
-              GButton(icon: Icons.home, text: 'Home'),
-              GButton(
-                icon: Icons.calculate_outlined,
-                text: 'Voti',
-              ),
-              GButton(
-                icon: Icons.calendar_month_outlined,
-                text: 'Calendario',
-              ),
-              GButton(
-                icon: Icons.schedule,
-                text: 'Presenze',
-              ),
-              GButton(
-                icon: Icons.account_box_outlined,
-                text: 'Account',
-              )
-            ],
-            selectedIndex: _selectedIndex,
-            onTabChange: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

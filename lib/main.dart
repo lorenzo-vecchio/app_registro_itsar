@@ -170,7 +170,7 @@ class _MyAppState extends State<MyApp> {
             home: alreadyHaveData ? const HomePage() : const LoginPage(),
             theme: ThemeData(
               scaffoldBackgroundColor:
-                  model.isDarkMode ? Colors.black : Colors.white,
+                  model.isDarkMode ? backgroundDarkMode : backgroundLightMode,
               listTileTheme: ListTileThemeData(
                 tileColor: model.isDarkMode
                     ? tileBackgroundDarkMode
