@@ -7,6 +7,7 @@ import 'package:prova_registro/data.dart';
 import 'package:prova_registro/globals.dart';
 import 'package:prova_registro/screen_size.dart';
 import '../widgets/filter.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class Presenze extends StatefulWidget {
   const Presenze({super.key});
@@ -19,6 +20,18 @@ class _PresenzeState extends State<Presenze> {
   List<String> listaNomiMaterie = [];
   List<PresenzaAssenza> listaMaterie = globalData.presenzeList;
   List<String> selectedFilters = [];
+
+  double _getPercentPresenze(List<PresenzaAssenza> presenzeList) {
+    int minutiP = 0;
+    int minutiA = 0;
+    for (PresenzaAssenza item in presenzeList) {
+      minutiP = minutiP + item.minuti_presenza + (item.ore_presenza * 60);
+      minutiA = minutiA + item.minuti_assenza + (item.ore_assenza * 60);
+    }
+    int totale = minutiP + minutiA;
+    double percentuale = minutiP * 100 / totale;
+    return percentuale;
+  }
 
   List<String> _getNomiMaterie() {
     List<String> risultato = [];
@@ -260,9 +273,73 @@ class _PresenzeState extends State<Presenze> {
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+                    children: const [
                       Text('Filtra per materia'),
                       Icon(Icons.expand_more)
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(ScreenSize.padding10),
+                  child: Wrap(
+                    spacing: 5,
+                    runSpacing: 5,
+                    children: selectedFilters.length == listaNomiMaterie.length
+                        ? []
+                        : selectedFilters
+                            .map((String item) => Container(
+                                decoration: BoxDecoration(
+                                    color: isDarkMode
+                                        ? Colors.grey.shade900.withOpacity(0.50)
+                                        : Colors.grey.shade300
+                                            .withOpacity(0.50),
+                                    borderRadius: BorderRadius.circular(200)),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 5.0, horizontal: 8),
+                                  child: Text(
+                                    item,
+                                    style: TextStyle(
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: 13),
+                                  ),
+                                )))
+                            .toList(),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(ScreenSize.padding10),
+                      child: Text('Percentuale presenza sul totale:'),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, ScreenSize.padding20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      LinearPercentIndicator(
+                        animation: true,
+                        barRadius: const Radius.circular(200),
+                        width: ScreenSize.screenWidth * 0.8,
+                        lineHeight: 23.0,
+                        percent: _getPercentPresenze(listaMaterie) / 100,
+                        backgroundColor: isDarkMode
+                            ? Colors.grey.shade900.withOpacity(0.50)
+                            : Colors.grey.shade300.withOpacity(0.50),
+                        progressColor: Colors.red,
+                        center: Text(
+                          '${_getPercentPresenze(listaMaterie).toStringAsFixed(2)}%',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: isDarkMode ? Colors.white : Colors.black),
+                        ),
+                      ),
                     ],
                   ),
                 ),
