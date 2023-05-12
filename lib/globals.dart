@@ -12,8 +12,8 @@ bool alreadyHaveData = false;
 Color backgroundDarkMode = Colors.black;
 Color backgroundLightMode = Colors.white;
 // barra di navigazione
-Color notActiveTextDarkMode = Color.fromARGB(255, 126, 126, 126);
-Color notActiveTextLightMode = Color.fromARGB(255, 124, 124, 124);
+Color notActiveTextDarkMode = const Color.fromARGB(255, 126, 126, 126);
+Color notActiveTextLightMode = const Color.fromARGB(255, 124, 124, 124);
 Color activeTextDarkMode = Colors.white;
 Color activeTextLightMode = Colors.black;
 Color tabBackgroundColorDarkMode = Colors.grey.shade900.withOpacity(0.50);
@@ -61,7 +61,7 @@ List<int> hoursToDifferent(double val) {
 String getInterval(Materia materia) {
   var room = materia.aula;
   bool hasFourHours =
-      materia.fine.difference(materia.inizio) == Duration(hours: 4);
+      materia.fine.difference(materia.inizio) == const Duration(hours: 4);
   switch (room) {
     case "CRESPI-1":
       if (materia.inizio.hour < 11) {

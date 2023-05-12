@@ -121,7 +121,7 @@ class _HomeState extends State<Home> {
                             0,
                             ScreenSize.screenHeight * 0.02),
                         child: Text(
-                          '${materie.indexOf(i) == 0 ? 'Oggi' : 'Domani'}',
+                          materie.indexOf(i) == 0 ? 'Oggi' : 'Domani',
                           style: const TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.bold,
@@ -182,83 +182,180 @@ class _HomeState extends State<Home> {
                                   ],
                                 );
                               } else {
-                                List<Widget> listaMaterie = [];
-                                for (var j = 0; j < i.length; j++) {
-                                  listaMaterie.add(
-                                    Padding(
-                                      padding: j == 0
-                                          ? EdgeInsets.fromLTRB(
-                                              0,
-                                              ScreenSize.screenHeight * 0.04,
-                                              0,
-                                              0) //0,30,0,0
-                                          : EdgeInsets.fromLTRB(
-                                              0,
-                                              ScreenSize.screenHeight * 0.04,
-                                              0,
-                                              0), //0,30,0,0
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          color: i[j]
-                                                      .inizio
-                                                      .toString()
-                                                      .substring(11) ==
-                                                  '09:00:00.000'
-                                              ? model.isDarkMode
-                                                  ? morningLessonDarkMode
-                                                  : morningLessonLightMode
-                                              : model.isDarkMode
-                                                  ? afternoonLessonDarkMode
-                                                  : afternoonLessonLightMode,
-                                        ),
-                                        padding: EdgeInsets.symmetric(
-                                            vertical:
-                                                ScreenSize.screenHeight * 0.008,
-                                            horizontal: ScreenSize
-                                                .padding8), //0,15,0,15
-                                        child: FractionallySizedBox(
-                                          widthFactor: 0.80,
-                                          child: Padding(
-                                            padding: EdgeInsets.all(
-                                                ScreenSize.padding8), //8
-                                            child: RichText(
-                                              text: TextSpan(
-                                                style:
-                                                    DefaultTextStyle.of(context)
+                                if (i.length > 2) {
+                                  return ListView.builder(
+                                    padding: const EdgeInsets.all(0),
+                                    itemCount: i.length,
+                                    itemBuilder: (context, index) {
+                                      final isLastItem = index == i.length - 1;
+                                      return SingleChildScrollView(
+                                        child: Padding(
+                                          padding: index == 0
+                                              ? EdgeInsets.fromLTRB(
+                                                  ScreenSize.screenHeight *
+                                                      0.04,
+                                                  ScreenSize.screenHeight *
+                                                      0.04,
+                                                  ScreenSize.screenHeight *
+                                                      0.04,
+                                                  0)
+                                              : EdgeInsets.fromLTRB(
+                                                  ScreenSize.screenHeight *
+                                                      0.04,
+                                                  ScreenSize.screenHeight *
+                                                      0.04,
+                                                  ScreenSize.screenHeight *
+                                                      0.04,
+                                                  isLastItem
+                                                      ? ScreenSize
+                                                              .screenHeight *
+                                                          0.04
+                                                      : 0),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              color: i[index]
+                                                          .inizio
+                                                          .toString()
+                                                          .substring(11) ==
+                                                      '09:00:00.000'
+                                                  ? model.isDarkMode
+                                                      ? morningLessonDarkMode
+                                                      : morningLessonLightMode
+                                                  : model.isDarkMode
+                                                      ? afternoonLessonDarkMode
+                                                      : afternoonLessonLightMode,
+                                            ),
+                                            padding: EdgeInsets.symmetric(
+                                                vertical:
+                                                    ScreenSize.screenHeight *
+                                                        0.008,
+                                                horizontal:
+                                                    ScreenSize.padding8),
+                                            child: FractionallySizedBox(
+                                              widthFactor: 1,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(0),
+                                                child: RichText(
+                                                  text: TextSpan(
+                                                    style: DefaultTextStyle.of(
+                                                            context)
                                                         .style,
-                                                children: <TextSpan>[
-                                                  TextSpan(
-                                                    text: '${i[j].nomeMateria}',
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: model.isDarkMode
-                                                          ? Colors.white
-                                                          : Colors.black,
-                                                    ),
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                        text: i[index]
+                                                            .nomeMateria,
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: model
+                                                                  .isDarkMode
+                                                              ? Colors.white
+                                                              : Colors.black,
+                                                        ),
+                                                      ),
+                                                      TextSpan(
+                                                        text:
+                                                            '\nAula: ${i[index].aula}\nOrario: ${i[index].inizio.toString().substring(11).substring(0, 5)}-${i[index].fine.toString().substring(11).substring(0, 5)}\nIntervallo: ${getInterval(i[index])}',
+                                                        style: TextStyle(
+                                                          color: model
+                                                                  .isDarkMode
+                                                              ? Colors.white
+                                                              : Colors.black,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                  TextSpan(
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  List<Widget> listaMaterie = [];
+                                  for (var j = 0; j < i.length; j++) {
+                                    listaMaterie.add(
+                                      Padding(
+                                        padding: j == 0
+                                            ? EdgeInsets.fromLTRB(
+                                                0,
+                                                ScreenSize.screenHeight * 0.04,
+                                                0,
+                                                0)
+                                            : EdgeInsets.fromLTRB(
+                                                0,
+                                                ScreenSize.screenHeight * 0.04,
+                                                0,
+                                                0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            color: i[j]
+                                                        .inizio
+                                                        .toString()
+                                                        .substring(11) ==
+                                                    '09:00:00.000'
+                                                ? model.isDarkMode
+                                                    ? morningLessonDarkMode
+                                                    : morningLessonLightMode
+                                                : model.isDarkMode
+                                                    ? afternoonLessonDarkMode
+                                                    : afternoonLessonLightMode,
+                                          ),
+                                          padding: EdgeInsets.symmetric(
+                                              vertical:
+                                                  ScreenSize.screenHeight *
+                                                      0.008,
+                                              horizontal: ScreenSize.padding8),
+                                          child: FractionallySizedBox(
+                                            widthFactor: 0.80,
+                                            child: Padding(
+                                              padding: EdgeInsets.all(
+                                                  ScreenSize.padding8),
+                                              child: RichText(
+                                                text: TextSpan(
+                                                  style: DefaultTextStyle.of(
+                                                          context)
+                                                      .style,
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: i[j].nomeMateria,
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: model.isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                      ),
+                                                    ),
+                                                    TextSpan(
                                                       text:
                                                           '\nAula: ${i[j].aula}\nOrario: ${i[j].inizio.toString().substring(11).substring(0, 5)}-${i[j].fine.toString().substring(11).substring(0, 5)}\nIntervallo: ${getInterval(i[j])}',
                                                       style: TextStyle(
                                                         color: model.isDarkMode
                                                             ? Colors.white
                                                             : Colors.black,
-                                                      )),
-                                                ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
+                                    );
+                                  }
+                                  return Column(
+                                    children: listaMaterie,
                                   );
                                 }
-                                return Column(
-                                  children: listaMaterie,
-                                );
                               }
                             }()),
                       ),
@@ -310,7 +407,7 @@ class _HomeState extends State<Home> {
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: () {
-                          if (upcomingExams.length == 0) {
+                          if (upcomingExams.isEmpty) {
                             return [
                               Padding(
                                 padding: EdgeInsets.all(ScreenSize.padding8),
@@ -369,8 +466,8 @@ class _HomeState extends State<Home> {
                                           text: TextSpan(
                                             children: [
                                               TextSpan(
-                                                text:
-                                                    '${esame.nomeMateria.replaceAll('[ESAME]', '')}',
+                                                text: esame.nomeMateria
+                                                    .replaceAll('[ESAME]', ''),
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: model.isDarkMode
@@ -421,7 +518,7 @@ class _HomeState extends State<Home> {
                   title: Padding(
                     padding: EdgeInsets.fromLTRB(ScreenSize.screenWidth * 0.055,
                         0, 0, ScreenSize.screenHeight * 0.02), //25,0,0,25
-                    child: Text(
+                    child: const Text(
                       'Presenze',
                       style: TextStyle(
                         fontSize: 40,

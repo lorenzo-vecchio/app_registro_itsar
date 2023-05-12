@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:prova_registro/screen_size.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 import '../loginpage.dart';
@@ -33,36 +34,59 @@ class _AccountState extends State<Account> {
 
   @override
   Widget build(BuildContext context) {
-    MediaQueryData _mediaQueryData = MediaQuery.of(context);
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Consumer<ThemeModel>(builder: (context, model, child) {
+      print(model.isDarkMode);
       return Scaffold(
         body: Column(
           children: [
             Container(
               margin: EdgeInsets.symmetric(
-                  vertical: _mediaQueryData.size.height / 6,
-                  horizontal: _mediaQueryData.size.width),
+                vertical: mediaQueryData.size.height / 6,
+                horizontal: mediaQueryData.size.width,
+              ),
             ),
             FloatingActionButton(
+              backgroundColor: darkRedITS,
               onPressed: () {
-                final themeModel =
-                    Provider.of<ThemeModel>(context, listen: false);
-                themeModel.toggleTheme();
+                if (model.systemTheme) {
+                  print("Sono impostato su sistema");
+                } else {
+                  model.toggleTheme();
+                }
               },
               child: Icon(
-                context.watch<ThemeModel>().isDarkMode
-                    ? Icons.wb_sunny
-                    : Icons.nightlight_round,
+                model.isDarkMode ? Icons.wb_sunny : Icons.nightlight_round,
+                color: model.isDarkMode ? Colors.white : Colors.black,
               ),
+            ),
+            SizedBox(
+              height: ScreenSize.padding8,
+            ),
+            SwitchListTile(
+              activeColor: Colors.blueAccent,
+              inactiveTrackColor: darkRedITS,
+              title: Text(
+                'Usa tema del sistema',
+                style: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+              ),
+              value: model.systemTheme,
+              onChanged: (bool value) {
+                model.chooseTheme(value);
+                print(model.isDarkMode);
+              },
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Il tuo account attuale è:',
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: model.isDarkMode ? Colors.white : Colors.black),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
               ),
             ),
             Padding(
@@ -70,8 +94,9 @@ class _AccountState extends State<Account> {
               child: Text(
                 globalData.username,
                 style: TextStyle(
-                    fontSize: 16,
-                    color: model.isDarkMode ? Colors.white : Colors.black),
+                  fontSize: 16,
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
               ),
             ),
             ElevatedButton(
@@ -98,8 +123,8 @@ class _AccountState extends State<Account> {
                   : Text(
                       'Logout',
                       style: TextStyle(
-                          color:
-                              model.isDarkMode ? Colors.white : Colors.black),
+                        color: model.isDarkMode ? Colors.white : Colors.black,
+                      ),
                     ),
             ),
           ],
