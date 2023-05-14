@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:ui' as ui;
 
 class ThemeModel extends ChangeNotifier {
-  bool isDarkMode = ui.window.platformBrightness == ui.Brightness.dark;
+  bool isDarkMode = false;
   bool exDarkMode = false;
   bool systemTheme = true;
 

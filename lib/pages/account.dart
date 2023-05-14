@@ -15,7 +15,7 @@ class Account extends StatefulWidget {
   State<Account> createState() => _AccountState();
 }
 
-class _AccountState extends State<Account> {
+class _AccountState extends State<Account> with WidgetsBindingObserver {
   bool _isLoading = false;
   String Username = '';
 
@@ -30,6 +30,25 @@ class _AccountState extends State<Account> {
     final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
     await storage.delete(key: 'username');
     await storage.delete(key: 'password');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    Provider.of<ThemeModel>(context, listen: false)
+        .chooseTheme(true); // Imposta il tema di sistema
+    super.didChangePlatformBrightness();
   }
 
   @override
