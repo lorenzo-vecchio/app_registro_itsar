@@ -46,8 +46,11 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
 
   @override
   void didChangePlatformBrightness() {
-    Provider.of<ThemeModel>(context, listen: false)
-        .chooseTheme(true); // Imposta il tema di sistema
+    final model = Provider.of<ThemeModel>(context, listen: false);
+    if (model.systemTheme) {
+      model.chooseTheme(
+          true); // Imposta il tema di sistema solo se il tile è attivo
+    }
     super.didChangePlatformBrightness();
   }
 

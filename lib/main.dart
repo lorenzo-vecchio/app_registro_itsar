@@ -91,7 +91,6 @@ Future<void> main() async {
         MethodChannel('com.example.myapp/background_task');
     backgroundTaskChannel.setMethodCallHandler((call) => backgroundSync());
   }
-
   runApp(const MyApp());
 }
 
@@ -104,11 +103,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool _isLoading = true;
-
+  late final ThemeModel _themeModel;
   @override
   void initState() {
     super.initState();
     _initialize();
+    _themeModel = ThemeModel();
   }
 
   Future<void> _initialize() async {
@@ -160,16 +160,20 @@ class _MyAppState extends State<MyApp> {
       // removes the splashscreen
       FlutterNativeSplash.remove();
 
-      return ChangeNotifierProvider(
-        create: (_) => ThemeModel(),
-        child: Consumer<ThemeModel>(builder: (context, model, child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: alreadyHaveData ? const HomePage() : const LoginPage(),
-            theme: getThemeData(model.isDarkMode, Brightness.light),
-            darkTheme: getThemeData(model.isDarkMode, Brightness.dark),
-          );
-        }),
+      return ChangeNotifierProvider<ThemeModel>.value(
+        value: _themeModel,
+        child: Consumer<ThemeModel>(
+          builder: (context, themeModel, child) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: alreadyHaveData
+                  ? const HomePage()
+                  : const LoginPage(),
+              theme: getThemeData(themeModel.isDarkMode, Brightness.light),
+              darkTheme: getThemeData(themeModel.isDarkMode, Brightness.dark),
+            );
+          },
+        ),
       );
     }
   }
