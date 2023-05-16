@@ -6,7 +6,8 @@ import 'package:prova_registro/data.dart';
 import 'package:prova_registro/globals.dart';
 import 'package:prova_registro/screen_size.dart';
 import 'package:provider/provider.dart';
-
+import '../widgets/filter.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import '../providers/themeProvider.dart';
 
 class Presenze extends StatefulWidget {
@@ -175,28 +176,128 @@ class _PresenzeState extends State<Presenze> {
               );
             }
             if (index == 1) {
-              return Padding(
-                padding: EdgeInsets.fromLTRB(ScreenSize.screenWidth * 0.05,
-                    ScreenSize.padding8, ScreenSize.padding8, 0),
-                child: ListTile(
-                  tileColor: model.isDarkMode ? Colors.black : Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      color: model.isDarkMode ? Colors.black : Colors.white,
+              return Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(ScreenSize.screenWidth * 0.05,
+                      ScreenSize.padding8, ScreenSize.padding8, 0),
+                  child: ListTile(
+                    tileColor: isDarkMode ? Colors.black : Colors.white,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: isDarkMode ? Colors.black : Colors.white,
+                      ),
                     ),
-                  ),
-                  title: const Text(
-                    "Presenze",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+                    title: const Text(
+                      "Presenze",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                   ),
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                 ),
-              );
-            }
+                MaterialButton(
+                  onPressed: () => {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Theme(
+                          data: Theme.of(context),
+                          child: FilterDialog(
+                            items: listaNomiMaterie,
+                            onApply: _selezioneMaterie,
+                            selectedItems: selectedFilters,
+                            backgroundColor:
+                                isDarkMode ? Colors.black : Colors.white,
+                            activeColor: Colors.red,
+                            notActiveColor:
+                                isDarkMode ? Colors.white : Colors.black,
+                            tileBackgroundColor: isDarkMode
+                                ? Colors.grey.shade900.withOpacity(0.50)
+                                : Colors.grey.shade300.withOpacity(0.50),
+                            buttonColor: Colors.red,
+                          ),
+                        );
+                      },
+                    )
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text('Filtra per materia'),
+                      Icon(Icons.expand_more)
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(ScreenSize.padding10),
+                  child: Wrap(
+                    spacing: 5,
+                    runSpacing: 5,
+                    children: selectedFilters.length == listaNomiMaterie.length
+                        ? []
+                        : selectedFilters
+                            .map((String item) => Container(
+                                decoration: BoxDecoration(
+                                    color: isDarkMode
+                                        ? Colors.grey.shade900.withOpacity(0.50)
+                                        : Colors.grey.shade300
+                                            .withOpacity(0.50),
+                                    borderRadius: BorderRadius.circular(200)),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 5.0, horizontal: 8),
+                                  child: Text(
+                                    item,
+                                    style: TextStyle(
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: 13),
+                                  ),
+                                )))
+                            .toList(),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(ScreenSize.padding10),
+                      child: Text('Percentuale presenza sul totale:'),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, ScreenSize.padding20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      LinearPercentIndicator(
+                        animation: true,
+                        barRadius: const Radius.circular(200),
+                        width: ScreenSize.screenWidth * 0.8,
+                        lineHeight: 23.0,
+                        percent: _getPercentPresenze(listaMaterie) / 100,
+                        backgroundColor: isDarkMode
+                            ? Colors.grey.shade900.withOpacity(0.50)
+                            : Colors.grey.shade300.withOpacity(0.50),
+                        progressColor: Colors.red,
+                        center: Text(
+                          '${_getPercentPresenze(listaMaterie).toStringAsFixed(2)}%',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: isDarkMode ? Colors.white : Colors.black),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
           },
         ),
       );
