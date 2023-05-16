@@ -108,7 +108,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _initialize();
-    _themeModel = ThemeModel();
   }
 
   Future<void> _initialize() async {
@@ -129,6 +128,10 @@ class _MyAppState extends State<MyApp> {
     } catch (e) {
       // Handle errors here
     }
+    _themeModel = ThemeModel();
+    setState(() {
+      _isLoading = false;
+    });
     Future<bool> isNetworkAvailable() async {
       var connectivityResult = await Connectivity().checkConnectivity();
       if (connectivityResult == ConnectivityResult.none) {
@@ -144,10 +147,6 @@ class _MyAppState extends State<MyApp> {
         globalData = data;
       }
     }
-
-    setState(() {
-      _isLoading = false;
-    });
   }
 
   @override
@@ -166,9 +165,7 @@ class _MyAppState extends State<MyApp> {
           builder: (context, themeModel, child) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              home: alreadyHaveData
-                  ? const HomePage()
-                  : const LoginPage(),
+              home: alreadyHaveData ? const HomePage() : const LoginPage(),
               theme: getThemeData(themeModel.isDarkMode, Brightness.light),
               darkTheme: getThemeData(themeModel.isDarkMode, Brightness.dark),
             );
