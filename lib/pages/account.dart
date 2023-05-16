@@ -62,92 +62,123 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
       return Scaffold(
         body: Column(
           children: [
-            Container(
-              margin: EdgeInsets.symmetric(
-                vertical: mediaQueryData.size.height / 6,
-                horizontal: mediaQueryData.size.width,
-              ),
-            ),
-            FloatingActionButton(
-              backgroundColor: darkRedITS,
-              onPressed: () {
-                if (model.systemTheme) {
-                  print("Sono impostato su sistema");
-                } else {
-                  model.toggleTheme();
-                }
-              },
-              child: Icon(
-                model.isDarkMode ? Icons.wb_sunny : Icons.nightlight_round,
-                color: model.isDarkMode ? Colors.white : Colors.black,
-              ),
-            ),
-            SizedBox(
-              height: ScreenSize.padding8,
-            ),
-            SwitchListTile(
-              activeColor: Colors.blueAccent,
-              inactiveTrackColor: darkRedITS,
-              title: Text(
-                'Usa tema del sistema',
-                style: TextStyle(
-                  color: model.isDarkMode ? Colors.white : Colors.black,
-                ),
-              ),
-              value: model.systemTheme,
-              onChanged: (bool value) {
-                model.chooseTheme(value);
-                print(model.isDarkMode);
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Il tuo account attuale è:',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: model.isDarkMode ? Colors.white : Colors.black,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                globalData.username,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: model.isDarkMode ? Colors.white : Colors.black,
-                ),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                setState(() {
-                  _isLoading = true;
-                });
-                await _logout();
-                Navigator.pushAndRemoveUntil<dynamic>(
-                  context,
-                  MaterialPageRoute<dynamic>(
-                    builder: (BuildContext context) => const LoginPage(),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(ScreenSize.padding20,
+                      ScreenSize.screenHeight * 0.07, 0, ScreenSize.padding20),
+                  child: Text(
+                    'Impostazioni',
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
-                  (route) => false,
-                );
-                setState(() {
-                  _isLoading = false;
-                });
-              },
-              child: _isLoading
-                  ? CircularProgressIndicator(
-                      color: darkRedITS,
-                    )
-                  : Text(
-                      'Logout',
-                      style: TextStyle(
-                        color: model.isDarkMode ? Colors.white : Colors.black,
-                      ),
+                ),
+              ],
+            ),
+            ExpansionTile(
+              title: Text('Tema'),
+              children: [
+                SwitchListTile(
+                  activeColor: Colors.green,
+                  inactiveTrackColor: darkRedITS,
+                  tileColor: Colors.transparent,
+                  title: Text(
+                    'Usa tema di sistema',
+                    style: TextStyle(
+                      color: model.isDarkMode ? Colors.white : Colors.black,
                     ),
+                  ),
+                  value: model.systemTheme,
+                  onChanged: (bool value) {
+                    model.chooseTheme(value);
+                    print(model.isDarkMode);
+                  },
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, ScreenSize.padding20),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 0, horizontal: ScreenSize.padding10),
+                        child: Text('Cambia tema:'),
+                      ),
+                      FloatingActionButton(
+                        backgroundColor: darkRedITS,
+                        onPressed: () {
+                          if (model.systemTheme) {
+                            print("Sono impostato su sistema");
+                          } else {
+                            model.toggleTheme();
+                          }
+                        },
+                        child: Icon(
+                          model.isDarkMode
+                              ? Icons.wb_sunny
+                              : Icons.nightlight_round,
+                          color: model.isDarkMode ? Colors.white : Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            ExpansionTile(
+              expandedCrossAxisAlignment: CrossAxisAlignment.start,
+              title: Text('Account'),
+              children: [
+                SizedBox(
+                  height: 0,
+                  width: ScreenSize.screenWidth,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Il tuo account attuale è: ${globalData.username}',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: model.isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      ScreenSize.padding8, 0, 0, ScreenSize.padding20),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(200.0)),
+                      backgroundColor: darkRedITS,
+                    ),
+                    onPressed: () async {
+                      setState(() {
+                        _isLoading = true;
+                      });
+                      await _logout();
+                      Navigator.pushAndRemoveUntil<dynamic>(
+                        context,
+                        MaterialPageRoute<dynamic>(
+                          builder: (BuildContext context) => const LoginPage(),
+                        ),
+                        (route) => false,
+                      );
+                      setState(() {
+                        _isLoading = false;
+                      });
+                    },
+                    child: _isLoading
+                        ? CircularProgressIndicator(
+                            color: darkRedITS,
+                          )
+                        : Text(
+                            'Logout',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

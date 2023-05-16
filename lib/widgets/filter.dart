@@ -154,12 +154,13 @@ class _FilterDialogState extends State<FilterDialog> {
                     Navigator.of(context).pop();
                   },
                   style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(200.0)),
-                      backgroundColor: widget.buttonColor ?? Colors.red),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(200.0)),
+                    backgroundColor: widget.buttonColor ?? Colors.red,
+                  ),
                   child: const Text(
                     'Applica',
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],

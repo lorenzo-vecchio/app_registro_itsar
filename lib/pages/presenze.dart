@@ -282,7 +282,7 @@ class _PresenzeState extends State<Presenze> {
                               tileBackgroundColor: model.isDarkMode
                                   ? Colors.grey.shade900.withOpacity(0.50)
                                   : Colors.grey.shade300.withOpacity(0.50),
-                              buttonColor: Colors.red,
+                              buttonColor: darkRedITS,
                             ),
                           );
                         },

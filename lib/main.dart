@@ -178,96 +178,103 @@ class _MyAppState extends State<MyApp> {
 
 ThemeData getThemeData(bool isDarkMode, Brightness tema) {
   return ThemeData(
-      scaffoldBackgroundColor:
-          isDarkMode ? backgroundDarkMode : backgroundLightMode,
-      brightness: tema,
-      listTileTheme: ListTileThemeData(
-        textColor: isDarkMode ? Colors.white : Colors.black,
-        tileColor: isDarkMode ? tileBackgroundDarkMode : tileBackgoundLightMode,
-        contentPadding: const EdgeInsets.all(10),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-          side: const BorderSide(
-            color: Colors.transparent,
-          ),
+    scaffoldBackgroundColor:
+        isDarkMode ? backgroundDarkMode : backgroundLightMode,
+    brightness: tema,
+    listTileTheme: ListTileThemeData(
+      textColor: isDarkMode ? Colors.white : Colors.black,
+      tileColor: isDarkMode ? tileBackgroundDarkMode : tileBackgoundLightMode,
+      contentPadding: const EdgeInsets.all(10),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+        side: const BorderSide(
+          color: Colors.transparent,
         ),
       ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-            textStyle: TextStyle(
-              backgroundColor: darkRedITS,
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
-            backgroundColor: darkRedITS),
-      ),
-      inputDecorationTheme: InputDecorationTheme(
-          labelStyle:
-              TextStyle(color: isDarkMode ? Colors.white : Colors.black),
-          filled: true,
-          fillColor: isDarkMode
-              ? Colors.grey.shade900.withOpacity(0.50)
-              : Colors.grey.shade400.withOpacity(0.50),
-          enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.transparent),
-              borderRadius: BorderRadius.circular(500)),
-          focusedBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: isDarkMode ? Colors.white : Colors.black),
-            borderRadius: BorderRadius.circular(500),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+          textStyle: TextStyle(
+            backgroundColor: darkRedITS,
+            color: isDarkMode ? Colors.white : Colors.black,
           ),
-          floatingLabelStyle:
-              TextStyle(color: isDarkMode ? Colors.white : Colors.black)),
-      textTheme: TextTheme(
-        displayLarge: TextStyle(
-          fontSize: 72.0,
-          fontWeight: FontWeight.bold,
-          color: isDarkMode ? Colors.white : Colors.black,
+          backgroundColor: darkRedITS),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+        labelStyle: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
+        filled: true,
+        fillColor: isDarkMode
+            ? Colors.grey.shade900.withOpacity(0.50)
+            : Colors.grey.shade400.withOpacity(0.50),
+        enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.transparent),
+            borderRadius: BorderRadius.circular(500)),
+        focusedBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(color: isDarkMode ? Colors.white : Colors.black),
+          borderRadius: BorderRadius.circular(500),
         ),
-        titleLarge: TextStyle(
-          fontSize: 36.0,
-          fontStyle: FontStyle.italic,
-          color: isDarkMode ? Colors.white : Colors.black,
-        ),
-        bodyMedium: TextStyle(
-          fontSize: 14.0,
-          fontFamily: 'Montserrat',
-          color: isDarkMode ? Colors.white : Colors.black,
-        ),
-        bodySmall: TextStyle(
-          color: isDarkMode ? Colors.white : Colors.black,
-        ),
-        displaySmall: TextStyle(
-          color: isDarkMode ? Colors.white : Colors.black,
-        ),
-        displayMedium: TextStyle(
-          color: isDarkMode ? Colors.white : Colors.black,
-        ),
-        titleSmall: TextStyle(
-          color: isDarkMode ? Colors.white : Colors.black,
-        ),
-        titleMedium: TextStyle(
-          color: isDarkMode ? Colors.white : Colors.black,
-        ),
-        bodyLarge: TextStyle(
-          color: isDarkMode ? Colors.white : Colors.black,
-        ),
-        headlineSmall: TextStyle(
-          color: isDarkMode ? Colors.white : Colors.black,
-        ),
-        headlineMedium: TextStyle(
-          color: isDarkMode ? Colors.white : Colors.black,
-        ),
-        headlineLarge: TextStyle(
-          color: isDarkMode ? Colors.white : Colors.black,
-        ),
-        labelSmall: TextStyle(
-          color: isDarkMode ? Colors.white : Colors.black,
-        ),
-        labelMedium: TextStyle(
-          color: isDarkMode ? Colors.white : Colors.black,
-        ),
-        labelLarge: TextStyle(
-          color: isDarkMode ? Colors.white : Colors.black,
-        ),
-      ));
+        floatingLabelStyle:
+            TextStyle(color: isDarkMode ? Colors.white : Colors.black)),
+    textTheme: TextTheme(
+      displayLarge: TextStyle(
+        fontSize: 72.0,
+        fontWeight: FontWeight.bold,
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      titleLarge: TextStyle(
+        fontSize: 36.0,
+        fontStyle: FontStyle.italic,
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 14.0,
+        fontFamily: 'Montserrat',
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      bodySmall: TextStyle(
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      displaySmall: TextStyle(
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      displayMedium: TextStyle(
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      titleSmall: TextStyle(
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      titleMedium: TextStyle(
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      bodyLarge: TextStyle(
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      headlineSmall: TextStyle(
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      headlineMedium: TextStyle(
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      headlineLarge: TextStyle(
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      labelSmall: TextStyle(
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      labelMedium: TextStyle(
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      labelLarge: TextStyle(
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+    ),
+    expansionTileTheme: ExpansionTileThemeData(
+      textColor: isDarkMode ? Colors.red : darkRedITS,
+      iconColor: isDarkMode ? Colors.red : darkRedITS,
+      collapsedIconColor: isDarkMode ? Colors.white : Colors.black,
+      collapsedBackgroundColor: isDarkMode ? Colors.black : Colors.white,
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
+    ),
+  );
 }
