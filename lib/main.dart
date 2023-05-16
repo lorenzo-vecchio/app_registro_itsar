@@ -13,6 +13,7 @@ import 'homepage.dart';
 import 'loginpage.dart';
 import 'data.dart';
 import 'notifi_service.dart';
+import '../providers/calendarPreference.dart';
 
 const fetchBackground = "fetchBackground";
 
@@ -129,6 +130,7 @@ class _MyAppState extends State<MyApp> {
       // Handle errors here
     }
     _themeModel = ThemeModel();
+    loadBoolMensile();
     setState(() {
       _isLoading = false;
     });

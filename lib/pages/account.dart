@@ -7,6 +7,7 @@ import 'dart:io';
 import '../loginpage.dart';
 import '../globals.dart';
 import '../providers/themeProvider.dart';
+import '../providers/calendarPreference.dart';
 
 class Account extends StatefulWidget {
   const Account({Key? key}) : super(key: key);
@@ -178,6 +179,47 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
                           ),
                   ),
                 ),
+              ],
+            ),
+            ExpansionTile(
+              title: Text('Calendario'),
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          ScreenSize.padding10, 0, 0, ScreenSize.padding10),
+                      child: Text(
+                        'Visione di default del calendario:',
+                        style: TextStyle(fontSize: 17),
+                      ),
+                    ),
+                  ],
+                ),
+                RadioListTile(
+                    title: Text('Mensile'),
+                    activeColor: darkRedITS,
+                    contentPadding: EdgeInsets.symmetric(vertical: 0),
+                    visualDensity: VisualDensity.compact,
+                    value: true,
+                    groupValue: calendarioMensile,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        changeMensilePreference(true);
+                      });
+                    }),
+                RadioListTile(
+                    title: Text('Settimanale'),
+                    activeColor: darkRedITS,
+                    contentPadding: EdgeInsets.symmetric(vertical: 0),
+                    visualDensity: VisualDensity.compact,
+                    value: false,
+                    groupValue: calendarioMensile,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        changeMensilePreference(false);
+                      });
+                    })
               ],
             ),
           ],

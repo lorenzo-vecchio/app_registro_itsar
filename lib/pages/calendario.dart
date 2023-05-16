@@ -4,6 +4,7 @@ import 'package:prova_registro/data.dart';
 import 'package:prova_registro/globals.dart';
 import 'package:provider/provider.dart';
 import '../providers/themeProvider.dart';
+import '../providers/calendarPreference.dart';
 
 class Calendario extends StatefulWidget {
   const Calendario({Key? key}) : super(key: key);
@@ -35,8 +36,8 @@ class _CalendarioState extends State<Calendario> {
         endTime: materia.fine,
         description: intervallo,
         color: () {
-          bool hasFourHours =
-              materia.fine.difference(materia.inizio) == const Duration(hours: 4);
+          bool hasFourHours = materia.fine.difference(materia.inizio) ==
+              const Duration(hours: 4);
           if (materia.isExam) {
             return Colors.deepPurple;
           }
@@ -69,8 +70,8 @@ class _CalendarioState extends State<Calendario> {
           endTime: materia.fine,
           description: intervallo,
           color: () {
-            bool hasFourHours =
-                materia.fine.difference(materia.inizio) == const Duration(hours: 4);
+            bool hasFourHours = materia.fine.difference(materia.inizio) ==
+                const Duration(hours: 4);
             if (materia.isExam) {
               return Colors.deepPurple;
             }
@@ -106,48 +107,50 @@ class _CalendarioState extends State<Calendario> {
   Widget build(BuildContext context) {
     // gets if it's in dark mode or not
     return Consumer<ThemeModel>(builder: (context, model, child) {
-    return Scaffold(
-      floatingActionButton: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 200),
-        child: FloatingActionButton(
-          key: ValueKey(filterIcon),
-          onPressed: _filtroSoloEsami,
-          backgroundColor: Colors.red,
-          child: Icon(filterIcon),
-        ),
-      ),
-      body: SafeArea(
-        child: Calendar(
-          eventTileHeight: 130,
-          startOnMonday: true,
-          weekDays: const ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'],
-          eventsList: soloEsami ? _examList : _eventList,
-          isExpandable: true,
-          eventDoneColor: Colors.green,
-          selectedColor: Colors.pink,
-          selectedTodayColor: Colors.red,
-          todayColor: Colors.red,
-          eventColor: null,
-          locale: 'it_IT',
-          todayButtonText: 'Oggi',
-          allDayEventText: 'All Day',
-          multiDayEndText: 'End',
-          isExpanded: true,
-          expandableDateFormat: 'EEEE dd MMMM yyyy',
-          datePickerType: DatePickerType.date,
-          dayOfWeekStyle: TextStyle(
-              color: model.isDarkMode ? Colors.white : Colors.black,
-              fontWeight: FontWeight.w800,
-              fontSize: 11),
-          displayMonthTextStyle: TextStyle(
-            color: model.isDarkMode ? Colors.white : Colors.black,
+      return Scaffold(
+        floatingActionButton: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 200),
+          child: FloatingActionButton(
+            key: ValueKey(filterIcon),
+            onPressed: _filtroSoloEsami,
+            backgroundColor: Colors.red,
+            child: Icon(filterIcon),
           ),
-          defaultDayColor: model.isDarkMode ? Colors.white : Colors.black,
-          defaultOutOfMonthDayColor: Colors.grey.shade500,
-          bottomBarTextStyle: TextStyle(color: model.isDarkMode ? Colors.white : Colors.black,),
         ),
-      ),
-    );
-  });
+        body: SafeArea(
+          child: Calendar(
+            eventTileHeight: 130,
+            startOnMonday: true,
+            weekDays: const ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'],
+            eventsList: soloEsami ? _examList : _eventList,
+            isExpandable: true,
+            eventDoneColor: Colors.green,
+            selectedColor: Colors.pink,
+            selectedTodayColor: Colors.red,
+            todayColor: Colors.red,
+            eventColor: null,
+            locale: 'it_IT',
+            todayButtonText: 'Oggi',
+            allDayEventText: 'All Day',
+            multiDayEndText: 'End',
+            isExpanded: calendarioMensile,
+            expandableDateFormat: 'EEEE dd MMMM yyyy',
+            datePickerType: DatePickerType.date,
+            dayOfWeekStyle: TextStyle(
+                color: model.isDarkMode ? Colors.white : Colors.black,
+                fontWeight: FontWeight.w800,
+                fontSize: 11),
+            displayMonthTextStyle: TextStyle(
+              color: model.isDarkMode ? Colors.white : Colors.black,
+            ),
+            defaultDayColor: model.isDarkMode ? Colors.white : Colors.black,
+            defaultOutOfMonthDayColor: Colors.grey.shade500,
+            bottomBarTextStyle: TextStyle(
+              color: model.isDarkMode ? Colors.white : Colors.black,
+            ),
+          ),
+        ),
+      );
+    });
   }
 }

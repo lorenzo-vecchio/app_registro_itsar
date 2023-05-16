@@ -84,8 +84,8 @@ class _HomePageState extends State<HomePage> {
                   text: 'Presenze',
                 ),
                 GButton(
-                  icon: Icons.account_box_outlined,
-                  text: 'Account',
+                  icon: Icons.settings_outlined,
+                  text: 'Impostazioni',
                 )
               ],
               selectedIndex: _selectedIndex,
