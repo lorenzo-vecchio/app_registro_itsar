@@ -41,6 +41,9 @@ class Data {
         valid = false;
       }
     } else {
+      final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
+      username = await storage.read(key: 'username') ?? 'errore';
+      password = await storage.read(key: 'password') ?? 'errore';
       await _readDataFromDisc();
       _convertJSON();
     }
