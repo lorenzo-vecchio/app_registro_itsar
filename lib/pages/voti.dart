@@ -58,9 +58,10 @@ class _VotiState extends State<Voti> {
                     ),
                   ),
                   title: Text(
-                    "Grades",
+                    "Voti",
                     style: TextStyle(
-                      backgroundColor: model.isDarkMode ? Colors.black : Colors.white,
+                      backgroundColor:
+                          model.isDarkMode ? Colors.black : Colors.white,
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
@@ -79,7 +80,9 @@ class _VotiState extends State<Voti> {
                         0.048, // distanza orizzontale dai bordi del dispositivo per quanto riguarda il container dei voti
                     vertical: ScreenSize.screenHeight * 0.007), //15,5
                 child: ListTile(
-                  tileColor: model.isDarkMode ? tileBackgroundDarkMode : tileBackgoundLightMode ,
+                  tileColor: model.isDarkMode
+                      ? tileBackgroundDarkMode
+                      : tileBackgoundLightMode,
                   title: Text(
                     voto.nomeMateria,
                     style: const TextStyle(fontWeight: FontWeight.bold),

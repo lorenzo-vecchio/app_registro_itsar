@@ -76,7 +76,8 @@ class _LoginPageState extends State<LoginPage> {
                         padding: const EdgeInsets.all(25.0),
                         child: Image(
                             image: model.isDarkMode
-                                ? const AssetImage('lib/assets/ITS-Logo-Negativo.png')
+                                ? const AssetImage(
+                                    'lib/assets/ITS-Logo-Negativo.png')
                                 : const AssetImage(
                                     'lib/assets/ITS-Logo-Positivo-Login.png')),
                       ),
@@ -119,8 +120,10 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 16),
                       _isLoading
-                          ? const CircularProgressIndicator()
-                          : Container(
+                          ? CircularProgressIndicator(
+                              color: darkRedITS,
+                            )
+                          : SizedBox(
                               width: 100,
                               height: 50,
                               child: ElevatedButton(

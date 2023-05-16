@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:prova_registro/screen_size.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 import '../loginpage.dart';
@@ -14,7 +15,7 @@ class Account extends StatefulWidget {
   State<Account> createState() => _AccountState();
 }
 
-class _AccountState extends State<Account> {
+class _AccountState extends State<Account> with WidgetsBindingObserver {
   bool _isLoading = false;
   String Username = '';
 
@@ -32,41 +33,92 @@ class _AccountState extends State<Account> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    final model = Provider.of<ThemeModel>(context, listen: false);
+    if (model.systemTheme) {
+      model.chooseTheme(
+          true); // Imposta il tema di sistema solo se il tile è attivo
+    }
+    super.didChangePlatformBrightness();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    MediaQueryData _mediaQueryData = MediaQuery.of(context);
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Consumer<ThemeModel>(builder: (context, model, child) {
+      print(model.isDarkMode);
       return Scaffold(
         body: Column(
           children: [
             Container(
               margin: EdgeInsets.symmetric(
-                  vertical: _mediaQueryData.size.height / 6,
-                  horizontal: _mediaQueryData.size.width),
-            ),
-            FloatingActionButton(
-              onPressed: () {
-                final themeModel =
-                    Provider.of<ThemeModel>(context, listen: false);
-                themeModel.toggleTheme();
-              },
-              child: Icon(
-                context.watch<ThemeModel>().isDarkMode
-                    ? Icons.wb_sunny
-                    : Icons.nightlight_round,
+                vertical: mediaQueryData.size.height / 6,
+                horizontal: mediaQueryData.size.width,
               ),
             ),
+            FloatingActionButton(
+              backgroundColor: darkRedITS,
+              onPressed: () {
+                if (model.systemTheme) {
+                  print("Sono impostato su sistema");
+                } else {
+                  model.toggleTheme();
+                }
+              },
+              child: Icon(
+                model.isDarkMode ? Icons.wb_sunny : Icons.nightlight_round,
+                color: model.isDarkMode ? Colors.white : Colors.black,
+              ),
+            ),
+            SizedBox(
+              height: ScreenSize.padding8,
+            ),
+            SwitchListTile(
+              activeColor: Colors.blueAccent,
+              inactiveTrackColor: darkRedITS,
+              title: Text(
+                'Usa tema del sistema',
+                style: TextStyle(
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
+              ),
+              value: model.systemTheme,
+              onChanged: (bool value) {
+                model.chooseTheme(value);
+                print(model.isDarkMode);
+              },
+            ),
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Il tuo account attuale è:',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: model.isDarkMode ? Colors.white : Colors.black ),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 globalData.username,
-                style: TextStyle(fontSize: 16,color: model.isDarkMode ? Colors.white : Colors.black ),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: model.isDarkMode ? Colors.white : Colors.black,
+                ),
               ),
             ),
             ElevatedButton(
@@ -78,7 +130,7 @@ class _AccountState extends State<Account> {
                 Navigator.pushAndRemoveUntil<dynamic>(
                   context,
                   MaterialPageRoute<dynamic>(
-                    builder: (BuildContext context) => LoginPage(),
+                    builder: (BuildContext context) => const LoginPage(),
                   ),
                   (route) => false,
                 );
@@ -86,7 +138,16 @@ class _AccountState extends State<Account> {
                   _isLoading = false;
                 });
               },
-              child: _isLoading ? CircularProgressIndicator() : Text('Logout',style: TextStyle(color: model.isDarkMode ? Colors.white : Colors.black ),),
+              child: _isLoading
+                  ? CircularProgressIndicator(
+                      color: darkRedITS,
+                    )
+                  : Text(
+                      'Logout',
+                      style: TextStyle(
+                        color: model.isDarkMode ? Colors.white : Colors.black,
+                      ),
+                    ),
             ),
           ],
         ),
