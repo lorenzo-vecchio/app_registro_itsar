@@ -1,6 +1,7 @@
 import 'package:carousel_indicator/carousel_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:prova_registro/widgets/lesson_onTap.dart';
 import 'package:provider/provider.dart';
 import '../globals.dart';
 import '../data.dart';
@@ -280,176 +281,10 @@ class _HomeState extends State<Home> {
                                   List<Widget> listaMaterie = [];
                                   for (var j = 0; j < i.length; j++) {
                                     listaMaterie.add(
-                                      Padding(
-                                        padding: j == 0
-                                            ? EdgeInsets.fromLTRB(
-                                                0,
-                                                ScreenSize.screenHeight * 0.04,
-                                                0,
-                                                0)
-                                            : EdgeInsets.fromLTRB(
-                                                0,
-                                                ScreenSize.screenHeight * 0.04,
-                                                0,
-                                                0),
-                                        child: GestureDetector(
-                                          onLongPress: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) => Theme(
-                                                data: ThemeData(
-                                                  // Personalizza lo stile della finestra di dialogo
-                                                  dialogTheme: DialogTheme(
-                                                    backgroundColor: i[j]
-                                                                .inizio
-                                                                .toString()
-                                                                .substring(
-                                                                    11) ==
-                                                            '09:00:00.000'
-                                                        ? model.isDarkMode
-                                                            ? morningLessonDarkMode
-                                                            : morningLessonLightMode
-                                                        : model.isDarkMode
-                                                            ? afternoonLessonDarkMode
-                                                            : afternoonLessonLightMode,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              16),
-                                                    ),
-                                                  ),
-                                                ),
-                                                child: AlertDialog(
-                                                  title: Text(
-                                                    i[j].nomeMateria,
-                                                    style: TextStyle(
-                                                      color: model.isDarkMode
-                                                          ? Colors.white
-                                                          : Colors.black,
-                                                    ),
-                                                  ),
-                                                  content: Text(
-                                                    'Aula: ${i[j].aula}\n'
-                                                    'Orario: ${i[j].inizio.toString().substring(11).substring(0, 5)}-${i[j].fine.toString().substring(11).substring(0, 5)}\n'
-                                                    'Intervallo: ${getInterval(i[j])}',
-                                                    style: TextStyle(
-                                                      color: model.isDarkMode
-                                                          ? Colors.white
-                                                          : Colors.black,
-                                                    ),
-                                                  ),
-                                                  actions: [
-                                                    ElevatedButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStateProperty
-                                                                .resolveWith<
-                                                                    Color?>(
-                                                          (Set<MaterialState>
-                                                              states) {
-                                                            if (states.contains(
-                                                                MaterialState
-                                                                    .pressed)) {
-                                                              return Colors.grey
-                                                                  .shade300;
-                                                            }
-                                                            return i[j]
-                                                                        .inizio
-                                                                        .toString()
-                                                                        .substring(
-                                                                            11) ==
-                                                                    '09:00:00.000'
-                                                                ? model.isDarkMode
-                                                                    ? afternoonLessonDarkMode
-                                                                    : afternoonLessonLightMode
-                                                                : model.isDarkMode
-                                                                    ? morningLessonDarkMode
-                                                                    : morningLessonLightMode;
-                                                          },
-                                                        ),
-                                                      ),
-                                                      child: Text(
-                                                        'Chiudi',
-                                                        style: TextStyle(
-                                                          color: model
-                                                                  .isDarkMode
-                                                              ? Colors.white
-                                                              : Colors.black,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              color: i[j]
-                                                          .inizio
-                                                          .toString()
-                                                          .substring(11) ==
-                                                      '09:00:00.000'
-                                                  ? model.isDarkMode
-                                                      ? morningLessonDarkMode
-                                                      : morningLessonLightMode
-                                                  : model.isDarkMode
-                                                      ? afternoonLessonDarkMode
-                                                      : afternoonLessonLightMode,
-                                            ),
-                                            padding: EdgeInsets.symmetric(
-                                              vertical:
-                                                  ScreenSize.screenHeight *
-                                                      0.008,
-                                              horizontal: ScreenSize.padding8,
-                                            ),
-                                            child: FractionallySizedBox(
-                                              widthFactor: 0.80,
-                                              child: Padding(
-                                                padding: EdgeInsets.all(
-                                                    ScreenSize.padding8),
-                                                child: RichText(
-                                                  text: TextSpan(
-                                                    style: DefaultTextStyle.of(
-                                                            context)
-                                                        .style,
-                                                    children: <TextSpan>[
-                                                      TextSpan(
-                                                        text: i[j].nomeMateria,
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: model
-                                                                  .isDarkMode
-                                                              ? Colors.white
-                                                              : Colors.black,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text:
-                                                            '\nAula: ${i[j].aula}\nOrario: ${i[j].inizio.toString().substring(11).substring(0, 5)}-${i[j].fine.toString().substring(11).substring(0, 5)}\nIntervallo: ${getInterval(i[j])}',
-                                                        style: TextStyle(
-                                                          color: model
-                                                                  .isDarkMode
-                                                              ? Colors.white
-                                                              : Colors.black,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                      LessonOnTap(
+                                          i: i,
+                                          listaMaterie: listaMaterie,
+                                          j: j),
                                     );
                                   }
                                   return Column(
