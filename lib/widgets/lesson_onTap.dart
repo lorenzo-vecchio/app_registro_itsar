@@ -8,6 +8,7 @@ class LessonOnTap extends StatefulWidget {
   final i;
   final List<Widget> listaMaterie;
   final j;
+
   const LessonOnTap(
       {Key? key, required this.i, required this.listaMaterie, required this.j})
       : super(key: key);
