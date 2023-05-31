@@ -44,11 +44,18 @@ class _HomeState extends State<Home> {
 
   List<Materia> _findTomorrowMaterie() {
     final now = DateTime.now();
+    final tomorrow = DateTime.now().add(Duration(days: 1));
+    print(now.year);
+    print(tomorrow.month);
+    print(tomorrow.day);
+    if(globalData.materieList.where((materia) => materia.inizio.day == tomorrow.day).isEmpty){
+      print(materieDomani);
+    }
     return globalData.materieList
         .where((materia) =>
             materia.inizio.year == now.year &&
-            materia.inizio.month == now.month &&
-            materia.inizio.day == now.day + 1)
+            materia.inizio.month == tomorrow.month &&
+            materia.inizio.day == tomorrow.day)
         .toList();
   }
 
@@ -86,7 +93,7 @@ class _HomeState extends State<Home> {
                 options: CarouselOptions(
                   height: 500,
                   viewportFraction: 1,
-                  initialPage: 0,
+                  initialPage: 0, 
                   enableInfiniteScroll: false,
                   onPageChanged: (index, reason) {
                     setState(() {
@@ -142,6 +149,8 @@ class _HomeState extends State<Home> {
                                   : Colors.grey.shade300.withOpacity(0.50),
                             ),
                             child: () {
+                              print("stampiamo i:");
+                              print(i.isEmpty);
                               if (i.isEmpty) {
                                 return Column(
                                   children: [
