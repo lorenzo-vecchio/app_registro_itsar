@@ -44,16 +44,14 @@ class _HomeState extends State<Home> {
 
   List<Materia> _findTomorrowMaterie() {
     final now = DateTime.now();
+    //Aggiunto tomorrow per confrontare la data odierna con quella del giorno successivo
     final tomorrow = DateTime.now().add(Duration(days: 1));
-    print(now.year);
-    print(tomorrow.month);
-    print(tomorrow.day);
-    if(globalData.materieList.where((materia) => materia.inizio.day == tomorrow.day).isEmpty){
-      print(materieDomani);
-    }
+    // print(tomorrow.year);
+    // print(tomorrow.month);
+    // print(tomorrow.day);
     return globalData.materieList
         .where((materia) =>
-            materia.inizio.year == now.year &&
+            materia.inizio.year == tomorrow.year &&
             materia.inizio.month == tomorrow.month &&
             materia.inizio.day == tomorrow.day)
         .toList();
@@ -149,8 +147,6 @@ class _HomeState extends State<Home> {
                                   : Colors.grey.shade300.withOpacity(0.50),
                             ),
                             child: () {
-                              print("stampiamo i:");
-                              print(i.isEmpty);
                               if (i.isEmpty) {
                                 return Column(
                                   children: [
