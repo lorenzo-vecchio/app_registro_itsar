@@ -17,6 +17,7 @@ class Voti extends StatefulWidget {
 class _VotiState extends State<Voti> {
   final GlobalKey<LiquidPullToRefreshState> _refreshIndicatorKey =
       GlobalKey<LiquidPullToRefreshState>();
+  bool isLoading = false;
 
   @override
   void didChangeDependencies() {
@@ -25,7 +26,11 @@ class _VotiState extends State<Voti> {
   }
 
   Future<void> _handleRefresh() async {
-    await Future.delayed(const Duration(seconds: 1));
+    Data newData = Data.fromCredentials(globalData.username, globalData.password);
+    await newData.initialize();
+    setState(() {
+      globalData = newData;
+    });
   }
 
   @override
@@ -37,9 +42,7 @@ class _VotiState extends State<Voti> {
         body: LiquidPullToRefresh(
           key: _refreshIndicatorKey,
           onRefresh: _handleRefresh,
-          color: model.isDarkMode
-              ? Colors.black
-              : Colors.white,
+          color: model.isDarkMode ? Colors.black : Colors.white,
           showChildOpacityTransition: false,
           animSpeedFactor: 2,
           backgroundColor: darkRedITS,
