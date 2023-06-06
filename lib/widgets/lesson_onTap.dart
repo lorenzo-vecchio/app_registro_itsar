@@ -84,32 +84,41 @@ class _LessonOnTapState extends State<LessonOnTap> {
                     ),
                   ),
                   actions: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.resolveWith<Color?>(
-                          (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.pressed)) {
-                              return Colors.grey.shade300;
-                            }
-                            return i[j].inizio.toString().substring(11) ==
-                                    '09:00:00.000'
-                                ? model.isDarkMode
-                                    ? afternoonLessonDarkMode
-                                    : afternoonLessonLightMode
-                                : model.isDarkMode
-                                    ? morningLessonDarkMode
-                                    : morningLessonLightMode;
-                          },
+                    Align(
+                      alignment: Alignment.center,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        style: ButtonStyle(
+                          alignment: Alignment.center,
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                            )
+                          ),
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith<Color?>(
+                            (Set<MaterialState> states) {
+                              if (states.contains(MaterialState.pressed)) {
+                                return Colors.grey.shade300;
+                              }
+                              return i[j].inizio.toString().substring(11) ==
+                                      '09:00:00.000'
+                                  ? model.isDarkMode
+                                      ? afternoonLessonDarkMode
+                                      : afternoonLessonLightMode
+                                  : model.isDarkMode
+                                      ? morningLessonDarkMode
+                                      : morningLessonLightMode;
+                            },
+                          ),
                         ),
-                      ),
-                      child: Text(
-                        'Chiudi',
-                        style: TextStyle(
-                          color: model.isDarkMode ? Colors.white : Colors.black,
+                        child: Text(
+                          'Chiudi',
+                          style: TextStyle(
+                            color: model.isDarkMode ? Colors.white : Colors.black,
+                          ),
                         ),
                       ),
                     ),
