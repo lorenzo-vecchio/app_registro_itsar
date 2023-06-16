@@ -29,6 +29,9 @@ Color morningLessonLightMode = Colors.yellow;
 // lezione pomeriggio
 Color afternoonLessonDarkMode = Colors.indigo;
 Color afternoonLessonLightMode = Colors.lightBlue;
+// Lezioni Extra
+Color extraLessonDarkMode = Colors.pink.shade400;
+Color extraLessonLightMode = Colors.pinkAccent.shade100;
 // carousel indicator
 Color carouselIndicatorNotActiveDarkMode = Colors.white30;
 Color carouselIndicatorNotActiveLightMode =
