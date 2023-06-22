@@ -26,7 +26,8 @@ class _VotiState extends State<Voti> {
   }
 
   Future<void> _handleRefresh() async {
-    Data newData = Data.fromCredentials(globalData.username, globalData.password);
+    Data newData =
+        Data.fromCredentials(globalData.username, globalData.password);
     await newData.initialize();
     setState(() {
       globalData = newData;
@@ -55,13 +56,13 @@ class _VotiState extends State<Voti> {
                 Color getCircleColor(Voto voto) {
                   if (voto.voto >= 27.0) {
                     return Colors.green;
-                  } else if (voto.voto > 18.0 && voto.voto < 27) {
+                  } else if (voto.voto >= 18.0 && voto.voto < 27) {
                     return Colors.orange;
                   } else {
                     return Colors.red;
                   }
                 }
-      
+
                 if (index == 0) {
                   return Average();
                 }
@@ -111,18 +112,35 @@ class _VotiState extends State<Voti> {
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       trailing: Container(
-                        padding: const EdgeInsets.all(15), //15
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: getCircleColor(voto),
-                        ),
-                        child: Text(
-                          voto.voto.toString(),
-                          style: const TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        padding: voto.voto < 10
+                            ? voto.voto == 0
+                                ? const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 9)
+                                : const EdgeInsets.symmetric(
+                                    horizontal: 22, vertical: 16)
+                            : const EdgeInsets.all(15), //15
+                        decoration: voto.voto != 0
+                            ? BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: getCircleColor(voto),
+                              )
+                            : const BoxDecoration(
+                                shape: BoxShape.circle, color: Colors.green),
+                        child: voto.voto == 0
+                            ? Icon(
+                                Icons.check,
+                                color: model.isDarkMode
+                                    ? Colors.white
+                                    : Colors.black,
+                                size: 40,
+                              )
+                            : Text(
+                                voto.voto.toString(),
+                                style: const TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                       ),
                       contentPadding: EdgeInsets.symmetric(
                           horizontal: ScreenSize.screenWidth * 0.02,

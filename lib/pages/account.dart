@@ -90,7 +90,7 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
                   value: model.systemTheme,
                   onChanged: (bool value) {
                     model.chooseTheme(value);
-                    print(model.isDarkMode);
+                    //print(model.isDarkMode);
                   },
                 ),
                 Padding(
@@ -125,6 +125,47 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
                     ),
                   ),
                 ),
+              ],
+            ),
+            ExpansionTile(
+              title: const Text('Calendario'),
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          ScreenSize.padding10, 0, 0, ScreenSize.padding10),
+                      child: const Text(
+                        'Visione di default del calendario:',
+                        style: TextStyle(fontSize: 17),
+                      ),
+                    ),
+                  ],
+                ),
+                RadioListTile(
+                    title: const Text('Mensile'),
+                    activeColor: darkRedITS,
+                    contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                    visualDensity: VisualDensity.compact,
+                    value: true,
+                    groupValue: calendarioMensile,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        changeMensilePreference(true);
+                      });
+                    }),
+                RadioListTile(
+                    title: const Text('Settimanale'),
+                    activeColor: darkRedITS,
+                    contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                    visualDensity: VisualDensity.compact,
+                    value: false,
+                    groupValue: calendarioMensile,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        changeMensilePreference(false);
+                      });
+                    })
               ],
             ),
             ExpansionTile(
@@ -182,47 +223,6 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
                           ),
                   ),
                 ),
-              ],
-            ),
-            ExpansionTile(
-              title: const Text('Calendario'),
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(
-                          ScreenSize.padding10, 0, 0, ScreenSize.padding10),
-                      child: const Text(
-                        'Visione di default del calendario:',
-                        style: TextStyle(fontSize: 17),
-                      ),
-                    ),
-                  ],
-                ),
-                RadioListTile(
-                    title: const Text('Mensile'),
-                    activeColor: darkRedITS,
-                    contentPadding: const EdgeInsets.symmetric(vertical: 0),
-                    visualDensity: VisualDensity.compact,
-                    value: true,
-                    groupValue: calendarioMensile,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        changeMensilePreference(true);
-                      });
-                    }),
-                RadioListTile(
-                    title: const Text('Settimanale'),
-                    activeColor: darkRedITS,
-                    contentPadding: const EdgeInsets.symmetric(vertical: 0),
-                    visualDensity: VisualDensity.compact,
-                    value: false,
-                    groupValue: calendarioMensile,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        changeMensilePreference(false);
-                      });
-                    })
               ],
             ),
           ],

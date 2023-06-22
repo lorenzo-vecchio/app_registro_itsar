@@ -9,23 +9,26 @@ class Average extends StatelessWidget {
 
   double _calcolaMedia() {
     int somma = 0;
+    int votoDaEliminare = 0;
+    int totVoti = 0;
     for (Voto voto in globalData.votiList) {
-      somma += voto.voto;
+      voto.voto > 0 ? somma = somma + voto.voto : votoDaEliminare++;
     }
-    return somma / globalData.votiList.length;
+    totVoti = globalData.votiList.length - votoDaEliminare;
+    return somma / totVoti;
   }
 
   final ValueNotifier<double> _valueNotifier = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
-    MediaQueryData _mediaQueryData = MediaQuery.of(context);
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Padding(
       padding: EdgeInsets.fromLTRB(
-          _mediaQueryData.size.width * 0.048,
-          _mediaQueryData.size.width * 0.048,
-          _mediaQueryData.size.width * 0.048,
-          _mediaQueryData.size.width * 0.048),
+          mediaQueryData.size.width * 0.048,
+          mediaQueryData.size.width * 0.048,
+          mediaQueryData.size.width * 0.048,
+          mediaQueryData.size.width * 0.048),
       child: ListTile(
         contentPadding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
         shape: RoundedRectangleBorder(
