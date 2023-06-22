@@ -113,7 +113,7 @@ class _VotiState extends State<Voti> {
                       ),
                       trailing: Container(
                         padding: voto.voto < 10
-                            ? voto.voto == 0
+                            ? voto.nomeMateria.contains("UFT05")
                                 ? const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 9)
                                 : const EdgeInsets.symmetric(

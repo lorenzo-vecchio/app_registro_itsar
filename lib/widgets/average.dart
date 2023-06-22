@@ -12,7 +12,9 @@ class Average extends StatelessWidget {
     int votoDaEliminare = 0;
     int totVoti = 0;
     for (Voto voto in globalData.votiList) {
-      voto.voto > 0 ? somma = somma + voto.voto : votoDaEliminare++;
+      voto.nomeMateria.contains("UFT05")
+          ? votoDaEliminare++
+          : somma = somma + voto.voto;
     }
     totVoti = globalData.votiList.length - votoDaEliminare;
     return somma / totVoti;
