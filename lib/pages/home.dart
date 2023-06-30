@@ -54,8 +54,7 @@ class _HomeState extends State<Home> {
         .where((materia) =>
     materia.inizio.year == tomorrow.year &&
         materia.inizio.month == tomorrow.month &&
-        materia.inizio.day == tomorrow.day)
-        .toList();
+        materia.inizio.day == tomorrow.day).toList();
   }
 
   List<Materia> _getUpcomingExams() {
@@ -92,7 +91,7 @@ class _HomeState extends State<Home> {
                 options: CarouselOptions(
                   height: 500,
                   viewportFraction: 1,
-                  initialPage: 0,
+                  initialPage: 0, 
                   enableInfiniteScroll: false,
                   onPageChanged: (index, reason) {
                     setState(() {
