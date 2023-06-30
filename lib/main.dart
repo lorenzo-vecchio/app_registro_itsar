@@ -67,7 +67,7 @@ Future<void> main() async {
   });
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.dark.copyWith(
-      statusBarColor: const Color.fromRGBO(0, 0, 0, 0.5),
+      statusBarIconBrightness: Brightness.dark,
       statusBarBrightness: Brightness.dark,
     ),
   );

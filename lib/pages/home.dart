@@ -1,6 +1,7 @@
 import 'package:carousel_indicator/carousel_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:prova_registro/widgets/lesson_onTap.dart';
 import 'package:provider/provider.dart';
 import '../globals.dart';
 import '../data.dart';
@@ -51,10 +52,9 @@ class _HomeState extends State<Home> {
     // print(tomorrow.day);
     return globalData.materieList
         .where((materia) =>
-            materia.inizio.year == tomorrow.year &&
-            materia.inizio.month == tomorrow.month &&
-            materia.inizio.day == tomorrow.day)
-        .toList();
+    materia.inizio.year == tomorrow.year &&
+        materia.inizio.month == tomorrow.month &&
+        materia.inizio.day == tomorrow.day).toList();
   }
 
   List<Materia> _getUpcomingExams() {
@@ -285,76 +285,10 @@ class _HomeState extends State<Home> {
                                   List<Widget> listaMaterie = [];
                                   for (var j = 0; j < i.length; j++) {
                                     listaMaterie.add(
-                                      Padding(
-                                        padding: j == 0
-                                            ? EdgeInsets.fromLTRB(
-                                                0,
-                                                ScreenSize.screenHeight * 0.04,
-                                                0,
-                                                0)
-                                            : EdgeInsets.fromLTRB(
-                                                0,
-                                                ScreenSize.screenHeight * 0.04,
-                                                0,
-                                                0),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            color: i[j]
-                                                        .inizio
-                                                        .toString()
-                                                        .substring(11) ==
-                                                    '09:00:00.000'
-                                                ? model.isDarkMode
-                                                    ? morningLessonDarkMode
-                                                    : morningLessonLightMode
-                                                : model.isDarkMode
-                                                    ? afternoonLessonDarkMode
-                                                    : afternoonLessonLightMode,
-                                          ),
-                                          padding: EdgeInsets.symmetric(
-                                              vertical:
-                                                  ScreenSize.screenHeight *
-                                                      0.008,
-                                              horizontal: ScreenSize.padding8),
-                                          child: FractionallySizedBox(
-                                            widthFactor: 0.80,
-                                            child: Padding(
-                                              padding: EdgeInsets.all(
-                                                  ScreenSize.padding8),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                  style: DefaultTextStyle.of(
-                                                          context)
-                                                      .style,
-                                                  children: <TextSpan>[
-                                                    TextSpan(
-                                                      text: i[j].nomeMateria,
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: model.isDarkMode
-                                                            ? Colors.white
-                                                            : Colors.black,
-                                                      ),
-                                                    ),
-                                                    TextSpan(
-                                                      text:
-                                                          '\nAula: ${i[j].aula}\nOrario: ${i[j].inizio.toString().substring(11).substring(0, 5)}-${i[j].fine.toString().substring(11).substring(0, 5)}\nIntervallo: ${getInterval(i[j])}',
-                                                      style: TextStyle(
-                                                        color: model.isDarkMode
-                                                            ? Colors.white
-                                                            : Colors.black,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                      LessonOnTap(
+                                          i: i,
+                                          listaMaterie: listaMaterie,
+                                          j: j),
                                     );
                                   }
                                   return Column(

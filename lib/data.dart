@@ -74,17 +74,17 @@ class Data {
       String materia = element['materia'];
       double presenza = element['ore_presenza'];
       double assenza = element['ore_assenza'];
-      int ore_presenza = presenza.floor();
-      int minuti_presenza = ((presenza - ore_presenza) * 100).toInt();
-      int ore_assenza = assenza.floor();
-      int minuti_assenza = ((assenza - ore_assenza) * 100).toInt();
+      int orePresenza = presenza.floor();
+      int minutiPresenza = ((presenza - orePresenza) * 100).toInt();
+      int oreAssenza = assenza.floor();
+      int minutiAssenza = ((assenza - oreAssenza) * 100).toInt();
       DateTime data = DateTime.parse(
           element['date'].replaceAll('/', '-').split('-').reversed.join());
       DateTime inizio = DateFormat('HH:mm').parse(element['ora_inizio']);
       DateTime fine = DateFormat('HH:mm').parse(element['ora_fine']);
-      PresenzaAssenza pres_ass = PresenzaAssenza(materia, ore_presenza,
-          minuti_presenza, ore_assenza, minuti_assenza, data, inizio, fine);
-      presenzeList.add(pres_ass);
+      PresenzaAssenza presAss = PresenzaAssenza(materia, orePresenza,
+          minutiPresenza, oreAssenza, minutiAssenza, data, inizio, fine);
+      presenzeList.add(presAss);
     });
     _getSommaPresenzeAssenze();
   }
@@ -129,11 +129,9 @@ class Data {
     Data newData = this;
 
     // Create a map of all the grades in oldData, with the nomeMateria field as the key
-    Map<String, Voto> oldGrades = Map.fromIterable(
-      oldData.votiList,
-      key: (v) => v.nomeMateria,
-      value: (v) => v,
-    );
+    Map<String, Voto> oldGrades = {
+      for (var v in oldData.votiList) v.nomeMateria: v
+    };
 
     // Check if each grade in newData is already in oldGrades, comparing the nomeMateria field
     for (Voto newGrade in newData.votiList) {
@@ -170,6 +168,7 @@ class Data {
     };
     sommaPresenzeAssenze = risultato;
   }
+
 }
 
 class Voto {

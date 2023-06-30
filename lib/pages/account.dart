@@ -59,7 +59,6 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Consumer<ThemeModel>(builder: (context, model, child) {
-      print(model.isDarkMode);
       return Scaffold(
         body: Column(
           children: [
@@ -68,7 +67,7 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
                 Padding(
                   padding: EdgeInsets.fromLTRB(ScreenSize.padding20,
                       ScreenSize.screenHeight * 0.07, 0, ScreenSize.padding20),
-                  child: Text(
+                  child: const Text(
                     'Impostazioni',
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
@@ -76,7 +75,7 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
               ],
             ),
             ExpansionTile(
-              title: Text('Tema'),
+              title: const Text('Tema'),
               children: [
                 SwitchListTile(
                   activeColor: Colors.green,
@@ -91,42 +90,87 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
                   value: model.systemTheme,
                   onChanged: (bool value) {
                     model.chooseTheme(value);
-                    print(model.isDarkMode);
+                    //print(model.isDarkMode);
                   },
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, ScreenSize.padding20),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 0, horizontal: ScreenSize.padding10),
-                        child: Text('Cambia tema:'),
-                      ),
-                      FloatingActionButton(
-                        backgroundColor: darkRedITS,
-                        onPressed: () {
-                          if (model.systemTheme) {
-                            print("Sono impostato su sistema");
-                          } else {
-                            model.toggleTheme();
-                          }
-                        },
-                        child: Icon(
-                          model.isDarkMode
-                              ? Icons.wb_sunny
-                              : Icons.nightlight_round,
-                          color: model.isDarkMode ? Colors.white : Colors.black,
-                        ),
-                      ),
-                    ],
+                  padding: EdgeInsets.symmetric(
+                      vertical: 0, horizontal: ScreenSize.padding10),
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: ScreenSize.padding8),
+                    child: Row(
+                      children: [
+                        if (!model.systemTheme) ...[
+                          const Text('Cambia tema: '),
+                          FloatingActionButton(
+                            backgroundColor: darkRedITS,
+                            onPressed: () {
+                              if (model.systemTheme) {
+                                debugPrint("Tema di sistema");
+                              } else {
+                                model.toggleTheme();
+                              }
+                            },
+                            child: Icon(
+                              model.isDarkMode
+                                  ? Icons.wb_sunny
+                                  : Icons.nightlight_round,
+                              color: model.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
             ExpansionTile(
+              title: const Text('Calendario'),
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          ScreenSize.padding10, 0, 0, ScreenSize.padding10),
+                      child: const Text(
+                        'Visione di default del calendario:',
+                        style: TextStyle(fontSize: 17),
+                      ),
+                    ),
+                  ],
+                ),
+                RadioListTile(
+                    title: const Text('Mensile'),
+                    activeColor: darkRedITS,
+                    contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                    visualDensity: VisualDensity.compact,
+                    value: true,
+                    groupValue: calendarioMensile,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        changeMensilePreference(true);
+                      });
+                    }),
+                RadioListTile(
+                    title: const Text('Settimanale'),
+                    activeColor: darkRedITS,
+                    contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                    visualDensity: VisualDensity.compact,
+                    value: false,
+                    groupValue: calendarioMensile,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        changeMensilePreference(false);
+                      });
+                    })
+              ],
+            ),
+            ExpansionTile(
               expandedCrossAxisAlignment: CrossAxisAlignment.start,
-              title: Text('Account'),
+              title: const Text('Account'),
               children: [
                 SizedBox(
                   height: 0,
@@ -171,7 +215,7 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
                         ? CircularProgressIndicator(
                             color: darkRedITS,
                           )
-                        : Text(
+                        : const Text(
                             'Logout',
                             style: TextStyle(
                                 color: Colors.white,
@@ -179,47 +223,6 @@ class _AccountState extends State<Account> with WidgetsBindingObserver {
                           ),
                   ),
                 ),
-              ],
-            ),
-            ExpansionTile(
-              title: Text('Calendario'),
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(
-                          ScreenSize.padding10, 0, 0, ScreenSize.padding10),
-                      child: Text(
-                        'Visione di default del calendario:',
-                        style: TextStyle(fontSize: 17),
-                      ),
-                    ),
-                  ],
-                ),
-                RadioListTile(
-                    title: Text('Mensile'),
-                    activeColor: darkRedITS,
-                    contentPadding: EdgeInsets.symmetric(vertical: 0),
-                    visualDensity: VisualDensity.compact,
-                    value: true,
-                    groupValue: calendarioMensile,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        changeMensilePreference(true);
-                      });
-                    }),
-                RadioListTile(
-                    title: Text('Settimanale'),
-                    activeColor: darkRedITS,
-                    contentPadding: EdgeInsets.symmetric(vertical: 0),
-                    visualDensity: VisualDensity.compact,
-                    value: false,
-                    groupValue: calendarioMensile,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        changeMensilePreference(false);
-                      });
-                    })
               ],
             ),
           ],

@@ -20,13 +20,14 @@ class _CalendarioState extends State<Calendario> {
   IconData filterIcon = Icons.filter_list;
 
   @override
-  void initState() {
-    super.initState();
-    _createNeatCleanEventList();
-    _createExamList();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final themeProvider = Provider.of<ThemeModel>(context, listen: false);
+    _createNeatCleanEventList(themeProvider.isDarkMode);
+    _createExamList(themeProvider.isDarkMode);
   }
 
-  void _createNeatCleanEventList() {
+  void _createNeatCleanEventList(isDarkMode) {
     List<Materia> eventiMaterie = globalData.materieList;
     for (Materia materia in eventiMaterie) {
       String intervallo = 'Intervallo: ${getInterval(materia)}';
@@ -39,19 +40,23 @@ class _CalendarioState extends State<Calendario> {
           bool hasFourHours = materia.fine.difference(materia.inizio) ==
               const Duration(hours: 4);
           if (materia.isExam) {
-            return Colors.deepPurple;
+            return isDarkMode ? Colors.white : Colors.black;
           }
           if (hasFourHours && materia.inizio.hour < 11) {
-            return Colors.red;
+            return isDarkMode ? morningLessonDarkMode : morningLessonLightMode;
           }
           if (hasFourHours && !(materia.inizio.hour < 11)) {
-            return Colors.indigo;
+            return isDarkMode
+                ? afternoonLessonDarkMode
+                : afternoonLessonLightMode;
           }
           if (materia.fine.difference(materia.inizio) ==
               const Duration(hours: 9)) {
-            return Colors.green;
+            return isDarkMode
+                ? backgroundOggiNienteDarkMode
+                : backgroundOggiNienteLightMode;
           } else {
-            return Colors.yellow;
+            return isDarkMode ? extraLessonDarkMode : extraLessonLightMode;
           }
         }(),
       );
@@ -59,7 +64,7 @@ class _CalendarioState extends State<Calendario> {
     }
   }
 
-  void _createExamList() {
+  void _createExamList(isDarkMode) {
     List<Materia> eventiMaterie = globalData.materieList;
     for (Materia materia in eventiMaterie) {
       if (materia.isExam) {
@@ -73,19 +78,25 @@ class _CalendarioState extends State<Calendario> {
             bool hasFourHours = materia.fine.difference(materia.inizio) ==
                 const Duration(hours: 4);
             if (materia.isExam) {
-              return Colors.deepPurple;
+              return isDarkMode ? Colors.white : Colors.black;
             }
             if (hasFourHours && materia.inizio.hour < 11) {
-              return Colors.red;
+              return isDarkMode
+                  ? morningLessonDarkMode
+                  : morningLessonLightMode;
             }
             if (hasFourHours && !(materia.inizio.hour < 11)) {
-              return Colors.indigo;
+              return isDarkMode
+                  ? afternoonLessonDarkMode
+                  : afternoonLessonLightMode;
             }
             if (materia.fine.difference(materia.inizio) ==
                 const Duration(hours: 9)) {
-              return Colors.green;
+              return isDarkMode
+                  ? backgroundOggiNienteDarkMode
+                  : backgroundOggiNienteLightMode;
             } else {
-              return Colors.yellow;
+              return isDarkMode ? extraLessonDarkMode : extraLessonLightMode;
             }
           }(),
         );
