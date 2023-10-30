@@ -66,13 +66,12 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  
+
   // allow notifications
-  await Permission.notification.isDenied.then((value) {
-    if (value) {
-      Permission.notification.request();
-    }
-  });
+  if (await Permission.notification.isDenied) {
+    await Permission.notification.request();
+  }
+
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.dark.copyWith(
       statusBarIconBrightness: Brightness.dark,
