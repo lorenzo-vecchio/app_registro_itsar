@@ -14,9 +14,7 @@ class FirebaseNotification {
       sound: true,
     );
 
-    final token = await _firebaseMessaging.getToken(
-      
-    );
+    final token = await _firebaseMessaging.getToken();
 
     print('token: ${token!}');
   }

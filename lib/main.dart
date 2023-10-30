@@ -66,7 +66,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseNotification().initNotifications();
+  
   // allow notifications
   await Permission.notification.isDenied.then((value) {
     if (value) {
@@ -81,6 +81,8 @@ Future<void> main() async {
   );
   // notifications
   NotificationService().initNotification();
+  //firebase notification
+  await FirebaseNotification().initNotifications();
   // background configuration android
   await Workmanager().initialize(callbackDispatcher, isInDebugMode: false);
   if (Platform.isAndroid) {
