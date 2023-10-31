@@ -67,7 +67,7 @@ String getInterval(Materia materia) {
   //     materia.fine.difference(materia.inizio) == const Duration(hours: 4);
 
   if (materia.inizio.hour < 11) {
-    return '10:00';
+    return '11:00';
   }
   if (!(materia.inizio.hour < 11)) {
     return '16:00';
