@@ -28,8 +28,13 @@ class _CalendarioState extends State<Calendario> {
   }
 
   void _createNeatCleanEventList(isDarkMode) {
+    String searchText = '- Aula:';
     List<Materia> eventiMaterie = globalData.materieList;
     for (Materia materia in eventiMaterie) {
+      int index = materia.nomeMateria.indexOf(searchText);
+      if (index != -1) {
+        materia.nomeMateria = materia.nomeMateria.substring(0, index).trim();
+      }
       String intervallo = 'Intervallo: ${getInterval(materia)}';
       NeatCleanCalendarEvent evento = NeatCleanCalendarEvent(
         '${materia.nomeMateria}\n\n${materia.aula}',
@@ -130,7 +135,7 @@ class _CalendarioState extends State<Calendario> {
         ),
         body: SafeArea(
           child: Calendar(
-            eventTileHeight: 130,
+            eventTileHeight: 140,
             startOnMonday: true,
             weekDays: const ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'],
             eventsList: soloEsami ? _examList : _eventList,
