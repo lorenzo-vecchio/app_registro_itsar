@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:intl/intl.dart';
 import 'package:prova_registro/data.dart';
 import 'package:prova_registro/globals.dart';
@@ -49,7 +48,7 @@ class _PresenzeState extends State<Presenze> {
     List<String> selectedItems = value.cast<String>();
     selectedFilters = selectedItems;
     List<PresenzaAssenza> filteredList = [];
-    if (selectedItems.length == 0) {
+    if (selectedItems.isEmpty) {
       listaMaterie = globalData.presenzeList;
       setState(() {});
       return;
@@ -78,6 +77,7 @@ class _PresenzeState extends State<Presenze> {
   @override
   Widget build(BuildContext context) {
     // gets if it's in dark mode or not
+    print(globalData.presenzeList.first.materia);
     return Consumer<ThemeModel>(builder: (context, model, child) {
       return Scaffold(
         backgroundColor: model.isDarkMode ? Colors.black : Colors.white,
@@ -342,7 +342,7 @@ class _PresenzeState extends State<Presenze> {
                     children: [
                       Padding(
                         padding: EdgeInsets.all(ScreenSize.padding10),
-                        child: Text('Percentuale presenza sul totale:'),
+                        child: const Text('Percentuale presenza sul totale:'),
                       ),
                     ],
                   ),
@@ -376,6 +376,7 @@ class _PresenzeState extends State<Presenze> {
                 ],
               );
             }
+            return null;
           },
         ),
       );

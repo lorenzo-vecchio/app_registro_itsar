@@ -91,7 +91,7 @@ class Data {
 
   Future<void> _APIconnection(String username, String password) async {
     final response = await http.post(
-      Uri.parse('https://flask-api-scraper.vercel.app'),
+      Uri.parse('https://flask-api-registro-itsar.vercel.app'),//vercel di gio
       body: jsonEncode({
         'username': username,
         'password': password,

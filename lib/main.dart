@@ -1,12 +1,16 @@
 import 'dart:io';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:prova_registro/firebase/firebase_notification.dart';
 import 'package:prova_registro/globals.dart';
 import 'package:prova_registro/providers/themeProvider.dart';
+import 'package:prova_registro/screen_size.dart';
 import 'package:provider/provider.dart';
 import 'package:workmanager/workmanager.dart';
 import 'homepage.dart';
@@ -14,8 +18,11 @@ import 'loginpage.dart';
 import 'data.dart';
 import 'notifi_service.dart';
 import '../providers/calendarPreference.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 const fetchBackground = "fetchBackground";
+Future backgroundHandler(RemoteMessage msg) async {}
 
 Future<dynamic> backgroundSync() async {
   // Code to run in background
@@ -59,12 +66,16 @@ Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   // keeps the splash screen until startup operations are finished
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   // allow notifications
-  await Permission.notification.isDenied.then((value) {
-    if (value) {
-      Permission.notification.request();
-    }
-  });
+  if (await Permission.notification.isDenied) {
+    await Permission.notification.request();
+  }
+
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.dark.copyWith(
       statusBarIconBrightness: Brightness.dark,
@@ -73,6 +84,11 @@ Future<void> main() async {
   );
   // notifications
   NotificationService().initNotification();
+  //firebase notification
+  await FirebaseNotification().initNotifications();
+  //backgroud configuration
+  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+
   // background configuration android
   await Workmanager().initialize(callbackDispatcher, isInDebugMode: false);
   if (Platform.isAndroid) {
@@ -109,6 +125,56 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _initialize();
+    //notifications
+    NotificationService().initNotification();
+    FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      print("Initial Message ${message.toString()}");
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      print("Message on App opened ${event.toString()}");
+    });
+    // FirebaseMessaging.onMessage.listen((message) {
+    //   if (message.notification != null) {
+    //     NotificationService().display(message);
+    //   }
+    // });
+    FirebaseMessaging.onMessage.listen((event) {
+      final notification = event.notification;
+      final android = event.notification?.android;
+      if (notification != null && android != null) {
+        NotificationService().showNotification();
+      }
+    });
+
+    FirebaseMessaging.onMessage.listen((event) {
+      if (event.notification != null) return;
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Material(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: ScreenSize.screenWidth * 0.8,
+                    height: 64,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.white,
+                    ),
+                    child: Column(children: [
+                      Text(event.notification?.title ?? ''),
+                      const SizedBox(height: 10),
+                      Text(event.notification?.body ?? ''),
+                    ]),
+                  )
+                ],
+              ),
+            );
+          });
+    });
   }
 
   Future<void> _initialize() async {

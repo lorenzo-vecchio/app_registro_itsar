@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "674281588830",
+    "project_id": "itsar---registro",
+    "storage_bucket": "itsar---registro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674281588830:android:3a206cebfb0893e2df0ccf",
+        "android_client_info": {
+          "package_name": "com.example.prova_registro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA43qkAQA9iadn9w3wiTMWMTbdLRDViAQQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
