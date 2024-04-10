@@ -44,9 +44,8 @@ class _HomeState extends State<Home> {
   }
 
   List<Materia> _findTomorrowMaterie() {
-    final now = DateTime.now();
     //Aggiunto tomorrow per confrontare la data odierna con quella del giorno successivo
-    final tomorrow = DateTime.now().add(Duration(days: 1));
+    final tomorrow = DateTime.now().add(const Duration(days: 1));
     // print(tomorrow.year);
     // print(tomorrow.month);
     // print(tomorrow.day);
@@ -89,7 +88,7 @@ class _HomeState extends State<Home> {
             children: [
               CarouselSlider(
                 options: CarouselOptions(
-                  height: 500,
+                  height: ScreenSize.screenHeight * 0.7,
                   viewportFraction: 1,
                   initialPage: 0, 
                   enableInfiniteScroll: false,
@@ -138,7 +137,7 @@ class _HomeState extends State<Home> {
                             ScreenSize.padding20,
                             0,
                             ScreenSize.padding20,
-                            ScreenSize.screenWidth * 0.07), //20,0,20,40
+                            ScreenSize.screenWidth * 0.1), //20,0,20,40
                         child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25),

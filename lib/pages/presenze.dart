@@ -66,6 +66,7 @@ class _PresenzeState extends State<Presenze> {
   void initState() {
     super.initState();
     listaNomiMaterie = _getNomiMaterie();
+    listaNomiMaterie.sort();
   }
 
   @override

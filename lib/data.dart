@@ -91,7 +91,8 @@ class Data {
 
   Future<void> _APIconnection(String username, String password) async {
     final response = await http.post(
-      Uri.parse('https://flask-api-registro-itsar.vercel.app'),//vercel di gio
+      Uri.parse(
+          'https://flask-api-registro-itsar-test-2anni.vercel.app'), //vercel contenente due anni ITSAR fatto da gio
       body: jsonEncode({
         'username': username,
         'password': password,
@@ -168,7 +169,6 @@ class Data {
     };
     sommaPresenzeAssenze = risultato;
   }
-
 }
 
 class Voto {

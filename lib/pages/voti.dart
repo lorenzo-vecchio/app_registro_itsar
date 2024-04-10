@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../globals.dart';
@@ -118,7 +120,7 @@ class _VotiState extends State<Voti> {
                                     horizontal: 10, vertical: 9)
                                 : const EdgeInsets.symmetric(
                                     horizontal: 22, vertical: 16)
-                            : const EdgeInsets.all(15), //15
+                            : const EdgeInsets.symmetric(horizontal: 15, vertical: 10), 
                         decoration: voto.voto != 0
                             ? BoxDecoration(
                                 shape: BoxShape.circle,
